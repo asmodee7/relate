@@ -1,0 +1,11 @@
+/* pêche #FDB884
+vert #87D8A2
+rouge #C35256
+bleu #00C6CF
+"taupe" (neutre) #BAA89B */
+
+.btn-peche
+{
+    background-color: #FDB884;
+    text-align: center;
+}

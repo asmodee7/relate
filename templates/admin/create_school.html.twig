@@ -1,14 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Admin !{% endblock %}
+{% block title %}Hello Admin !
+{% endblock %}
 
 {% block body %}
 
-<p>Coucou c'est nous </p>
+	<h4 class="text-center my-3">New partnership:
+	</h4>
 
-{{ form_start(schoolForm) }}
-<button type="submit" class="btn btn-dark">Send</button>
+	<div class="container">
+		{{ form_start(schoolForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
-{{ form_end(schoolForm) }}
+		{{ form_row(schoolForm.school_name, {'label': "Name of the school"} )}}
+		{{ form_row(schoolForm.country )}}
+		{{ form_row(schoolForm.language )}}
+		{{ form_row(schoolForm.user_lastname )}}
+		{{ form_row(schoolForm.user_firstname )}}
+		{{ form_row(schoolForm.user_position )}}
+		{{ form_row(schoolForm.username )}}
+		{{ form_row(schoolForm.password )}}
+
+		<div class="text-center mt-2">
+			<button type="submit" class="btn btn-peche text-white text-center">Create the school account</button>
+		</div>
+
+		{{ form_end(schoolForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
+	</div>
 
 {% endblock %}
