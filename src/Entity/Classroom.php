@@ -39,10 +39,16 @@ class Classroom
      */
     private $students;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=ClassroomDuo::class, mappedBy="classrooms")
+     */
+    private $classroomDuos;
+
     public function __construct()
     {
         $this->teachers = new ArrayCollection();
         $this->students = new ArrayCollection();
+        $this->classroomDuos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -120,6 +126,33 @@ class Classroom
     {
         if ($this->students->removeElement($student)) {
             $student->removeClassroom($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ClassroomDuo[]
+     */
+    public function getClassroomDuos(): Collection
+    {
+        return $this->classroomDuos;
+    }
+
+    public function addClassroomDuo(ClassroomDuo $classroomDuo): self
+    {
+        if (!$this->classroomDuos->contains($classroomDuo)) {
+            $this->classroomDuos[] = $classroomDuo;
+            $classroomDuo->addClassroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassroomDuo(ClassroomDuo $classroomDuo): self
+    {
+        if ($this->classroomDuos->removeElement($classroomDuo)) {
+            $classroomDuo->removeClassroom($this);
         }
 
         return $this;

@@ -74,9 +74,15 @@ class Student
      */
     private $other_hobbies;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=StudentDuo::class, mappedBy="students")
+     */
+    private $studentDuos;
+
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
+        $this->studentDuos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -224,6 +230,33 @@ class Student
     public function setOtherHobbies(string $other_hobbies): self
     {
         $this->other_hobbies = $other_hobbies;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StudentDuo[]
+     */
+    public function getStudentDuos(): Collection
+    {
+        return $this->studentDuos;
+    }
+
+    public function addStudentDuo(StudentDuo $studentDuo): self
+    {
+        if (!$this->studentDuos->contains($studentDuo)) {
+            $this->studentDuos[] = $studentDuo;
+            $studentDuo->addStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudentDuo(StudentDuo $studentDuo): self
+    {
+        if ($this->studentDuos->removeElement($studentDuo)) {
+            $studentDuo->removeStudent($this);
+        }
 
         return $this;
     }
