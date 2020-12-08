@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Relate | Student Login
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center my-3">Relate | Student Login</h1>
+
+	<div class="container">
+		{{ form_start(loginStudentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
+		{{ form_row(loginStudentForm.username )}}
+		{{ form_row(loginStudentForm.password )}}
+
+		<div class="text-center mt-2">
+			<button type="submit" class="btn btn-peche text-white text-center">Login</button>
+		</div>
+
+		{{ form_end(loginStudentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
+	</div>
+
+{% endblock %}
