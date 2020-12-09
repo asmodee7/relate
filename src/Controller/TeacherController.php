@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Entity\Teacher;
 use App\Form\TeacherType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class TeacherController extends AbstractController
 {
@@ -26,16 +26,16 @@ class TeacherController extends AbstractController
      */
     public function newTeacher(Request $request, EntityManagerInterface $manager): Response
     {
-        $school = new Teacher;
+        $teacher = new Teacher;
 
-        $teacherForm = $this->createForm(TeacherType::class, $school);
+        $teacherForm = $this->createForm(TeacherType::class, $teacher);
 
         $teacherForm->handleRequest($request);
 
         dump($request);
 
         if ($teacherForm->isSubmitted() && $teacherForm->isValid()) {
-            $manager->persist($school);
+            $manager->persist($teacher);
             $manager->flush();
 
             $this->redirectToRoute("create_teacher");

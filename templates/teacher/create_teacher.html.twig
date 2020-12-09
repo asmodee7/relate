@@ -9,7 +9,7 @@
 	</h4>
 
 	<div class="container">
-		{{ form_start(teacherForm, {'attr': {'class': 'col-md-5 text-red mx-auto'}}) }}
+		{{ form_start(teacherForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
 		{{ form_row(teacherForm.lastname )}}
 		{{ form_row(teacherForm.firstname )}}
@@ -20,8 +20,8 @@
         {{ form_row(teacherForm.phone_number )}}
         {{ form_row(teacherForm.photo )}}
         {{ form_row(teacherForm.description )}}
-        {# {{ form_row(teacherForm.id_school )}}
-        {{ form_row(teacherForm.classrooms )}} #}
+        {# {{ form_row(teacherForm.id_school )}} #}
+        {# {{ form_row(teacherForm.classrooms )}} #}
 
 		<div class="text-center mt-2">
 			<button type="submit" class="btn btn-peche text-white text-center">Create the Teacher account</button>
