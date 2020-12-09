@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Teacher !{% endblock %}
+
+{% block body %}
+
+	<h4 class="text-center my-3">New Student:
+	</h4>
+
+	<div class="container">
+		{{ form_start(studentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
+		{{ form_row(studentForm.username, {'label': "Username"} )}}
+		{{ form_row(studentForm.password, {'label': "Password"} )}}
+		{{ form_row(studentForm.lastname, {'label': "Lastname"} )}}
+		{{ form_row(studentForm.firstname, {'label': "Firstname"} )}}
+		{{ form_row(studentForm.age, {'label': "Age"} )}}
+		{{ form_row(studentForm.description, {'label': "Description"} )}}
+		{{ form_row(studentForm.photo, {'label': "Profile Picture"} )}}
+		{{ form_row(studentForm.sport, {'label': "Sport"} )}}
+		{{ form_row(studentForm.music, {'label': "Music"} )}}
+		{{ form_row(studentForm.other_hobbies, {'label': "Others"} )}}
+		{{ form_row(studentForm.classrooms )}}
+
+		<div class="text-center mt-2">
+			<button type="submit" class="btn btn-peche text-white text-center">Create the student account</button>
+		</div>
+
+		{{ form_end(studentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
+	</div>
+
+{% endblock %}

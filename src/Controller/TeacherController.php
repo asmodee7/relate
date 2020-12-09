@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Teacher;
-use App\Form\TeacherType;
+use App\Entity\Student;
+use App\Entity\Classroom;
+use App\Form\StudentType;
+use App\Form\ClassroomType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class TeacherController extends AbstractController
 {
@@ -21,28 +23,57 @@ class TeacherController extends AbstractController
             'controller_name' => 'TeacherController',
         ]);
     }
-     /**
-     * @Route("teacher/new-teacher", name="create_teacher")
+
+    /**
+     * @Route("teacher/new_student", name="create_student")
      */
-    public function newTeacher(Request $request, EntityManagerInterface $manager): Response
+    public function newStudent(Request $request, EntityManagerInterface $manager): Response
     {
-        $teacher = new Teacher;
+            $student = new Student;
 
-        $teacherForm = $this->createForm(TeacherType::class, $teacher);
+        $studentForm = $this->createForm(StudentType:: class, $student);
 
-        $teacherForm->handleRequest($request);
+        $studentForm->handleRequest($request);
 
         dump($request);
 
-        if ($teacherForm->isSubmitted() && $teacherForm->isValid()) {
-            $manager->persist($teacher);
+        if($studentForm->isSubmitted() && $studentForm->isValid())
+        {
+            $manager->persist($student);
             $manager->flush();
 
-            $this->redirectToRoute("create_teacher");
-        }
+            $this->redirectToRoute("create_student");
+        }        
 
-        return $this->render("teacher/create_teacher.html.twig", [
-            'teacherForm' => $teacherForm->createView()
+        return $this->render("teacher/create_student.html.twig", [
+            'studentForm' => $studentForm->createView()
         ]);
+    }
+
+    /**
+     * @Route("teacher/new_classroom", name="create_classroom")
+     */
+    public function newClassroom(Request $request, EntityManagerInterface $manager): Response
+    {
+            $classroom = new Classroom;
+
+        $classroomForm = $this->createForm(ClassroomType:: class, $classroom);
+
+        $classroomForm->handleRequest($request);
+
+        dump($request);
+
+        if($classroomForm->isSubmitted() && $classroomForm->isValid())
+        {
+            $manager->persist($classroom);
+            $manager->flush();
+
+            $this->redirectToRoute("create_classroom");
+        }        
+
+        return $this->render("teacher/create_classroom.html.twig", [
+            'classroomForm' => $classroomForm->createView()
+        ]);
+
     }
 }
