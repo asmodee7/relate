@@ -4,8 +4,59 @@ rouge #C35256
 bleu #00C6CF
 "taupe" (neutre) #BAA89B */
 
+body
+{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.bg-green
+{
+    background-color: #87D8A2;
+}
+
 .btn-peche
 {
     background-color: #FDB884;
     text-align: center;
+}
+
+/* ------------------------------------------- Header ------------------------------------------- */
+
+.relate-nav
+{
+    min-height: 15vh;
+}
+
+.relate-nav a
+{
+    color: white;
+}
+
+/* ------------------------------------------- Body ------------------------------------------- */
+
+.relate-body
+{
+    min-height: 70vh;
+}
+
+.card-button
+{
+    min-height: 20rem;
+    width: 80%;
+    margin: 5px;
+    border-radius: 40px;
+    box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.5);
+    transition: 0.3s ease background-color;
+}
+
+.card-button:hover
+{
+    background-color: rgb(247, 247, 247);
+}
+
+/* ------------------------------------------- Footer ------------------------------------------- */
+
+.relate-footer
+{
+    min-height: 15vh;
 }

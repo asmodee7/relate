@@ -27,21 +27,20 @@ class AdminController extends AbstractController
      */
     public function newSchool(Request $request, EntityManagerInterface $manager): Response
     {
-            $school = new School;
+        $school = new School;
 
-        $schoolForm = $this->createForm(SchoolType:: class, $school);
+        $schoolForm = $this->createForm(SchoolType::class, $school);
 
         $schoolForm->handleRequest($request);
 
         dump($request);
 
-        if($schoolForm->isSubmitted() && $schoolForm->isValid())
-        {
+        if ($schoolForm->isSubmitted() && $schoolForm->isValid()) {
             $manager->persist($school);
             $manager->flush();
 
             $this->redirectToRoute("create_school");
-        }        
+        }
 
         return $this->render("admin/create_school.html.twig", [
             'schoolForm' => $schoolForm->createView()
