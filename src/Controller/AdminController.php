@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
@@ -25,7 +26,7 @@ class AdminController extends AbstractController
     /**
      * @Route("admin/new-school", name="create_school")
      */
-    public function newSchool(Request $request, EntityManagerInterface $manager): Response
+    public function newSchool(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
         $school = new School;
 
@@ -36,6 +37,11 @@ class AdminController extends AbstractController
         dump($request);
 
         if ($schoolForm->isSubmitted() && $schoolForm->isValid()) {
+
+            $hash = $encoder->encodePassword($school, $school->getPassword());
+
+            $school->setPassword($hash);
+
             $manager->persist($school);
             $manager->flush();
 

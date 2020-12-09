@@ -73,6 +73,13 @@ class Classroom
         return $this;
     }
 
+    // public function setTeacher(Teacher $teacher): self
+    // {
+    //     $this->teacher = $teacher;
+
+    //     return $this;
+    // }
+
     public function removeTeacher(Teacher $teacher): self
     {
         $this->teachers->removeElement($teacher);

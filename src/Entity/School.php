@@ -6,11 +6,18 @@ use App\Repository\SchoolRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=SchoolRepository::class)
+ * @UniqueEntity(
+ * fields = {"username"},
+ * message = "Username deja utilisé"
+ * )
  */
-class School
+class School implements UserInterface
 {
     /**
      * @ORM\Id
@@ -41,6 +48,7 @@ class School
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="1", minMessage="Votre mot de passe doit faire minimum 1 caractères")
      */
     private $password;
 
@@ -198,5 +206,20 @@ class School
         }
 
         return $this;
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function getSalt()
+    {
+
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
     }
 }

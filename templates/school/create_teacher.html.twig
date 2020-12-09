@@ -9,25 +9,25 @@
 	</h4>
 
 	<div class="container">
-		{{ form_start(schoolTeacher, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+		{{ form_start(newTeacherForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
-		{{ form_row(schoolTeacher.lastname )}}
-		{{ form_row(schoolTeacher.firstname )}}
-		{{ form_row(schoolTeacher.username )}}
-		{{ form_row(schoolTeacher.password )}}
-        {{ form_row(schoolTeacher.language )}}
-        {{ form_row(schoolTeacher.email )}}
-        {{ form_row(schoolTeacher.phone_number )}}
-        {{ form_row(schoolTeacher.photo )}}
-        {{ form_row(schoolTeacher.description )}}
-        {# {{ form_row(schoolTeacher.id_school )}} #}
-        {# {{ form_row(schoolTeacher.classrooms )}} #}
+		{{ form_row(newTeacherForm.lastname )}}
+		{{ form_row(newTeacherForm.firstname )}}
+		{{ form_row(newTeacherForm.username )}}
+		{{ form_row(newTeacherForm.password )}}
+        {{ form_row(newTeacherForm.language )}}
+        {{ form_row(newTeacherForm.email )}}
+        {{ form_row(newTeacherForm.phone_number )}}
+        {{ form_row(newTeacherForm.photo )}}
+        {{ form_row(newTeacherForm.description )}}
+        {# {{ form_row(newTeacherForm.id_school )}} #}
+        {# {{ form_row(newTeacherForm.classrooms )}} #}
 
 		<div class="text-center mt-2">
 			<button type="submit" class="btn btn-peche text-white text-center">Create the Teacher account</button>
 		</div>
 
-		{{ form_end(schoolTeacher, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+		{{ form_end(newTeacherForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
 	</div>
 

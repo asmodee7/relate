@@ -61,10 +61,13 @@ class TeacherController extends AbstractController
 
         $classroomForm->handleRequest($request);
 
-        dump($request);
+        // dump($request);
+        // dump($this->getUser()->getUsername());
 
         if($classroomForm->isSubmitted() && $classroomForm->isValid())
         {
+            $classroom->addTeacher($this->getUser());
+            // dump($classroom->getTeachers());
             $manager->persist($classroom);
             $manager->flush();
 
