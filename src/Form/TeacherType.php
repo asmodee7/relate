@@ -21,8 +21,8 @@ class TeacherType extends AbstractType
             ->add('phone_number')
             ->add('photo')
             ->add('description')
-            ->add('id_school')
-            ->add('classrooms')
+            // ->add('id_school')
+            // ->add('classrooms')
         ;
     }
 
