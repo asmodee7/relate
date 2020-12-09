@@ -2,15 +2,26 @@
 
 namespace App\Entity;
 
-use App\Repository\TeacherRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TeacherRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=TeacherRepository::class)
+ * @UniqueEntity(
+ *      fields = {"email"},
+ *      message="E-mail deja utilisé"
+ * )
+ * @UniqueEntity(
+ *      fields = {"username"},
+ *      message="Username deja utilisé"
+ * )
  */
-class Teacher
+class Teacher implements UserInterface
 {
     /**
      * @ORM\Id
@@ -32,6 +43,7 @@ class Teacher
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="1", minMessage="Votre mot de passe doit faire minimum 1 caractère")
      */
     private $password;
 
@@ -228,6 +240,32 @@ class Teacher
         if ($this->classrooms->removeElement($classroom)) {
             $classroom->removeTeacher($this);
         }
+
+        return $this;
+    }
+
+    // Cette méthode est uniquement destinée à nettoyer les mots de passe en texte brute éventuellement stockés
+    public function eraseCredentials()
+    {
+        
+    }
+
+    // Renvoie la chaine de caractère non encodée que l'utilisateur a saisi, qui est utilisé à l'origine pour encoder le mot de passe
+    public function getSalt()
+    {
+        
+    }
+
+    // Cette fonction renvoie un tableau de chaine de caractères
+    // Renvoie les roles accordés à l'utilisateur
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

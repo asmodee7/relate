@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Teacher;
 use App\Form\TeacherType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SchoolController extends AbstractController
 {
@@ -24,26 +25,31 @@ class SchoolController extends AbstractController
      /**
      * @Route("school/new-teacher", name="new_teacher")
      */
-    public function newSchoolTeacher(Request $request, EntityManagerInterface $manager): Response
+    public function newSchoolTeacher(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
-            $schoolTeacher = new Teacher;
+            $teacher = new Teacher;
 
-        $schoolTeacher = $this->createForm(TeacherType:: class, $schoolTeacher);
+        $newTeacherForm = $this->createForm(TeacherType:: class, $teacher);
 
-        $schoolTeacher->handleRequest($request);
+        $newTeacherForm->handleRequest($request);
 
         dump($request);
 
-        if($schoolTeacher->isSubmitted() && $schoolTeacher->isValid())
+        if($newTeacherForm->isSubmitted() && $newTeacherForm->isValid())
         {
-            $manager->persist($schoolTeacher);
+            $hash = $encoder->encodePassword($teacher, $teacher->getPassword());
+            $teacher->setPassword($hash);
+
+            $teacher->setIdSchool($this->getUser());
+
+            $manager->persist($teacher);
             $manager->flush();
 
             $this->redirectToRoute("new_teacher");
         }        
 
         return $this->render("school/create_teacher.html.twig", [
-            'schoolTeacher' => $schoolTeacher->createView()
+            'newTeacherForm' => $newTeacherForm->createView()
         ]);
 
     }
