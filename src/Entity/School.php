@@ -72,6 +72,11 @@ class School implements UserInterface
      */
     private $teachers;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $roles = [];
+
     public function __construct()
     {
         $this->teachers = new ArrayCollection();
@@ -218,8 +223,15 @@ class School implements UserInterface
 
     }
 
-    public function getRoles()
+    public function getRoles(): ?array
     {
-        return ['ROLE_USER'];
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }

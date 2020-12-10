@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StudentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -88,6 +89,11 @@ class Student implements UserInterface
      * @ORM\ManyToMany(targetEntity=StudentDuo::class, mappedBy="students")
      */
     private $studentDuos;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $roles = [];
 
     public function __construct()
     {
@@ -273,14 +279,24 @@ class Student implements UserInterface
 
     public function eraseCredentials()
     {
+
     }
 
     public function getSalt()
     {
+
     }
 
-    public function getRoles()
+
+    public function getRoles(): ?array
     {
-        return ['ROLE_USER'];
+        return $this->roles;
+    }
+
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }

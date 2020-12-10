@@ -25,18 +25,18 @@ class TeacherType extends AbstractType
             ->add('phone_number')
             ->add('photo')
             ->add('description')
-            ->add('id_school', EntityType::class, [
-                'label' => 'School',
-                'class' => School::class,
-                'choice_label' => 'school_name'
-                ])
-            ->add('classrooms', EntityType::class,[
-                'label' => 'Classroom',
-                'class' => Classroom::class,
-                'choice_label' => 'classroom_name',
-                'expanded' => true,
-                'multiple' => true
-            ])
+            // ->add('id_school', EntityType::class, [
+            //     'label' => 'School',
+            //     'class' => School::class,
+            //     'choice_label' => 'school_name'
+            //     ])
+            // ->add('classrooms', EntityType::class,[
+            //     'label' => 'Classroom',
+            //     'class' => Classroom::class,
+            //     'choice_label' => 'classroom_name',
+            //     'expanded' => true,
+            //     'multiple' => true
+            // ])
         ;
     }
 

@@ -87,6 +87,11 @@ class Teacher implements UserInterface
      */
     private $classrooms;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $roles = [];
+
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
@@ -256,17 +261,17 @@ class Teacher implements UserInterface
         
     }
 
-    // Cette fonction renvoie un tableau de chaine de caractères
-    // Renvoie les roles accordés à l'utilisateur
-    public function getRoles()
+    public function getRoles(): ?array
     {
-        return array('ROLE_USER');
+        return $this->roles;
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
+
+ 
 }

@@ -38,9 +38,11 @@ class TeacherController extends AbstractController
 
         dump($request);
 
-        if ($studentForm->isSubmitted() && $studentForm->isValid()) {
+        if($studentForm->isSubmitted() && $studentForm->isValid())
+        {
             $hash = $encoder->encodePassword($student, $student->getPassword());
             $student->setPassword($hash);
+            $student->getRoles(["ROLE_STUDENT"]);
 
             $manager->persist($student);
             $manager->flush();
