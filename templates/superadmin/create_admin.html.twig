@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello God !{% endblock %}
+
+{% block body %}
+
+	<h4 class="text-center my-3">New Admin:</h4>
+
+	<div class="container">
+		{{ form_start(adminForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
+		{{ form_row(adminForm.username, {'label': "Username"} )}}
+		{{ form_row(adminForm.password, {'label': "Password"} )}}
+
+		<div class="text-center mt-2">
+			<button type="submit" class="btn btn-peche text-white text-center">Create the Admin</button>
+		</div>
+
+		{{ form_end(adminForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
+	</div>
+
+{% endblock %}

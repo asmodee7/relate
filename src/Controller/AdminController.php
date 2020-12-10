@@ -15,7 +15,7 @@ class AdminController extends AbstractController
 {
 
      /**
-     * @Route("/", name="homepage")
+     * @Route("/admin/homepage", name="homepage")
      */
     public function homepage(): Response
     {
