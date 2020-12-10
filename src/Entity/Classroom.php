@@ -32,7 +32,7 @@ class Classroom
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $classroom_name;
+    private $classroomName;
 
     /**
      * @ORM\ManyToMany(targetEntity=Student::class, mappedBy="classrooms")
@@ -99,14 +99,14 @@ class Classroom
         return $this;
     }
 
-    public function getclassroom_name(): ?string
+    public function getclassroomName(): ?string
     {
-        return $this->classroom_name;
+        return $this->classroomName;
     }
 
-    public function setclassroom_name(string $classroom_name): self
+    public function setclassroomName(string $classroomName): self
     {
-        $this->classroom_name = $classroom_name;
+        $this->classroomName = $classroomName;
 
         return $this;
     }

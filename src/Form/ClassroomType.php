@@ -13,7 +13,7 @@ class ClassroomType extends AbstractType
     {
         $builder
             ->add('grade')
-            ->add('classroom_name')
+            ->add('classroomName')
             // ->add('teachers')
             // ->add('students')
             // ->add('classroomDuos')
