@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class TeacherController extends AbstractController
 {
@@ -27,7 +28,7 @@ class TeacherController extends AbstractController
     /**
      * @Route("teacher/new_student", name="create_student")
      */
-    public function newStudent(Request $request, EntityManagerInterface $manager): Response
+    public function newStudent(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
             $student = new Student;
 
@@ -39,6 +40,9 @@ class TeacherController extends AbstractController
 
         if($studentForm->isSubmitted() && $studentForm->isValid())
         {
+            $hash = $encoder->encodePassword($student, $student->getPassword());
+            $student->setPassword($hash);
+            $student->getRoles(["ROLE_STUDENT"]);
             $manager->persist($student);
             $manager->flush();
 

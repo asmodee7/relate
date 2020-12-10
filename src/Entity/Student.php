@@ -2,15 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\StudentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StudentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=StudentRepository::class)
  */
-class Student
+class Student implements UserInterface
 {
     /**
      * @ORM\Id
@@ -78,6 +80,11 @@ class Student
      * @ORM\ManyToMany(targetEntity=StudentDuo::class, mappedBy="students")
      */
     private $studentDuos;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $roles = [];
 
     public function __construct()
     {
@@ -257,6 +264,28 @@ class Student
         if ($this->studentDuos->removeElement($studentDuo)) {
             $studentDuo->removeStudent($this);
         }
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function getSalt()
+    {
+
+    }
+
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

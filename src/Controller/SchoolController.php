@@ -42,6 +42,7 @@ class SchoolController extends AbstractController
 
             $teacher->setIdSchool($this->getUser());
 
+            $teacher->setRoles(["ROLE_TEACHER"]);
             $manager->persist($teacher);
             $manager->flush();
 
