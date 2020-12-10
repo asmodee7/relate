@@ -45,7 +45,7 @@ class Student
     private $firstname;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $age;
 

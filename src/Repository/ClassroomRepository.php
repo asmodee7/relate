@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Teacher;
 use App\Entity\Classroom;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Classroom|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,15 @@ class ClassroomRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Classroom::class);
     }
+
+    // public function findAllExcept($teacher) {
+    //     $qb = $this->createQueryBuilder('Teacher');
+    //     $qb->add('select', 'profdeux')
+    //        ->add('from', 'Teacher profdeux')
+    //        ->add('where', 'profdeux != :teacher')
+    //        ->setParameter('teacher', $teacher);
+    //     return $qb->getQuery()->getResult();
+    // }
 
     // /**
     //  * @return Classroom[] Returns an array of Classroom objects
