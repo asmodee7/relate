@@ -24,7 +24,7 @@
 
             <tr>
                 <td class="card-center">{{ classroom.grade }}</td>
-                <td class="card-center">{{ classroom.classroom_name }}</td>
+                <td class="card-center">{{ classroom.classroomName }}</td>
             </tr>
 
         {% endfor %}
@@ -43,22 +43,22 @@
     {% endfor %}
     </tr>
 
-    {% for classroom in autresClasses %}
-
-    {% if classroom.teachers.username != 'profdeux' %}
+    {% for classroom in classrooms %}
     
         <tr>
             <td class="card-center">{{ classroom.grade }}</td>
-            <td class="card-center">{{ classroom.classroom_name }}</td>
+            <td class="card-center">{{ classroom.classroomName }}</td>
         </tr>
         
-    {% endif %}
 
     {% endfor %}
     </table>
 </div>
 
 </div>
+
+<div class="row"><p>Création de 2 inputs permettant de sélectionner les 2 classes à jumeler.</p>
+<p>Création d'un bouton permettant d'envoyer ces informations en BDD.</p></div>
 
 
 {% endblock %}
