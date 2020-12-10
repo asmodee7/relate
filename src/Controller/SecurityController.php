@@ -38,7 +38,7 @@ class SecurityController extends AbstractController
     // }
 
     /**
-     * @Route("/login", name="login")
+     * @Route("/", name="login")
      */
     public function login(AuthenticationUtils $authenticationUtils, AuthorizationCheckerInterface $authChecker)
     {

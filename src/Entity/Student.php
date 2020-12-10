@@ -83,7 +83,7 @@ class Student implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $other_hobbies;
+    private $otherHobbies;
 
     /**
      * @ORM\ManyToMany(targetEntity=StudentDuo::class, mappedBy="students")
@@ -238,14 +238,14 @@ class Student implements UserInterface
         return $this;
     }
 
-    public function getother_hobbies(): ?string
+    public function getotherHobbies(): ?string
     {
-        return $this->other_hobbies;
+        return $this->otherHobbies;
     }
 
-    public function setOtherHobbies(string $other_hobbies): self
+    public function setOtherHobbies(string $otherHobbies): self
     {
-        $this->other_hobbies = $other_hobbies;
+        $this->otherHobbies = $otherHobbies;
 
         return $this;
     }

@@ -9,6 +9,9 @@ security:
         App\Entity\Student:
             algorithm: bcrypt
 
+        App\Entity\Admin:
+            algorithm: bcrypt
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
@@ -20,6 +23,7 @@ security:
                         app_school_provider,
                         app_teacher_provider,
                         app_student_provider,
+                        app_admin_provider,
                     ]
 
         app_school_provider:
@@ -33,6 +37,10 @@ security:
         app_student_provider:
             entity:
                 class: App\Entity\Student
+                property: username
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
                 property: username
 
     firewalls:
@@ -54,8 +62,8 @@ security:
                 path: logout
                 target: login
 
-                # role_hierarchy:
-                #     ROLE_ADMIN: ROLE_USER
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_SCHOOL, ROLE_TEACHER, ROLE_STUDENT]
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -68,5 +76,6 @@ security:
          - { path: ^/school, roles: ROLE_SCHOOL }
          - { path: ^/teacher, roles: ROLE_TEACHER }
          - { path: ^/student, roles: ROLE_STUDENT }
+         - { path: ^/admin, roles: ROLE_ADMIN }
     #     # - { path: ^/profile, roles: ROLE_USER }
     # access_denied_url: login
