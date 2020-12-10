@@ -94,30 +94,26 @@ class TeacherController extends AbstractController
     public function show(ClassroomRepository $repo, EntityManagerInterface $manager, TeacherRepository $repoTeacher): Response
     {
         $titres = $manager->getClassMetadata(Classroom::class)->getFieldNames();
-        $classrooms = $repo->findAll();
 
         $user = $this->getUser()->getId();
 
         $mesCLasses = $repoTeacher->find($user);
+
+        $language = $this->getUser()->getLanguage();
+
+        // $grade = $this->getUser()->getClassrooms();
+        // dump($grade);
+
+        $classrooms = $repo->getClassrooms($user, $language);
+
         // dump($classrooms);
-
-        // dump($manager);
-
-        $autresClasses = $manager->createQuery("SELECT * FROM Teacher WHERE country = 'français' AND grade = '6'");
-
-        dump($autresClasses);
-
-        // $autresClasses = $repo->findAllExcept($user);
-
-        //$myClassrooms = $repo->findBy(array ('teachers' => $teacher));
 
         // Doit afficher les classes du prof
         // Doit afficher les classes des autres écoles
         return $this->render("teacher/assoc_classroom.html.twig", [
             'titres' => $titres,
             'classrooms' => $classrooms,
-            'mesCLasses' => $mesCLasses,
-            'autresClasses' => $autresClasses
+            'mesCLasses' => $mesCLasses
         ]);
     }
 }
