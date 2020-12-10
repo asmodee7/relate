@@ -6,13 +6,21 @@ security:
         App\Entity\School:
             algorithm: bcrypt
 
+        App\Entity\Student:
+            algorithm: bcrypt
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
 
         chain_provider:
             chain:
-                providers: [app_school_provider, app_teacher_provider]
+                providers:
+                    [
+                        app_school_provider,
+                        app_teacher_provider,
+                        app_student_provider,
+                    ]
 
         app_school_provider:
             entity:
@@ -21,6 +29,10 @@ security:
         app_teacher_provider:
             entity:
                 class: App\Entity\Teacher
+                property: username
+        app_student_provider:
+            entity:
+                class: App\Entity\Student
                 property: username
 
     firewalls:
@@ -35,6 +47,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+
                 default_target_path: homepage
 
             logout:
@@ -46,7 +59,6 @@ security:
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
-
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
@@ -55,6 +67,5 @@ security:
     access_control:
     #     - { path: ^/admin, roles: ROLE_ADMIN }
     #     # - { path: ^/profile, roles: ROLE_USER }
-        # - { path: ^/login, roles: ROLE_USER }
-
+    # - { path: ^/login, roles: ROLE_USER }
     # access_denied_url: login

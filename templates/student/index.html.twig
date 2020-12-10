@@ -7,31 +7,59 @@
 	<h1>{{ title }}</h1>
 
 	<table class="table table-bordered text-center">
-		<tr>
-			{% for data in colonnes %}
 
-				<th>{{ data|upper }}</th>
-
-			{% endfor %}
-		</tr>
-
-		{% for student in students %}
-
+		<thead>
 			<tr>
-				<td>{{ student.username }}</td>
-				{# <td>{{ student.password }}</td> ça ne sert à rien Symfony ne l'affiche pas #}
-				<td>{{ student.firstname }}</td>
-				<td>{{ student.lastname }}</td>
-				<td>{{ student.age }}</td>
-				<td>{{ student.description }}</td>
-				<td>{{ student.photo }}</td>
-				<td>{{ student.sport }}</td>
-				<td>{{ student.music }}</td>
-				{# <td>{{ student.other_hobbies }}</td> #}
+				<th>Data</th>
+				<th>Your info</th>
 			</tr>
-
-		{% endfor %}
-
+		</thead>
+		<tbody>
+			<tr>
+				<td>Username</td>
+				<td>{{ app.user.username }}</td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td>{{ app.user.password }}</td>
+			</tr>
+			<tr>
+				<td>Firstname</td>
+				<td>{{ app.user.firstname }}</td>
+			</tr>
+			<tr>
+				<td>Lastname</td>
+				<td>{{ app.user.lastname }}</td>
+			</tr>
+			<tr>
+				<td>Firstname</td>
+				<td>{{ app.user.firstname }}</td>
+			</tr>
+			<tr>
+				<td>Age</td>
+				<td>{{ app.user.age }}</td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td>{{ app.user.description }}</td>
+			</tr>
+			<tr>
+				<td>Photo</td>
+				<td>{{ app.user.photo }}</td>
+			</tr>
+			<tr>
+				<td>Sport</td>
+				<td>{{ app.user.sport }}</td>
+			</tr>
+			<tr>
+				<td>Music</td>
+				<td>{{ app.user.music }}</td>
+			</tr>
+			<tr>
+				<td>Other hobbies</td>
+				<td>{{ app.user.other_hobbies }}</td>
+			</tr>
+		</tbody>
 	</table>
 
 {% endblock %}
