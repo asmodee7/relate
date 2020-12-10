@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Student;
+use App\Entity\Classroom;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EditStudentType extends AbstractType
@@ -22,7 +24,13 @@ class EditStudentType extends AbstractType
             ->add('sport')
             ->add('music')
             ->add('other_hobbies')
-            ->add('classrooms')
+            ->add('classrooms', EntityType::class, [
+                'label' => 'Classroom',
+                'class' => Classroom::class,
+                'choice_label' => 'classroom_name',
+                'expanded' => true,
+                'multiple' => true
+            ])
             ->add('studentDuos');
     }
 

@@ -22,21 +22,20 @@ class SchoolController extends AbstractController
             'controller_name' => 'SchoolController',
         ]);
     }
-     /**
+    /**
      * @Route("school/new-teacher", name="new_teacher")
      */
     public function newSchoolTeacher(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
-            $teacher = new Teacher;
+        $teacher = new Teacher;
 
-        $newTeacherForm = $this->createForm(TeacherType:: class, $teacher);
+        $newTeacherForm = $this->createForm(TeacherType::class, $teacher);
 
         $newTeacherForm->handleRequest($request);
 
         dump($request);
 
-        if($newTeacherForm->isSubmitted() && $newTeacherForm->isValid())
-        {
+        if ($newTeacherForm->isSubmitted() && $newTeacherForm->isValid()) {
             $hash = $encoder->encodePassword($teacher, $teacher->getPassword());
             $teacher->setPassword($hash);
 
@@ -46,11 +45,10 @@ class SchoolController extends AbstractController
             $manager->flush();
 
             $this->redirectToRoute("new_teacher");
-        }        
+        }
 
         return $this->render("school/create_teacher.html.twig", [
             'newTeacherForm' => $newTeacherForm->createView()
         ]);
-
     }
 }

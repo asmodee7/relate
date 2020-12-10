@@ -5,12 +5,20 @@ namespace App\Entity;
 use App\Repository\StudentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=StudentRepository::class)
+ * @UniqueEntity(
+ * fields = {"username"},
+ * message = "This username already exists"
+ * )
+
  */
-class Student
+class Student implements UserInterface
 {
     /**
      * @ORM\Id
@@ -26,11 +34,13 @@ class Student
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="1", minMessage="Your username must be at least 1 character long")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="1", minMessage="Votre mot de passe doit faire minimum 1 caractère")
      */
     private $password;
 
@@ -222,7 +232,7 @@ class Student
         return $this;
     }
 
-    public function getOtherHobbies(): ?string
+    public function getother_hobbies(): ?string
     {
         return $this->other_hobbies;
     }
@@ -259,5 +269,18 @@ class Student
         }
 
         return $this;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
     }
 }
