@@ -13,6 +13,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
+
+     /**
+     * @Route("/", name="homepage")
+     */
+    public function homepage(): Response
+    {
+        return $this->render('admin/homepage.html.twig');
+    }
+
     /**
      * @Route("/admin", name="admin")
      */
@@ -42,6 +51,7 @@ class AdminController extends AbstractController
 
             $school->setPassword($hash);
 
+            $school->setRoles(["ROLE_SCHOOL"]);
             $manager->persist($school);
             $manager->flush();
 

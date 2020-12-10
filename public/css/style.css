@@ -9,6 +9,8 @@ body
     font-family: 'Montserrat', sans-serif;
 }
 
+.row{ margin-left: 0; margin-right: 0;}
+
 .bg-green
 {
     background-color: #87D8A2;
@@ -19,6 +21,8 @@ body
     background-color: #FDB884;
     text-align: center;
 }
+
+
 
 /* ------------------------------------------- Header ------------------------------------------- */
 
