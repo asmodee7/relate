@@ -38,7 +38,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/edit-student", name="edit_student")
+     * @Route("student/edit-student", name="edit_student")
      */
     public function newStudent(Request $request): Response
     {
@@ -56,7 +56,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/login-student", name="login_student")
+     * @Route("student/login-student", name="login_student")
      */
     public function loginStudent(Request $request): Response
     {
