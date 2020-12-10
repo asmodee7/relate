@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Student;
+use App\Entity\Teacher;
 use App\Entity\Classroom;
 use App\Form\StudentType;
 use App\Form\ClassroomType;
+use Doctrine\ORM\EntityManager;
+use App\Repository\TeacherRepository;
+use App\Repository\ClassroomRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,6 +85,39 @@ class TeacherController extends AbstractController
 
         return $this->render("teacher/create_classroom.html.twig", [
             'classroomForm' => $classroomForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("teacher/assoc_classroom", name="assoc_classroom")
+     */
+    public function show(ClassroomRepository $repo, EntityManagerInterface $manager, TeacherRepository $repoTeacher): Response
+    {
+        $titres = $manager->getClassMetadata(Classroom::class)->getFieldNames();
+        $classrooms = $repo->findAll();
+
+        $user = $this->getUser()->getId();
+
+        $mesCLasses = $repoTeacher->find($user);
+        // dump($classrooms);
+
+        // dump($manager);
+
+        $autresClasses = $manager->createQuery("SELECT * FROM Teacher WHERE country = 'français' AND grade = '6'");
+
+        dump($autresClasses);
+
+        // $autresClasses = $repo->findAllExcept($user);
+
+        //$myClassrooms = $repo->findBy(array ('teachers' => $teacher));
+
+        // Doit afficher les classes du prof
+        // Doit afficher les classes des autres écoles
+        return $this->render("teacher/assoc_classroom.html.twig", [
+            'titres' => $titres,
+            'classrooms' => $classrooms,
+            'mesCLasses' => $mesCLasses,
+            'autresClasses' => $autresClasses
         ]);
     }
 }

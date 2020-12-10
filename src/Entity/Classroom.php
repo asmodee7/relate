@@ -99,12 +99,12 @@ class Classroom
         return $this;
     }
 
-    public function getClassroomName(): ?string
+    public function getclassroom_name(): ?string
     {
         return $this->classroom_name;
     }
 
-    public function setClassroomName(string $classroom_name): self
+    public function setclassroom_name(string $classroom_name): self
     {
         $this->classroom_name = $classroom_name;
 
