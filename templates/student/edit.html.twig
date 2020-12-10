@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Relate | Edit Student Profile
+{% endblock %}
+
+{% form_theme formEditStudent 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+	<h1>Edit Student Profile</h1>
+
+	{{ form_start(formEditStudent)}}
+	
+	{{ form_row(formEditStudent.firstname, {'attr': {'placeholder': "First Name"}})}}
+	{{ form_row(formEditStudent.lastname, {'attr': {'placeholder': "Last Name"}})}}
+	{{ form_row(formEditStudent.age, {'attr': {'placeholder': "Age"}})}}
+	{{ form_row(formEditStudent.photo, {'attr': {'placeholder': "Photo"}})}}
+	{{ form_row(formEditStudent.description, {'attr': {'placeholder': "Description"}})}}
+	{{ form_row(formEditStudent.sport, {'attr': {'placeholder': "Sport"}})}}
+	{{ form_row(formEditStudent.music, {'attr': {'placeholder': "Music"}})}}
+	{{ form_row(formEditStudent.other_hobbies, {'attr': {'placeholder': "Other Hobbies"}})}}
+	{{ form_row(formEditStudent.studentDuos, {'attr': {'placeholder': "My Student Duos"}})}}
+
+	<button type="submit" class="btn btn-success">Save changes</button>
+
+	{{ form_end(formEditStudent)}}
+
+{% endblock %}

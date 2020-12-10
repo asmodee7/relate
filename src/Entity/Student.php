@@ -238,7 +238,7 @@ class Student implements UserInterface
         return $this;
     }
 
-    public function getother_hobbies(): ?string
+    public function getOtherHobbies(): ?string
     {
         return $this->other_hobbies;
     }

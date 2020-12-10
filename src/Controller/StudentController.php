@@ -7,6 +7,7 @@ use App\Form\EditStudentType;
 use App\Form\LoginStudentType;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,60 +17,57 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class StudentController extends AbstractController
 {
     /**
-     * @Route("/student", name="student")
+     * @Route("/student/", name="student_homepage")
      */
-    public function index(EntityManagerInterface $manager, StudentRepository $repo): Response
+    public function index()
     {
+        return $this->render('student/index.html.twig');
+    }
 
-        $colonnes = $manager->getClassMetadata(Student::class)->getFieldNames();
-
-        dump($colonnes);
-
-        $users = $this->getUser();
-
-        dump($users);
-
-        return $this->render('student/index.html.twig', [
-            'controller_name' => 'StudentController',
-            'title' => 'Salut salut',
-            'colonnes' => $colonnes,
-            'users' => $users
+    /**
+     * @Route("/student/profile", name="me_student_profile")
+     */
+    public function showProfile(Student $student)
+    {
+        return $this->render('student/profile.html.twig', 
+        [
+            'student' => $student
         ]);
     }
 
     /**
-     * @Route("/edit-student", name="edit_student")
+     * @Route("/student/edit", name="edit_student")
      */
-    public function newStudent(Request $request): Response
+    public function edit(Request $request, EntityManagerInterface $manager)
     {
-        $student = new Student;
+        $student = new Student();
 
-        $studentForm = $this->createForm(EditStudentType::class, $student);
 
-        $studentForm->handleRequest($request);
+        $form = $this->createFormBuilder($student)
+                    ->add('firstname')
+                    ->add('lastname')
+                    ->add('age')
+                    ->add('photo')
+                    ->add('description')
+                    ->add('sport')
+                    ->add('music')
+                    ->add('other_hobbies')
+                    ->add('studentDuos')
+                    ->getForm();
 
-        // dump($request);
+        $form->handleRequest($request);
 
-        return $this->render('student/edit_student.html.twig', [
-            'studentForm' => $studentForm->createView()
-        ]);
-    }
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->persist($student);
+            $manager->flush();
 
-    /**
-     * @Route("/login-student", name="login_student")
-     */
-    public function loginStudent(Request $request): Response
-    {
-        $student = new Student;
+            return $this->redirectToRoute('me_student_profile', ['id' => $article->getId()]);
+        }
 
-        $loginStudentForm = $this->createForm(LoginStudentType::class, $student);
-
-        $loginStudentForm->handleRequest($request);
-
-        // dump($request);
-
-        return $this->render('student/login_student.html.twig', [
-            'loginStudentForm' => $loginStudentForm->createView()
+        return $this->render('student/edit.html.twig',
+        [
+            'formEditStudent' => $form->createView()
         ]);
     }
 }
