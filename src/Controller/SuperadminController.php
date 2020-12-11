@@ -18,6 +18,8 @@ class SuperadminController extends AbstractController
      */
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPERADMIN', null, 'Unable to access this page!');
+
         return $this->render('superadmin/index.html.twig', [
             'controller_name' => 'SuperadminController',
         ]);
@@ -28,6 +30,8 @@ class SuperadminController extends AbstractController
      */
     public function newSchool(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPERADMIN', null, 'Unable to access this page!');
+
         $admin = new Admin;
 
         $adminForm = $this->createForm(AdminType::class, $admin);

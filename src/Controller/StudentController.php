@@ -62,7 +62,7 @@ class StudentController extends AbstractController
             $manager->persist($student);
             $manager->flush();
 
-            return $this->redirectToRoute('me_student_profile', ['id' => $article->getId()]);
+            return $this->redirectToRoute('me_student_profile', ['id' => $student->getId()]);
         }
 
         return $this->render('student/edit.html.twig',

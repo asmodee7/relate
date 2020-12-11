@@ -19,6 +19,8 @@ class AdminController extends AbstractController
      */
     public function homepage(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         return $this->render('admin/homepage.html.twig');
     }
 
@@ -27,6 +29,8 @@ class AdminController extends AbstractController
      */
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
         ]);
@@ -37,6 +41,8 @@ class AdminController extends AbstractController
      */
     public function newSchool(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         $school = new School;
 
         $schoolForm = $this->createForm(SchoolType::class, $school);
