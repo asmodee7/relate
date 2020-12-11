@@ -9,6 +9,7 @@ use App\Entity\ClassroomDuo;
 use App\Form\ClassroomDuoType;
 use App\Form\StudentType;
 use App\Form\ClassroomType;
+use App\Repository\ClassroomDuoRepository;
 use Doctrine\ORM\EntityManager;
 use App\Repository\TeacherRepository;
 use App\Repository\ClassroomRepository;
@@ -100,6 +101,8 @@ class TeacherController extends AbstractController
 
         $mesCLasses = $repoTeacher->find($user);
 
+        dump($mesCLasses);
+
         $language = $this->getUser()->getLanguage();
 
         $classrooms = $repo->getClassrooms($user, $language);
@@ -115,6 +118,7 @@ class TeacherController extends AbstractController
 
             $manager->persist($classRoomDuo);
             $manager->flush();
+
         }
 
 
@@ -125,5 +129,21 @@ class TeacherController extends AbstractController
         ]);
 
 
+    }
+
+    /**
+     * @Route("teacher/my_classrooms", name="teacher_classrooms")
+     */
+    public function showTeacherClassrooms(TeacherRepository $repo)
+    {
+        $user = $this->getUser()->getId();
+
+        $myClassrooms = $repo->find($user);
+
+        dump($myClassrooms);
+
+        return $this->render("teacher/teacher_classrooms.html.twig", [
+            'myClassrooms' => $myClassrooms
+        ]);
     }
 }
