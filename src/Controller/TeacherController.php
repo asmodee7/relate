@@ -44,8 +44,7 @@ class TeacherController extends AbstractController
 
         dump($request);
 
-        if($studentForm->isSubmitted() && $studentForm->isValid())
-        {
+        if ($studentForm->isSubmitted() && $studentForm->isValid()) {
             $hash = $encoder->encodePassword($student, $student->getPassword());
             $student->setPassword($hash);
             $student->getRoles(["ROLE_STUDENT"]);
@@ -106,8 +105,18 @@ class TeacherController extends AbstractController
         $classrooms = $repo->getClassrooms($user, $language);
 
         // Envoi du formulaire de jumelage
+      
+        dump($classRoomDuoRequest);
 
-        
+        if ($classRoomDuoRequest->request->count() > 1) {
+            $classRoomDuo = new ClassroomDuo();
+            $classRoomDuo->setClassroom1($classRoomDuoRequest->request->get('classroom_1'))
+                ->setClassroom2($classRoomDuoRequest->request->get('classroom_2'));
+
+            $manager->persist($classRoomDuo);
+            $manager->flush();
+        }
+
 
         return $this->render("teacher/assoc_classroom.html.twig", [
             'titres' => $titres,
