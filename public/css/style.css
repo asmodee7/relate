@@ -31,11 +31,12 @@ body
     min-height: 15vh;
 }
 
-.relate-nav a
-{
-    color: white;
+.log{
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    right: 10px;
 }
-
 /* ------------------------------------------- Body ------------------------------------------- */
 
 .relate-body
