@@ -12,6 +12,8 @@
 			<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap" rel="stylesheet">
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 			<link rel="stylesheet" href="{{ asset('css/style.css')}}">
+			<link rel="stylesheet" href="{{ asset('css/styleLog.css')}}">
+			<link rel="stylesheet" href="{{ asset('css/styleProfil.css')}}">
 		{% endblock %}
 	</head>
 	<body>
@@ -19,11 +21,11 @@
 			<nav class="nav relate-nav bg-green row">
 				<div class="nav-left col-10 d-flex align-items-center justify-content-start">
 					<a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
-					<a class="nav-link" href="#">Mon profil</a>
-					<a class="nav-link" href="#">Mes correspondances</a>
-					<a class="nav-link" href="#">Mes discussions</a>
-					<a class="nav-link" href="#">Contacter mon professeur</a>
-					<a class="nav-link" href="{{path('edit_student')}}">Edit Student Profile</a>
+					<a class="nav-link" href="{#{{path('')}}#}">Mon profil</a>
+					<a class="nav-link" href="{#{{path('')}}#}">Mes correspondances</a>
+					<a class="nav-link" href="{#{{path('')}}#}">Mes discussions</a>
+					<a class="nav-link" href="{#{{path('')}}#}">Contacter mon professeur</a>
+					<a class="nav-link" href="{#{{path('')}}#}">Edit Student Profile</a>
 				</div>
 				<div class="nav-right col-2 d-flex align-items-center justify-content-end">
 					{% if app.user %}
@@ -44,13 +46,13 @@
 
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="#">Contact</a>
+							<a class="nav-link" href="{#{{path('')}}#}">Contact</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Mentions Légales</a>
+							<a class="nav-link" href="{#{{path('')}}#}">Mentions Légales</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Copyright</a>
+							<a class="nav-link" href="{#{{path('')}}#}">Copyright</a>
 						</li>
 					</ul>
 
