@@ -5,54 +5,90 @@
 
 {% block body %}
 
-	<h1 class="d-flex justify-content-center">Bienvenue sur le projet Relate</h1>
+	<h1 class=" text-center mt-2 pb-1">Bienvenue
+		<span>
+			{{app.user.username}}
+		</span>
+		dans votre Back-Office
+		 {{app.user.roles[0]|slice(5)|capitalize }}
+	
 
-	<div class="row justify-content-center">
+	</h1>
+	<hr>
+	<br>
+{# 
+	{% if is_granted('ROLE_ADMIN') %}
+		<p>Admin interface</p>
 
-		<div class="col-5">
+		{% elseif school %}
+			<p>School interface</p>
+
+		{% elseif teacher %}
+			<p>Teacher interface</p>
+
+		{% elseif student %}
+			<p>Student interface</p>
+
+		{% else %}
+			<p>Non connecter</p>
+
+
+	{% endif %} #}
+
+
+	<div class="row justify-content-center ">
+		<div class=" col-md-5">
 			<table class="table text-center table-hover table-bordered">
-
 				<tr>
-					<th class="display-4">Mes échanges<br><small>lorem</small><br><i class="fas fa-users"></i>
+					<th class="display-4">
+						<a href="{#{{path('')}}#}">
+							Mes échanges<br><i class="fas fa-users"></i>
+						</a>
 					</th>
 				</tr>
 			</table>
 		</div>
 
-		<div class="col-5">
+		<div class="col-md-5">
 			<table class="table text-center table-hover table-bordered">
-
 				<tr>
-					<th class="display-4">Mon profil<br><span>lorem</span><br><i class="fas fa-user-circle"></i>
+					<th class="display-4">
+						<a href="{#{{path('')}}#}">
+							Mon profil<br>
+							<i class="fas fa-user-circle"></i>
+						</a>
 					</th>
 				</tr>
-
 			</table>
 		</div>
 	</div>
+		<br>
 
-	<div class="row justify-content-center">
+		<div class="row justify-content-center">
+			<div class="col-md-5">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Mon binôme<br>
+								<i class="fas fa-comment-dots"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
 
-		<div class="col-5">
-			<table class="table text-center table-hover table-bordered">
-
-				<tr>
-					<th class="display-4">Mes discussions<br><small>lorem</small><br><i class="fas fa-comments"></i>
-					</th>
-				</tr>
-
-			</table>
-		</div>
-
-		<div class="col-5">
-			<table class="table text-center table-hover table-bordered">
-
-				<tr>
-					<th class="display-4">Mon prof<br><small>lorem</small><br><i class="fas fa-question-circle"></i>
-					</th>
-				</tr>
-
-			</table>
+			<div class="col-md-5">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Mon prof<br><i class="fas fa-question-circle"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 

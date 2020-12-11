@@ -105,6 +105,7 @@ class TeacherController extends AbstractController
         $classrooms = $repo->getClassrooms($user, $language);
 
         // Envoi du formulaire de jumelage
+      
         dump($classRoomDuoRequest);
 
         if ($classRoomDuoRequest->request->count() > 1) {
@@ -122,5 +123,7 @@ class TeacherController extends AbstractController
             'classrooms' => $classrooms,
             'mesCLasses' => $mesCLasses,
         ]);
+
+
     }
 }
