@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Student;
 use App\Entity\Teacher;
 use App\Entity\Classroom;
+use App\Entity\ClassroomDuo;
+use App\Form\ClassroomDuoType;
 use App\Form\StudentType;
 use App\Form\ClassroomType;
 use Doctrine\ORM\EntityManager;
@@ -42,8 +44,7 @@ class TeacherController extends AbstractController
 
         dump($request);
 
-        if($studentForm->isSubmitted() && $studentForm->isValid())
-        {
+        if ($studentForm->isSubmitted() && $studentForm->isValid()) {
             $hash = $encoder->encodePassword($student, $student->getPassword());
             $student->setPassword($hash);
             $student->getRoles(["ROLE_STUDENT"]);
@@ -91,7 +92,7 @@ class TeacherController extends AbstractController
     /**
      * @Route("teacher/assoc_classroom", name="assoc_classroom")
      */
-    public function show(ClassroomRepository $repo, EntityManagerInterface $manager, TeacherRepository $repoTeacher): Response
+    public function show(ClassroomRepository $repo, EntityManagerInterface $manager, TeacherRepository $repoTeacher, Request $classRoomDuoRequest): Response
     {
         $titres = $manager->getClassMetadata(Classroom::class)->getFieldNames();
 
@@ -101,19 +102,25 @@ class TeacherController extends AbstractController
 
         $language = $this->getUser()->getLanguage();
 
-        // $grade = $this->getUser()->getClassrooms();
-        // dump($grade);
-
         $classrooms = $repo->getClassrooms($user, $language);
 
-        // dump($classrooms);
+        // Envoi du formulaire de jumelage
+        dump($classRoomDuoRequest);
 
-        // Doit afficher les classes du prof
-        // Doit afficher les classes des autres écoles
+        if ($classRoomDuoRequest->request->count() > 1) {
+            $classRoomDuo = new ClassroomDuo();
+            $classRoomDuo->setClassroom1($classRoomDuoRequest->request->get('classroom_1'))
+                ->setClassroom2($classRoomDuoRequest->request->get('classroom_2'));
+
+            $manager->persist($classRoomDuo);
+            $manager->flush();
+        }
+
+
         return $this->render("teacher/assoc_classroom.html.twig", [
             'titres' => $titres,
             'classrooms' => $classrooms,
-            'mesCLasses' => $mesCLasses
+            'mesCLasses' => $mesCLasses,
         ]);
     }
 }
