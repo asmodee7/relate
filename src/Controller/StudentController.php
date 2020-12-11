@@ -36,7 +36,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/edit", name="edit_student")
+     * @Route("/student/edit", name="edit-student")
      */
     public function edit(Request $request, EntityManagerInterface $manager)
     {
@@ -51,7 +51,7 @@ class StudentController extends AbstractController
                     ->add('description')
                     ->add('sport')
                     ->add('music')
-                    ->add('other_hobbies')
+                    ->add('OtherHobbies')
                     ->add('studentDuos')
                     ->getForm();
 

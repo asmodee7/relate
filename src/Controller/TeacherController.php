@@ -32,7 +32,7 @@ class TeacherController extends AbstractController
     }
 
     /**
-     * @Route("teacher/new_student", name="create_student")
+     * @Route("teacher/new-student", name="create-student")
      */
     public function newStudent(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
