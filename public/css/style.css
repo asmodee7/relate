@@ -42,6 +42,11 @@ body
 {
     min-height: 70vh;
 }
+th a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
 
 .card-button
 {
