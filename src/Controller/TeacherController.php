@@ -53,7 +53,7 @@ class TeacherController extends AbstractController
             $manager->persist($student);
             $manager->flush();
 
-            $this->redirectToRoute("create_student");
+            $this->redirectToRoute("create-student");
         }
 
         return $this->render("teacher/create_student.html.twig", [
@@ -118,6 +118,7 @@ class TeacherController extends AbstractController
             $manager->persist($classRoomDuo);
             $manager->flush();
 
+            return $this->redirectToRoute('assoc_student', ['id' => $classRoomDuo->getId()]);
         }
 
 
@@ -132,7 +133,7 @@ class TeacherController extends AbstractController
      * @Route("teacher/{id}/assoc_student", name="assoc_student")
      */
 
-    public function classduostudents(ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo): Response
+    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo): Response
     {
 
         // on récupère l'id du classroomDuo
@@ -143,8 +144,10 @@ class TeacherController extends AbstractController
 
         // on verra après pour classroom_2 et les conditions
 
-        $classroomduo = $duorepo->findByid(5);
-        dump($classroomduo);
+        // $classroomduo = $duorepo->findByid();
+
+        $classroomduo = $duorepo->findAll();
+
 
         foreach ($classroomduo as $classroomduodata) {
             $id = $classroomduodata->getId();
@@ -173,6 +176,7 @@ class TeacherController extends AbstractController
 
         return $this->render("teacher/assoc_student.html.twig", [
             'classroom' => $classroom,
+            'newclassroomDuo' => $newclassroomDuo
             // 'myclassrooms' => $myclassrooms
         ]);
     }
@@ -190,6 +194,39 @@ class TeacherController extends AbstractController
 
         return $this->render("teacher/teacher_classrooms.html.twig", [
             'myClassrooms' => $myClassrooms
+        ]);
+    }
+
+    /**
+     * @Route("teacher/{id}/my_classroomduos", name="teacher_showclassroom")
+     */
+    public function showTeacherClassroomDuos(Request $request, ClassroomDuoRepository $duorepo, ClassroomRepository $classrepo)
+    {
+
+        $id = $request->get('id');
+
+        dump($id); // on récupère l'id de la classroom dans l'url, qui est le même que l'id de classroom_1
+
+        // on montre les partenaires selon l'id de classroom_1
+
+        // TROUVER TOUTES LES CLASSROOMS_1 ET CLASSROOM_2 AVEC ID URL
+        // getClassroomDuoTeacher() dans ClassroomDuoRepository permet d'aller chercher les classroomDuos où les classroom_1 et classroom_2 correspondent à l'id de la classroom sélectionnée
+
+        // look for *all* Product objects
+        // $products = $duorepo->findAll();
+
+        $classroomDuo = $duorepo->getClassroomDuoTeacher($id);
+
+        dump($classroomDuo);
+
+        $myclassroom = $classrepo->findById($id);
+
+        dump($myclassroom);
+
+
+        return $this->render("teacher/teacher_showclassrooms.html.twig", [
+            'classroomDuo' => $classroomDuo,
+            'myclassroom' => $myclassroom
         ]);
     }
 }

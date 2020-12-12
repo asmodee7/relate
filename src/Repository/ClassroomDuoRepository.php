@@ -24,15 +24,27 @@ class ClassroomDuoRepository extends ServiceEntityRepository
     {
 
         $query = $this->createQueryBuilder('c')
-        ->select ('c')
-        ->leftJoin('c.teachers','t')
-        ->where('t.id <> :user')
-        ->andWhere('t.language <> :language')
-        ->setParameter(":user", $user)
-        // ->andWhere('c.grade = :grade')
-        // ->setParameter(":grade", $grade)
+            ->select('c')
+            ->leftJoin('c.teachers', 't')
+            ->where('t.id <> :user')
+            ->andWhere('t.language <> :language')
+            ->setParameter(":user", $user)
+            // ->andWhere('c.grade = :grade')
+            // ->setParameter(":grade", $grade)
         ;
 
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function getClassroomDuoTeacher($id)
+    {
+
+        $query = $this->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.classroom_1 = :id')
+            ->orwhere('c.classroom_2 = :id')
+            ->setParameter(":id", $id);
 
         return $query->getQuery()->getResult();
     }
