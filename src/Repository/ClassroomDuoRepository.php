@@ -19,6 +19,7 @@ class ClassroomDuoRepository extends ServiceEntityRepository
         parent::__construct($registry, ClassroomDuo::class);
     }
 
+
     public function getClassroomDuo()
     {
 
