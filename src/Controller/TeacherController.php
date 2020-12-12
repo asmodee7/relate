@@ -9,6 +9,7 @@ use App\Entity\ClassroomDuo;
 use App\Form\ClassroomDuoType;
 use App\Form\StudentType;
 use App\Form\ClassroomType;
+use App\Repository\ClassroomDuoRepository;
 use Doctrine\ORM\EntityManager;
 use App\Repository\TeacherRepository;
 use App\Repository\ClassroomRepository;
@@ -96,16 +97,16 @@ class TeacherController extends AbstractController
     {
         $titres = $manager->getClassMetadata(Classroom::class)->getFieldNames();
 
-        $user = $this->getUser()->getId();
+        $user = $this->getUser()->getId(); // id du teacher connecté
 
-        $mesCLasses = $repoTeacher->find($user);
+        $mesCLasses = $repoTeacher->find($user); // infos du teacher en fonction de son id
 
-        $language = $this->getUser()->getLanguage();
+        $language = $this->getUser()->getLanguage(); // language du teacher connecté
 
-        $classrooms = $repo->getClassrooms($user, $language);
+        $classrooms = $repo->getClassrooms($user, $language); // on va chercher les infos de classroomrepo en fonction de l'id et de la langue du prof
 
         // Envoi du formulaire de jumelage
-      
+
         dump($classRoomDuoRequest);
 
         if ($classRoomDuoRequest->request->count() > 1) {
@@ -123,7 +124,54 @@ class TeacherController extends AbstractController
             'classrooms' => $classrooms,
             'mesCLasses' => $mesCLasses,
         ]);
+    }
+
+    /**
+     * @Route("teacher/{id}/assoc_student", name="assoc_student")
+     */
+
+    public function classduostudents(ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo): Response
+    {
+
+        // on récupère l'id du classroomDuo
+
+        // on montre le tableau qui correspond à l'id du classroomDuo avec classroom_1 et classroom_2
+
+        // on affiche la classroom_id qui correspond au chiffre dans classroom_1
+
+        // on verra après pour classroom_2 et les conditions
+
+        $classroomduo = $duorepo->findByid(5);
+        dump($classroomduo);
+
+        foreach ($classroomduo as $classroomduodata) {
+            $id = $classroomduodata->getId();
+        }
+        dump($id);
+
+        foreach ($classroomduo as $classroomduodata) {
+            $classroom1 = $classroomduodata->getClassroom1();
+        }
+        dump($classroom1); // c'est "4" pour le duoclassroom 5
+
+        foreach ($classroomduo as $classroomduodata) {
+            $classroom2 = $classroomduodata->getClassroom2();
+        }
+        dump($classroom2);
+
+        $classroom = $classroomrepo->findById($classroom1); // il est allé chercher la classroom 4
+
+        dump($classroom); // on a toutes les infos de la classroom_1 qui a l'id classroom 4
 
 
+        // $classroom->unwrap()->toArray();
+
+        // dump($classroom);
+
+
+        return $this->render("teacher/assoc_student.html.twig", [
+            'classroom' => $classroom,
+            // 'myclassrooms' => $myclassrooms
+        ]);
     }
 }
