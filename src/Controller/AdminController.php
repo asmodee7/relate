@@ -15,12 +15,10 @@ class AdminController extends AbstractController
 {
 
      /**
-     * @Route("/admin/homepage", name="homepage")
+     * @Route("/homepage", name="homepage")
      */
     public function homepage(): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
-
         return $this->render('admin/homepage.html.twig');
     }
 
