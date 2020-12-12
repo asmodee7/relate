@@ -8,16 +8,22 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form action="{{ path('login') }}" method="post">
+ <form action="{{ path('login') }}" method="post">
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            <!-- Icon -->
+            <div class="fadeIn first"></div>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
+            <!-- Login Form -->
+            <form>
+                <input type="text" id="username" class="fadeIn second" name="_username" placeholder="username" value="{{ last_username }}">
+                <input type="text" id="password" class="fadeIn third" name="_password" placeholder="password">
+                <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+        </div>
+    </div>
 
-    <button type="submit" class="btn btn-peche text-white">login</button>
-
-</form>
-
+</form> 
 {% endblock %}

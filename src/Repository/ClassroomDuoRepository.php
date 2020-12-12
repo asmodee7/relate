@@ -19,30 +19,24 @@ class ClassroomDuoRepository extends ServiceEntityRepository
         parent::__construct($registry, ClassroomDuo::class);
     }
 
-    // public function getClassroomDuo()
-    // {
-    // $qb = $this->createQueryBuilder('d')
-    //     ->join('d.classrooms', 'c', 'WITH', 'c = :c');
-    // $qb->setParameter('c', $myclassrooms);
+
+    public function getClassroomDuo()
+    {
+
+        $query = $this->createQueryBuilder('c')
+        ->select ('c')
+        ->leftJoin('c.teachers','t')
+        ->where('t.id <> :user')
+        ->andWhere('t.language <> :language')
+        ->setParameter(":user", $user)
+        // ->andWhere('c.grade = :grade')
+        // ->setParameter(":grade", $grade)
+        ;
 
 
+        return $query->getQuery()->getResult();
+    }
 
-
-
-
-    // $query = $this->createQueryBuilder('d');
-    // ->select('d')
-    // ->join('d.classrooms', 'c')
-    // ->addSelect('c');
-    // ->join('c.students', 't')
-    // ->addSelect('t')
-    // ->where('c.students = d.students');
-    // ->where('c.grade = d.grade');
-    // ->setParameter(':user', $user);
-
-
-    //     return $qb->getQuery()->getResult();
-    // }
     // /**
     //  * @return ClassroomDuo[] Returns an array of ClassroomDuo objects
     //  */

@@ -33,7 +33,7 @@ class TeacherController extends AbstractController
     }
 
     /**
-     * @Route("teacher/new_student", name="create_student")
+     * @Route("teacher/new-student", name="create-student")
      */
     public function newStudent(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
@@ -101,6 +101,7 @@ class TeacherController extends AbstractController
 
         $mesCLasses = $repoTeacher->find($user); // infos du teacher en fonction de son id
 
+
         $language = $this->getUser()->getLanguage(); // language du teacher connecté
 
         $classrooms = $repo->getClassrooms($user, $language); // on va chercher les infos de classroomrepo en fonction de l'id et de la langue du prof
@@ -116,6 +117,7 @@ class TeacherController extends AbstractController
 
             $manager->persist($classRoomDuo);
             $manager->flush();
+
         }
 
 
@@ -172,6 +174,22 @@ class TeacherController extends AbstractController
         return $this->render("teacher/assoc_student.html.twig", [
             'classroom' => $classroom,
             // 'myclassrooms' => $myclassrooms
+        ]);
+    }
+
+    /**
+     * @Route("teacher/my_classrooms", name="teacher_classrooms")
+     */
+    public function showTeacherClassrooms(TeacherRepository $repo)
+    {
+        $user = $this->getUser()->getId();
+
+        $myClassrooms = $repo->find($user);
+
+        dump($myClassrooms);
+
+        return $this->render("teacher/teacher_classrooms.html.twig", [
+            'myClassrooms' => $myClassrooms
         ]);
     }
 }

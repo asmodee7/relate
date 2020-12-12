@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class StudentController extends AbstractController
 {
     /**
-     * @Route("/student/", name="student_homepage")
+     * @Route("/student/", name="studenthomepage")
      */
     public function index()
     {
@@ -25,10 +25,22 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/profile", name="me_student_profile")
+     * @Route("/student/profile", name="mystudentprofile")
      */
-    public function showProfile(Student $student)
+    public function showProfile(Request $request, EntityManagerInterface $manager)
     {
+        $student = new Student();
+
+        $student->setFirstname('firstname')
+                ->setLastname('lastname')
+                ->setAge('12')
+                ->setPhoto('photo')
+                ->setDescription('description')
+                ->setSport('sport')
+                ->setMusic('music')
+                ->setOtherHobbies('other_hobbies');
+                /* ->setStudentDuos('studentDuos') */
+
         return $this->render('student/profile.html.twig', 
         [
             'student' => $student
@@ -36,7 +48,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/edit", name="edit_student")
+     * @Route("/student/edit", name="editmystudentprofile")
      */
     public function edit(Request $request, EntityManagerInterface $manager)
     {
@@ -51,7 +63,7 @@ class StudentController extends AbstractController
                     ->add('description')
                     ->add('sport')
                     ->add('music')
-                    ->add('other_hobbies')
+                    ->add('OtherHobbies')
                     ->add('studentDuos')
                     ->getForm();
 
@@ -62,7 +74,7 @@ class StudentController extends AbstractController
             $manager->persist($student);
             $manager->flush();
 
-            return $this->redirectToRoute('me_student_profile', ['id' => $student->getId()]);
+            return $this->redirectToRoute('mystudentprofile', ['id' => $student->getId()]);
         }
 
         return $this->render('student/edit.html.twig',

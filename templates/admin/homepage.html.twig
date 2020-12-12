@@ -16,62 +16,82 @@
 	</h1>
 	<hr>
 	<br>
-{# 
+	
 	{% if is_granted('ROLE_ADMIN') %}
-		<p>Admin interface</p>
 
-		{% elseif school %}
-			<p>School interface</p>
+	{#--------------------------------------ADMIN------------------------------------------------------#}
 
-		{% elseif teacher %}
-			<p>Teacher interface</p>
+		<div class="row justify-content-center ">
+			<div class=" col-md-10">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Mes écoles<br>
+								<i class="fas fa-school"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+			</div>
+		<div class="row justify-content-center ">
+			<div class="col-md-10">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Ajouté une école<br>
+								<i class="fas fa-plus-circle"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
 
-		{% elseif student %}
-			<p>Student interface</p>
-
-		{% else %}
-			<p>Non connecter</p>
-
-
-	{% endif %} #}
-
-
-	<div class="row justify-content-center ">
-		<div class=" col-md-5">
-			<table class="table text-center table-hover table-bordered">
-				<tr>
-					<th class="display-4">
-						<a href="{#{{path('')}}#}">
-							Mes échanges<br><i class="fas fa-users"></i>
-						</a>
-					</th>
-				</tr>
-			</table>
 		</div>
+	{#-------------------------------------FIN ADMIN---------------------------------------------------#}
 
-		<div class="col-md-5">
-			<table class="table text-center table-hover table-bordered">
-				<tr>
-					<th class="display-4">
-						<a href="{#{{path('')}}#}">
-							Mon profil<br>
-							<i class="fas fa-user-circle"></i>
-						</a>
-					</th>
-				</tr>
-			</table>
+		{% elseif is_granted('ROLE_SCHOOL') %}	
+
+	{#--------------------------------------SCHOOL------------------------------------------------------#}
+
+		<div class="row justify-content-center ">
+			<div class=" col-md-5">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Mon école<br>
+								<i class="fas fa-school"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-md-5">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Mes professeurs<br>
+								<i class="fas fa-users"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+
 		</div>
-	</div>
-		<br>
-
 		<div class="row justify-content-center">
 			<div class="col-md-5">
 				<table class="table text-center table-hover table-bordered">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Mon binôme<br>
-								<i class="fas fa-comment-dots"></i>
+								Contact notre support<br>
+								<i class="fas fa-question-circle"></i>
 							</a>
 						</th>
 					</tr>
@@ -83,13 +103,152 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Mon prof<br><i class="fas fa-question-circle"></i>
+								Ajouté un professeur<br>
+								<i class="fas fa-plus-circle"></i>
 							</a>
 						</th>
 					</tr>
 				</table>
 			</div>
 		</div>
-	</div>
+	{#-------------------------------------FIN SCHOOL---------------------------------------------------#}
+
+		{% elseif is_granted('ROLE_TEACHER') %}
+
+	{#--------------------------------------TEACHER------------------------------------------------------#}
+
+		<div class="row justify-content-center ">
+			<div class=" col-md-5">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Mon école<br>
+								<i class="fas fa-school"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-md-5">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Mes professeurs<br>
+								<i class="fas fa-users"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+		<br>
+		<div class="row justify-content-center">
+			<div class="col-md-5">
+					<table class="table text-center table-hover table-bordered">
+						<tr>
+							<th class="display-4">
+								<a href="{#{{path('')}}#}">
+									Mes classes<br>
+									<i class="fas fa-user-friends"></i>
+								</a>
+							</th>
+						</tr>
+					</table>
+				</div>
+
+				<div class="col-md-5">
+					<table class="table text-center table-hover table-bordered">
+						<tr>
+							<th class="display-4">
+								<a href="{#{{path('')}}#}">
+									Mes éléves<br><i class="fas fa-question-circle"></i>
+								</a>
+							</th>
+						</tr>
+					</table>
+
+			</div>
+		</div>
+	{#-------------------------------------FIN TEACHER---------------------------------------------------#}
+
+		{% elseif is_granted('ROLE_STUDENT') %}
+
+	{#--------------------------------------STUDENT------------------------------------------------------#}
+
+		<div class="row justify-content-center ">
+			<div class=" col-md-5">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Mon école<br>
+								<i class="fas fa-school"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-md-5">
+				<table class="table text-center table-hover table-bordered">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{path('')}}#}">
+								Ma classrooms<br>
+								<i class="fas fa-users"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+		<br>
+		<div class="row justify-content-center">
+			<div class="col-md-5">
+					<table class="table text-center table-hover table-bordered">
+						<tr>
+							<th class="display-4">
+								<a href="{#{{path('')}}#}">
+									Mon binôme<br>
+									<i class="fas fa-comment-dots"></i>
+								</a>
+							</th>
+						</tr>
+					</table>
+				</div>
+
+				<div class="col-md-5">
+					<table class="table text-center table-hover table-bordered">
+						<tr>
+							<th class="display-4">
+								<a href="{#{{path('')}}#}">
+									Mon prof<br><i class="fas fa-question-circle"></i>
+								</a>
+							</th>
+						</tr>
+					</table>
+
+			</div>
+		</div>
+	{#-------------------------------------FIN STUDENT---------------------------------------------------#}	
+
+		{% else %}
+			
+		{{path('')}}
+
+	{% endif %} 
+
+
+
+
+
+
+
+	
 
 {% endblock %}

@@ -23,7 +23,7 @@ class StudentType extends AbstractType
             ->add('photo')
             ->add('sport')
             ->add('music')
-            ->add('other_hobbies')
+            ->add('OtherHobbies')
             ->add('classrooms', EntityType::class,[
                 'label' => 'Classroom',
                 'class' => Classroom::class,
