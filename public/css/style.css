@@ -37,6 +37,11 @@ body
     top: 10px;
     right: 10px;
 }
+
+.nav-link{
+    padding-left: 10px!important;
+}
+
 /* ------------------------------------------- Body ------------------------------------------- */
 
 .relate-body
