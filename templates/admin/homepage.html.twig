@@ -5,11 +5,11 @@
 
 {% block body %}
 
-	<h1 class=" text-center mt-2 pb-1">Bienvenue
+	<h1 class=" text-center mt-2 pb-1">Welcome
 		<span>
-			{{app.user.username}}
+			{{app.user.username}},
 		</span>
-		dans votre Back-Office
+		this is your back office
 		 {{app.user.roles[0]|slice(5)|capitalize }}
 	
 
@@ -27,7 +27,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Mes écoles<br>
+								My school<br>
 								<i class="fas fa-school"></i>
 							</a>
 						</th>
@@ -41,7 +41,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Ajouté une école<br>
+								Add a school<br>
 								<i class="fas fa-plus-circle"></i>
 							</a>
 						</th>
@@ -62,7 +62,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Mon école<br>
+								My school<br>
 								<i class="fas fa-school"></i>
 							</a>
 						</th>
@@ -75,7 +75,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Mes professeurs<br>
+								My teachers<br>
 								<i class="fas fa-users"></i>
 							</a>
 						</th>
@@ -90,7 +90,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Contact notre support<br>
+								Contact us<br>
 								<i class="fas fa-question-circle"></i>
 							</a>
 						</th>
@@ -103,7 +103,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Ajouté un professeur<br>
+								Add a teacher<br>
 								<i class="fas fa-plus-circle"></i>
 							</a>
 						</th>
@@ -123,7 +123,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Mon école<br>
+								My school<br>
 								<i class="fas fa-school"></i>
 							</a>
 						</th>
@@ -136,7 +136,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Mes professeurs<br>
+								My teachers<br>
 								<i class="fas fa-users"></i>
 							</a>
 						</th>
@@ -152,7 +152,7 @@
 						<tr>
 							<th class="display-4">
 								<a href="{#{{path('')}}#}">
-									Mes classes<br>
+									My classrooms<br>
 									<i class="fas fa-user-friends"></i>
 								</a>
 							</th>
@@ -165,7 +165,7 @@
 						<tr>
 							<th class="display-4">
 								<a href="{#{{path('')}}#}">
-									Mes éléves<br><i class="fas fa-question-circle"></i>
+									My students<br><i class="fas fa-question-circle"></i>
 								</a>
 							</th>
 						</tr>
@@ -185,7 +185,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Mon école<br>
+								My school<br>
 								<i class="fas fa-school"></i>
 							</a>
 						</th>
@@ -198,7 +198,7 @@
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Ma classrooms<br>
+								My classroom<br>
 								<i class="fas fa-users"></i>
 							</a>
 						</th>
@@ -214,7 +214,7 @@
 						<tr>
 							<th class="display-4">
 								<a href="{#{{path('')}}#}">
-									Mon binôme<br>
+									My team mate<br>
 									<i class="fas fa-comment-dots"></i>
 								</a>
 							</th>
@@ -227,7 +227,7 @@
 						<tr>
 							<th class="display-4">
 								<a href="{#{{path('')}}#}">
-									Mon prof<br><i class="fas fa-question-circle"></i>
+									My teacher<br><i class="fas fa-question-circle"></i>
 								</a>
 							</th>
 						</tr>
