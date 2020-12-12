@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Teacher !
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		<h1 class="col-5 text-center my-4">My students</h1>
+		<h1 class="col-5 text-center my-4">Pen pals</h1>
+	</div>
+
+	{% for students in classroom %}
+
+		<tr>
+			<td class="card-center">
+				{% for item in students.students %}
+					<p>{{ item.lastname }}</p>
+				{% endfor %}
+			</td>
+		</tr>
+
+	{% endfor %}
+{% endblock %}
