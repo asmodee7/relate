@@ -14,7 +14,6 @@
 	
 
 	</h1>
-	<hr>
 	<br>
 	
 	{% if is_granted('ROLE_ADMIN') %}
@@ -23,7 +22,7 @@
 
 		<div class="row justify-content-center ">
 			<div class=" col-md-10">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
@@ -37,10 +36,10 @@
 			</div>
 		<div class="row justify-content-center ">
 			<div class="col-md-10">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
-							<a href="{#{{path('')}}#}">
+							<a href="{{ path('create_school') }}">
 								Add a school<br>
 								<i class="fas fa-plus-circle"></i>
 							</a>
@@ -58,11 +57,11 @@
 
 		<div class="row justify-content-center ">
 			<div class=" col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								My school<br>
+								Profile<br>
 								<i class="fas fa-school"></i>
 							</a>
 						</th>
@@ -71,11 +70,11 @@
 			</div>
 
 			<div class="col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								My teachers<br>
+								Teachers<br>
 								<i class="fas fa-users"></i>
 							</a>
 						</th>
@@ -86,11 +85,11 @@
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								Contact us<br>
+								Contact<br>
 								<i class="fas fa-question-circle"></i>
 							</a>
 						</th>
@@ -99,10 +98,10 @@
 			</div>
 
 			<div class="col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
-							<a href="{#{{path('')}}#}">
+							<a href="{{ path('new_teacher') }}">
 								Add a teacher<br>
 								<i class="fas fa-plus-circle"></i>
 							</a>
@@ -119,11 +118,11 @@
 
 		<div class="row justify-content-center ">
 			<div class=" col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
-							<a href="{#{{path('')}}#}">
-								My school<br>
+							<a href="{{ path('create_classroom') }}">
+								Create classroom<br>
 								<i class="fas fa-school"></i>
 							</a>
 						</th>
@@ -132,11 +131,11 @@
 			</div>
 
 			<div class="col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
-							<a href="{#{{path('')}}#}">
-								My teachers<br>
+							<a href="{{ path('teacher_classrooms') }}">
+								My classrooms<br>
 								<i class="fas fa-users"></i>
 							</a>
 						</th>
@@ -148,12 +147,12 @@
 		<br>
 		<div class="row justify-content-center">
 			<div class="col-md-5">
-					<table class="table text-center table-hover table-bordered">
+					<table class="table text-center table-bordered">
 						<tr>
 							<th class="display-4">
-								<a href="{#{{path('')}}#}">
-									My classrooms<br>
-									<i class="fas fa-user-friends"></i>
+								<a href="{{ path('create-student') }}">
+									Create student<br>
+									<i class="fas fa-plus-circle"></i>
 								</a>
 							</th>
 						</tr>
@@ -161,11 +160,11 @@
 				</div>
 
 				<div class="col-md-5">
-					<table class="table text-center table-hover table-bordered">
+					<table class="table text-center table-bordered">
 						<tr>
 							<th class="display-4">
 								<a href="{#{{path('')}}#}">
-									My students<br><i class="fas fa-question-circle"></i>
+									My students<br><i class="fas fa-user-friends"></i>
 								</a>
 							</th>
 						</tr>
@@ -181,7 +180,7 @@
 
 		<div class="row justify-content-center ">
 			<div class=" col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
@@ -194,12 +193,12 @@
 			</div>
 
 			<div class="col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-bordered">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
-								My classroom<br>
-								<i class="fas fa-users"></i>
+								My teacher<br>
+								<i class="fas fa-user-edit"></i>
 							</a>
 						</th>
 					</tr>
@@ -210,12 +209,12 @@
 		<br>
 		<div class="row justify-content-center">
 			<div class="col-md-5">
-					<table class="table text-center table-hover table-bordered">
+					<table class="table text-center table-bordered">
 						<tr>
 							<th class="display-4">
 								<a href="{#{{path('')}}#}">
-									My team mate<br>
-									<i class="fas fa-comment-dots"></i>
+									My classroom<br>
+									<i class="fas fa-users"></i>
 								</a>
 							</th>
 						</tr>
@@ -223,11 +222,11 @@
 				</div>
 
 				<div class="col-md-5">
-					<table class="table text-center table-hover table-bordered">
+					<table class="table text-center table-bordered">
 						<tr>
 							<th class="display-4">
 								<a href="{#{{path('')}}#}">
-									My teacher<br><i class="fas fa-question-circle"></i>
+									My team mate<br><i class="fas fa-comment-dots"></i>
 								</a>
 							</th>
 						</tr>
