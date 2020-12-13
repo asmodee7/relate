@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Teacher !{% endblock %}
+{% block title %}Hello Teacher !
+{% endblock %}
 
 {% block body %}
 
@@ -14,11 +15,13 @@
 		{{ form_row(classroomForm.classroomName, {'label': "Classroom Name"} )}}
 
 		<div class="text-center my-3">
-			<button type="submit" class="btn btn-peche text-white text-center">Create the classroom</button>
+			<button
+				type="submit" class="btn btn-peche text-white text-center">
+				{# <a href="{{ path('teacher_classrooms')}}"></a> #}
+				Create the classroom
+			</button>
 		</div>
 
 		{{ form_end(classroomForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
-
 	</div>
-
 {% endblock %}
