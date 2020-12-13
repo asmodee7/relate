@@ -25,7 +25,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/profile/{id}", name="mystudentprofile")
+     * @Route("/student/profile/{id}", name="my_student_profile")
      */
     public function showProfile($id, Request $request, EntityManagerInterface $manager)
     {
@@ -40,7 +40,7 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/edit/{id}", name="editmystudentprofile")
+     * @Route("/student/edit/{id}", name="edit_my_student_profile")
      */
     public function edit(Student $student, Request $request, EntityManagerInterface $manager)
     {
@@ -55,7 +55,7 @@ class StudentController extends AbstractController
             $manager->persist($student);
             $manager->flush();
 
-            return $this->redirectToRoute('mystudentprofile', ['id' => $student->getId()]);
+            return $this->redirectToRoute('my_student_profile', ['id' => $student->getId()]);
         }
 
         return $this->render('student/edit.html.twig',

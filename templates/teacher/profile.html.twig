@@ -12,8 +12,7 @@
         <span>{{ teacher.phonenumber}}</span>
         <span>{{ teacher.language}}</span>
 		<p>{{ teacher.description}}</p>
-
-		<a href="{{ path('editmyteacherprofile', {'id': teacher.id}) }}" class="btn">Editer</a>
 	</div>
 
+	<a href="{{ path('edit_my_teacher_profile', {'id': teacher.id}) }}" class="btn btn-success my-3">Editer</a>
 {% endblock %}

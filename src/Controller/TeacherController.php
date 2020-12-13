@@ -249,9 +249,9 @@ class TeacherController extends AbstractController
     }
 
     /**
-     * @Route("/teacher/profile/{id}", name="myteacherprofile")
+     * @Route("/teacher/profile/{id}", name="my_teacher_profile")
      */
-    public function showProfile(TeacherRepository $repo, $id, Request $request, EntityManagerInterface $manager)
+    public function showProfile(TeacherRepository $repo, $id)
     {
         /* $repo =$this->getDoctrine()-> getRepository(Teacher::class); */
 
@@ -264,7 +264,7 @@ class TeacherController extends AbstractController
     }
 
     /**
-     * @Route("/teacher/edit/{id}", name="editmyteacherprofile")
+     * @Route("/teacher/edit/{id}", name="edit_my_teacher_profile")
      */
     public function edit(Teacher $teacher, Request $request, EntityManagerInterface $manager)
     {
@@ -278,7 +278,7 @@ class TeacherController extends AbstractController
             $manager->persist($teacher);
             $manager->flush();
 
-            return $this->redirectToRoute('myteacherprofile', ['id' => $teacher->getId()]);
+            return $this->redirectToRoute('my_teacher_profile', ['id' => $teacher->getId()]);
         }
 
         return $this->render('teacher/editprofile.html.twig',

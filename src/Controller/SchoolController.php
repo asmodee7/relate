@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\School;
 use App\Entity\Teacher;
 use App\Form\TeacherType;
+use App\Form\EditSchoolType;
+use App\Repository\SchoolRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,6 +53,43 @@ class SchoolController extends AbstractController
 
         return $this->render("school/create_teacher.html.twig", [
             'newTeacherForm' => $newTeacherForm->createView()
+        ]);
+    }
+
+        /**
+     * @Route("/school/infos/{id}", name="my_school_infos")
+     */
+    public function showInfos(SchoolRepository $repo, $id)
+    {
+        $school = $repo->find($id);
+
+        return $this->render('school/infos.html.twig', 
+        [
+            'school' => $school
+        ]);
+    }
+
+    /**
+     * @Route("/school/edit/{id}", name="edit_my_school_infos")
+     */
+    public function edit(School $school, Request $request, EntityManagerInterface $manager)
+    {
+
+        $form = $this->createForm(EditSchoolType::class, $school);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->persist($school);
+            $manager->flush();
+
+            return $this->redirectToRoute('my_school_infos', ['id' => $school->getId()]);
+        }
+
+        return $this->render('school/edit.html.twig',
+        [
+            'formEditSchool' => $form->createView()
         ]);
     }
 }

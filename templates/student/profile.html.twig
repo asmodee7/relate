@@ -16,8 +16,8 @@
 		<span>{{ student.music}}</span>
 		<p>{{ student.otherhobbies}}</p>
 		<p>{{ student.description}}</p>
-
-		<a href="{{ path('editmystudentprofile', {'id': student.id}) }}" class="btn">Editer</a>
 	</div>
+
+	<a href="{{ path('edit_my_student_profile', {'id': student.id}) }}" class="btn btn-success my-3">Editer</a>
 
 {% endblock %}
