@@ -79,4 +79,4 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/superadmin, roles: ROLE_SUPERADMIN }
     #     # - { path: ^/profile, roles: ROLE_USER }
-    access_denied_url: login
+    access_denied_url: login 
