@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Teacher !
+{% block title %}Teacher | Duodata
 {% endblock %}
 
 {% block body %}
 
-	<div class="row">
-		<h1 class="col-5 text-center my-4">My students</h1>
-		<h1 class="col-5 text-center my-4">Pen pals</h1>
-	</div>
-
-	{% for students in classroom %}
+	{% for students in classroomOne %}
+		<div class="row">
+			<h1 class="col-5 text-center my-4">{{ students.grade }}</h1>
+		</div>
 
 		<tr>
 			<td class="card-center">
@@ -20,13 +18,21 @@
 			</td>
 
 		</tr>
-
 	{% endfor %}
 
-	{% for data in newclassroomDuo %}
+	{% for students in classroomTwo %}
+		<div class="row">
+			<h1 class="col-5 text-center my-4">{{ students.grade }}</h1>
+		</div>
 
-		<p>{{ data.id }}</p>
+		<tr>
+			<td class="card-center">
+				{% for item in students.students %}
+					<p>{{ item.lastname }}</p>
+				{% endfor %}
+			</td>
 
+		</tr>
 	{% endfor %}
 
 
