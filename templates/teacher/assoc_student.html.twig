@@ -6,28 +6,94 @@
 {% block body %}
 
 	<div class="row">
-		<h1 class="col-5 text-center my-4">My students</h1>
-		<h1 class="col-5 text-center my-4">Pen pals</h1>
-	</div>
-
-	{% for students in classroom %}
-
-		<tr>
-			<td class="card-center">
-				{% for item in students.students %}
-					<p>{{ item.lastname }}</p>
-				{% endfor %}
-			</td>
-
-		</tr>
-
+	{% for classroomData in classroomOne %}
+		<h1 class="col-5 text-center my-4">{{ classroomData.grade}}, {{ classroomData.classroomName}}</h1>
+	{% endfor %}
+	{% for classroomData in classroomTwo %}
+		<h1 class="col-5 text-center my-4">{{ classroomData.grade}}, {{ classroomData.classroomName}}</h1>
 	{% endfor %}
 
-	{% for data in newclassroomDuo %}
+	</div>
+<div class="row">
+	<div class="col-5">
+		<table class="table table-hover table-bordered">
+			{% for students in classroomOne %}
+
+				<tr>
+					<td class="card-center">
+						{% for item in students.students %}
+							<p>{{ item.lastname }}</p>
+						{% endfor %}
+					</td>
+					<td class="card-center">
+						{% for item in students.students %}
+							<p>{{ item.firstname }}</p>
+						{% endfor %}
+					</td>
+
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div class="col-5">
+		<table class="table table-hover table-bordered">
+			{% for students in classroomTwo %}
+
+				<tr>
+					<td class="card-center">
+						{% for item in students.students %}
+							<p>{{ item.lastname }}</p>
+						{% endfor %}
+					</td>
+					<td class="card-center">
+						{% for item in students.students %}
+							<p>{{ item.firstname }}</p>
+						{% endfor %}
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+</div>
+
+
+	{# {% for data in newclassroomDuo %}
 
 		<p>{{ data.id }}</p>
 
-	{% endfor %}
+	{% endfor %} #}
+
+	<form action="" method="post">
+		<div class="row">
+
+			<div class="form-group col-5">
+				<label for="student_1">Sélection de mon student</label>
+				<select class="form-control" name="student_1" id="student_1">
+					{% for students in classroomOne %}
+						{% for item in students.students %}
+							<option value="{{item.id}}">{{ item.lastname }}</option>
+						{% endfor %}
+
+					{% endfor %}
+				</select>
+			</div>
+
+			<div class="form-group col-5">
+				<label for="student_2">Sélection de l'autre student</label>
+				<select class="form-control" name="student_2" id="student_2">
+					{% for students in classroomTwo %}
+						{% for item in students.students %}
+							<option value="{{item.id}}">{{ item.lastname }}</option>
+						{% endfor %}
+					{% endfor %}
+				</select>
+			</div>
+
+		</div>
+
+		<button type="submit" class="btn btn-peche text-white my-3">Submit</button>
+
+	</form>
 
 
 {% endblock %}

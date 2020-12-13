@@ -6,6 +6,7 @@ use App\Entity\Student;
 use App\Entity\Teacher;
 use App\Entity\Classroom;
 use App\Entity\ClassroomDuo;
+use App\Entity\StudentDuo;
 use App\Form\ClassroomDuoType;
 use App\Form\StudentType;
 use App\Form\ClassroomType;
@@ -151,7 +152,7 @@ class TeacherController extends AbstractController
      * @Route("teacher/{id}/assoc_student", name="assoc_student")
      */
 
-    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo, Request $classRoomDuoRequest): Response
+    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo, Request $classRoomDuoRequest, EntityManagerInterface $manager): Response
     {
 
         // on récupère l'id du classroomDuo
@@ -173,15 +174,40 @@ class TeacherController extends AbstractController
 
         dump($classroom2); // id classe 2 en fonction de l'id
 
-        $classroom = $classroomrepo->findById($classroom1); // il est allé chercher la classroom n
+        $classroomOne = $classroomrepo->findById($classroom1); // il est allé chercher la classroom n dans classroom1
 
-        dump($classroom); // on a toutes les infos de la classroom_1 qui a l'id classroom n
+        dump($classroomOne); // on a toutes les infos de la classroom_1 qui a l'id classroom n
 
+        $classroomTwo = $classroomrepo->findById($classroom2);
+
+        dump($classroomTwo);
+
+        // dump($studentDuoRequest);
+
+        if ($classRoomDuoRequest->request->count() > 1) {
+            $studentDuo = new StudentDuo();
+
+            // si ce qu'il y a dans le select correspond à quelque chose dans la table student, alors retourne moi son ID
+            // envoie l'ID dans la table de DUO
+
+            $studentDuo->setStudent1($classRoomDuoRequest->request->get('student_1'))
+                ->setStudent2($classRoomDuoRequest->request->get('student_2'));
+
+            $manager->persist($studentDuo);
+            $manager->flush();
+
+            // return $this->redirectToRoute('assoc_student', ['id' => $studentDuo->getId()]);
+        }
+
+
+        // RAJOUTER IF CLASSROOM ID CORRESPOND AU PROF CONNECTE
 
         return $this->render("teacher/assoc_student.html.twig", [
-            'classroom' => $classroom,
-            'newclassroomDuo' => $newclassroomDuo
-            // 'myclassrooms' => $myclassrooms
+            'classroomOne' => $classroomOne,
+            'classroomTwo' => $classroomTwo,
+            'newclassroomDuo' => $newclassroomDuo,
+            // mes students
+            // les autres students
         ]);
     }
 
@@ -224,4 +250,5 @@ class TeacherController extends AbstractController
             'mystudents' => $mystudents
         ]);
     }
+
 }
