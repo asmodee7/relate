@@ -100,7 +100,6 @@ class TeacherController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute("teacher_classrooms");
-
         }
 
         return $this->render("teacher/create_classroom.html.twig", [
@@ -173,15 +172,21 @@ class TeacherController extends AbstractController
 
         dump($classroom2); // id classe 2 en fonction de l'id
 
-        $classroom = $classroomrepo->findById($classroom1); // il est allé chercher la classroom n
+        $classroomOne = $classroomrepo->findById($classroom1); // il est allé chercher la classroom n dans classroom1
 
-        dump($classroom); // on a toutes les infos de la classroom_1 qui a l'id classroom n
+        dump($classroomOne); // on a toutes les infos de la classroom_1 qui a l'id classroom n
 
+        $classroomTwo = $classroomrepo->findById($classroom2);
+
+        dump($classroomTwo);
+
+
+        // RAJOUTER IF CLASSROOM ID CORRESPOND AU PROF CONNECTE
 
         return $this->render("teacher/assoc_student.html.twig", [
-            'classroom' => $classroom,
+            'classroomOne' => $classroomOne,
+            'classroomTwo' => $classroomTwo,
             'newclassroomDuo' => $newclassroomDuo
-            // 'myclassrooms' => $myclassrooms
         ]);
     }
 
