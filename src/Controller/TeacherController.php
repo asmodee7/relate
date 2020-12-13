@@ -9,6 +9,7 @@ use App\Entity\ClassroomDuo;
 use App\Form\ClassroomDuoType;
 use App\Form\StudentType;
 use App\Form\ClassroomType;
+use App\Form\EditTeacherType;
 use App\Repository\ClassroomDuoRepository;
 use Doctrine\ORM\EntityManager;
 use App\Repository\TeacherRepository;
@@ -222,6 +223,45 @@ class TeacherController extends AbstractController
             'classroomDuo' => $classroomDuo,
             'myclassroom' => $myclassroom,
             'mystudents' => $mystudents
+        ]);
+    }
+
+    /**
+     * @Route("/teacher/profile/{id}", name="myteacherprofile")
+     */
+    public function showProfile(TeacherRepository $repo, $id, Request $request, EntityManagerInterface $manager)
+    {
+        /* $repo =$this->getDoctrine()-> getRepository(Teacher::class); */
+
+        $teacher =$repo->find($id);
+
+        return $this->render('teacher/profile.html.twig', 
+        [
+            'teacher' => $teacher
+        ]);
+    }
+
+    /**
+     * @Route("/teacher/edit/{id}", name="editmyteacherprofile")
+     */
+    public function edit(Teacher $teacher, Request $request, EntityManagerInterface $manager)
+    {
+
+        $form = $this->createForm(EditTeacherType::class, $teacher);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->persist($teacher);
+            $manager->flush();
+
+            return $this->redirectToRoute('myteacherprofile', ['id' => $teacher->getId()]);
+        }
+
+        return $this->render('teacher/editprofile.html.twig',
+        [
+            'formEditTeacher' => $form->createView()
         ]);
     }
 }
