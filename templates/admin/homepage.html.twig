@@ -10,19 +10,19 @@
 			{{app.user.username}},
 		</span>
 		this is your back office
-		 {{app.user.roles[0]|slice(5)|capitalize }}
-	
+		{{app.user.roles[0]|slice(5)|capitalize }}
+
 
 	</h1>
 	<br>
-	
+
 	{% if is_granted('ROLE_ADMIN') %}
 
-	{#--------------------------------------ADMIN------------------------------------------------------#}
+		{#--------------------------------------ADMIN------------------------------------------------------#}
 
 		<div class="row justify-content-center ">
 			<div class=" col-md-10">
-				<table class="table text-center table-bordered">
+				<table class="table text-center table-bordered table-height">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
@@ -33,10 +33,11 @@
 					</tr>
 				</table>
 			</div>
-			</div>
+		</div>
+		<br>
 		<div class="row justify-content-center ">
 			<div class="col-md-10">
-				<table class="table text-center table-bordered">
+				<table class="table text-center table-bordered table-height">
 					<tr>
 						<th class="display-4">
 							<a href="{{ path('create_school') }}">
@@ -49,15 +50,15 @@
 			</div>
 
 		</div>
-	{#-------------------------------------FIN ADMIN---------------------------------------------------#}
+		{#-------------------------------------FIN ADMIN---------------------------------------------------#}
 
-		{% elseif is_granted('ROLE_SCHOOL') %}	
+	{% elseif is_granted('ROLE_SCHOOL') %}
 
-	{#--------------------------------------SCHOOL------------------------------------------------------#}
+		{#--------------------------------------SCHOOL------------------------------------------------------#}
 
 		<div class="row justify-content-center ">
 			<div class=" col-md-5">
-				<table class="table text-center table-bordered">
+				<table class="table text-center table-bordered table-height">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
@@ -70,7 +71,7 @@
 			</div>
 
 			<div class="col-md-5">
-				<table class="table text-center table-bordered">
+				<table class="table text-center table-bordered table-height">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
@@ -83,9 +84,10 @@
 			</div>
 
 		</div>
+		<br>
 		<div class="row justify-content-center">
 			<div class="col-md-5">
-				<table class="table text-center table-bordered">
+				<table class="table text-center table-bordered table-height">
 					<tr>
 						<th class="display-4">
 							<a href="{#{{path('')}}#}">
@@ -98,7 +100,7 @@
 			</div>
 
 			<div class="col-md-5">
-				<table class="table text-center table-bordered">
+				<table class="table text-center table-bordered table-height">
 					<tr>
 						<th class="display-4">
 							<a href="{{ path('new_teacher') }}">
@@ -110,15 +112,28 @@
 				</table>
 			</div>
 		</div>
-	{#-------------------------------------FIN SCHOOL---------------------------------------------------#}
+		{#-------------------------------------FIN SCHOOL---------------------------------------------------#}
 
-		{% elseif is_granted('ROLE_TEACHER') %}
+	{% elseif is_granted('ROLE_TEACHER') %}
 
-	{#--------------------------------------TEACHER------------------------------------------------------#}
+		{#--------------------------------------TEACHER------------------------------------------------------#}
 
 		<div class="row justify-content-center ">
 			<div class=" col-md-5">
-				<table class="table text-center table-bordered">
+				<table class="table text-center table-bordered table-height">
+					<tr>
+						<th class="display-4">
+							<a href="{#{{ path('') }}#}">
+								Profile<br>
+								<i class="fas fa-user-alt"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-md-5">
+				<table class="table text-center table-bordered table-height">
 					<tr>
 						<th class="display-4">
 							<a href="{{ path('create_classroom') }}">
@@ -130,8 +145,11 @@
 				</table>
 			</div>
 
+		</div>
+		<br>
+		<div class="row justify-content-center">
 			<div class="col-md-5">
-				<table class="table text-center table-bordered">
+				<table class="table text-center table-bordered table-height">
 					<tr>
 						<th class="display-4">
 							<a href="{{ path('teacher_classrooms') }}">
@@ -143,111 +161,116 @@
 				</table>
 			</div>
 
+			<div class="col-md-5">
+				<table class="table text-center table-bordered table-height">
+					<tr>
+						<th class="display-4">
+							<a href="{{ path('create-student') }}">
+								Create Student<br><i class="fas fa-plus-circle"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+
+			</div>
 		</div>
 		<br>
 		<div class="row justify-content-center">
 			<div class="col-md-5">
-					<table class="table text-center table-bordered">
-						<tr>
-							<th class="display-4">
-								<a href="{{ path('create-student') }}">
-									Create student<br>
-									<i class="fas fa-plus-circle"></i>
-								</a>
-							</th>
-						</tr>
-					</table>
-				</div>
-
-				<div class="col-md-5">
-					<table class="table text-center table-bordered">
-						<tr>
-							<th class="display-4">
-								<a href="{#{{path('')}}#}">
-									My students<br><i class="fas fa-user-friends"></i>
-								</a>
-							</th>
-						</tr>
-					</table>
-
+				<table class="table text-center table-bordered table-height">
+					<tr>
+						<th class="display-4">
+							<a href="{{ path('assoc_classroom') }}">
+								New Partnership<br>
+								<i class="fas fa-people-arrows"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
 			</div>
 		</div>
+	</div>
 	{#-------------------------------------FIN TEACHER---------------------------------------------------#}
 
-		{% elseif is_granted('ROLE_STUDENT') %}
+{% elseif is_granted('ROLE_STUDENT') %}
 
 	{#--------------------------------------STUDENT------------------------------------------------------#}
+	<div class="row justify-content-center ">
+		<div class=" col-md-5">
+			<table class="table text-center table-bordered table-height">
+				<tr>
+					<th class="display-4">
+						<a href="{#{{path('')}}#}">
+							Profile<br>
+							<i class="fas fa-user-alt"></i>
+						</a>
+					</th>
+				</tr>
+			</table>
+		</div>
+		<div class=" col-md-5">
+			<table class="table text-center table-bordered table-height">
+				<tr>
+					<th class="display-4">
+						<a href="{#{{path('')}}#}">
+							My school<br>
+							<i class="fas fa-school"></i>
+						</a>
+					</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<br>
+	<div class="row justify-content-center ">
+		<div class="col-md-5">
+			<table class="table text-center table-bordered table-height">
+				<tr>
+					<th class="display-4">
+						<a href="{#{{path('')}}#}">
+							My teacher<br>
+							<i class="fas fa-user-edit"></i>
+						</a>
+					</th>
+				</tr>
+			</table>
+		</div>
+		<div class="col-md-5">
+			<table class="table text-center table-bordered table-height">
+				<tr>
+					<th class="display-4">
+						<a href="{#{{path('')}}#}">
+							My classroom<br>
+							<i class="fas fa-users"></i>
+						</a>
+					</th>
+				</tr>
+			</table>
+		</div>
+	</div>
 
-		<div class="row justify-content-center ">
-			<div class=" col-md-5">
-				<table class="table text-center table-bordered">
-					<tr>
-						<th class="display-4">
-							<a href="{#{{path('')}}#}">
-								My school<br>
-								<i class="fas fa-school"></i>
-							</a>
-						</th>
-					</tr>
-				</table>
-			</div>
+	<br>
+	<div class="row justify-content-center ">
 
-			<div class="col-md-5">
-				<table class="table text-center table-bordered">
-					<tr>
-						<th class="display-4">
-							<a href="{#{{path('')}}#}">
-								My teacher<br>
-								<i class="fas fa-user-edit"></i>
-							</a>
-						</th>
-					</tr>
-				</table>
-			</div>
+		<div class="col-md-5">
+			<table class="table text-center table-bordered table-height">
+				<tr>
+					<th class="display-4">
+						<a href="{#{{path('')}}#}">
+							My team mate<br><i class="fas fa-comment-dots"></i>
+						</a>
+					</th>
+				</tr>
+			</table>
 
 		</div>
-		<br>
-		<div class="row justify-content-center">
-			<div class="col-md-5">
-					<table class="table text-center table-bordered">
-						<tr>
-							<th class="display-4">
-								<a href="{#{{path('')}}#}">
-									My classroom<br>
-									<i class="fas fa-users"></i>
-								</a>
-							</th>
-						</tr>
-					</table>
-				</div>
-
-				<div class="col-md-5">
-					<table class="table text-center table-bordered">
-						<tr>
-							<th class="display-4">
-								<a href="{#{{path('')}}#}">
-									My team mate<br><i class="fas fa-comment-dots"></i>
-								</a>
-							</th>
-						</tr>
-					</table>
-
-			</div>
-		</div>
-	{#-------------------------------------FIN STUDENT---------------------------------------------------#}	
-
-		{% else %}
-			
-		{{path('')}}
-
-	{% endif %} 
+	</div>
 
 
+	{#-------------------------------------FIN STUDENT---------------------------------------------------#}
 
+{% else %}
 
+	{{path('')}}
 
-
-
-	
-
-{% endblock %}
+{% endif %}{% endblock %}

@@ -42,6 +42,10 @@ th a {
     color: black;
 }
 
+.table-height{
+    min-height: 35vh;
+}
+
 /* ------------------------------------------- Footer ------------------------------------------- */
 
 .relate-footer{min-height: 15vh;}

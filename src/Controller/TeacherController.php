@@ -99,7 +99,8 @@ class TeacherController extends AbstractController
             $manager->persist($classroom);
             $manager->flush();
 
-            return $this->redirectToRoute('teacher_classrooms');
+            return $this->redirectToRoute("teacher_classrooms");
+
         }
 
         return $this->render("teacher/create_classroom.html.twig", [
