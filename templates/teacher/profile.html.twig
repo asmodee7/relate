@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}Relate | Teacher Profile
+{% endblock %}
+
+{% block body %}
+	<h1>My Profile</h1>
+
+	<div class="content">
+		<img src="http://placehold.it/150x150" alt="">
+		<h2>{{ teacher.firstname}} {{ teacher.lastname}}</h2>
+        <span>{{ teacher.email}}</span>
+        <span>{{ teacher.phonenumber}}</span>
+        <span>{{ teacher.language}}</span>
+		<p>{{ teacher.description}}</p>
+
+		<a href="{{ path('editmyteacherprofile', {'id': teacher.id}) }}" class="btn">Editer</a>
+	</div>
+
+{% endblock %}

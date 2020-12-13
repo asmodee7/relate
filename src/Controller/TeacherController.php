@@ -10,6 +10,7 @@ use App\Entity\StudentDuo;
 use App\Form\ClassroomDuoType;
 use App\Form\StudentType;
 use App\Form\ClassroomType;
+use App\Form\EditTeacherType;
 use App\Repository\ClassroomDuoRepository;
 use Doctrine\ORM\EntityManager;
 use App\Repository\TeacherRepository;
@@ -101,7 +102,6 @@ class TeacherController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute("teacher_classrooms");
-
         }
 
         return $this->render("teacher/create_classroom.html.twig", [
@@ -199,15 +199,12 @@ class TeacherController extends AbstractController
             // return $this->redirectToRoute('assoc_student', ['id' => $studentDuo->getId()]);
         }
 
-
         // RAJOUTER IF CLASSROOM ID CORRESPOND AU PROF CONNECTE
 
         return $this->render("teacher/assoc_student.html.twig", [
             'classroomOne' => $classroomOne,
             'classroomTwo' => $classroomTwo,
-            'newclassroomDuo' => $newclassroomDuo,
-            // mes students
-            // les autres students
+            'newclassroomDuo' => $newclassroomDuo
         ]);
     }
 
@@ -251,4 +248,42 @@ class TeacherController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/teacher/profile/{id}", name="myteacherprofile")
+     */
+    public function showProfile(TeacherRepository $repo, $id, Request $request, EntityManagerInterface $manager)
+    {
+        /* $repo =$this->getDoctrine()-> getRepository(Teacher::class); */
+
+        $teacher =$repo->find($id);
+
+        return $this->render('teacher/profile.html.twig', 
+        [
+            'teacher' => $teacher
+        ]);
+    }
+
+    /**
+     * @Route("/teacher/edit/{id}", name="editmyteacherprofile")
+     */
+    public function edit(Teacher $teacher, Request $request, EntityManagerInterface $manager)
+    {
+
+        $form = $this->createForm(EditTeacherType::class, $teacher);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->persist($teacher);
+            $manager->flush();
+
+            return $this->redirectToRoute('myteacherprofile', ['id' => $teacher->getId()]);
+        }
+
+        return $this->render('teacher/editprofile.html.twig',
+        [
+            'formEditTeacher' => $form->createView()
+        ]);
+    }
 }

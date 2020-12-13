@@ -25,21 +25,13 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/profile", name="mystudentprofile")
+     * @Route("/student/profile/{id}", name="mystudentprofile")
      */
-    public function showProfile(Request $request, EntityManagerInterface $manager)
+    public function showProfile($id, Request $request, EntityManagerInterface $manager)
     {
-        $student = new Student();
+        $repo =$this->getDoctrine()-> getRepository(Student::class);
 
-        $student->setFirstname('firstname')
-                ->setLastname('lastname')
-                ->setAge('12')
-                ->setPhoto('photo')
-                ->setDescription('description')
-                ->setSport('sport')
-                ->setMusic('music')
-                ->setOtherHobbies('other_hobbies');
-                /* ->setStudentDuos('studentDuos') */
+        $student =$repo->find($id);
 
         return $this->render('student/profile.html.twig', 
         [
@@ -48,24 +40,13 @@ class StudentController extends AbstractController
     }
 
     /**
-     * @Route("/student/edit", name="editmystudentprofile")
+     * @Route("/student/edit/{id}", name="editmystudentprofile")
      */
-    public function edit(Request $request, EntityManagerInterface $manager)
+    public function edit(Student $student, Request $request, EntityManagerInterface $manager)
     {
-        $student = new Student();
 
 
-        $form = $this->createFormBuilder($student)
-                    ->add('firstname')
-                    ->add('lastname')
-                    ->add('age')
-                    ->add('photo')
-                    ->add('description')
-                    ->add('sport')
-                    ->add('music')
-                    ->add('OtherHobbies')
-                    ->add('studentDuos')
-                    ->getForm();
+        $form = $this->createForm(EditStudentType::class, $student);
 
         $form->handleRequest($request);
 

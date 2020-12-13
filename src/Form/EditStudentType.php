@@ -14,8 +14,6 @@ class EditStudentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('password')
             ->add('lastname')
             ->add('firstname')
             ->add('age')
@@ -23,15 +21,15 @@ class EditStudentType extends AbstractType
             ->add('photo')
             ->add('sport')
             ->add('music')
-            ->add('other_hobbies')
-            ->add('classrooms', EntityType::class, [
+            ->add('other_hobbies');
+/*             ->add('classrooms', EntityType::class, [
                 'label' => 'Classroom',
                 'class' => Classroom::class,
                 'choice_label' => 'classroom_name',
                 'expanded' => true,
                 'multiple' => true
-            ])
-            ->add('studentDuos');
+            /* ]) */
+            /* ->add('studentDuos'); */
     }
 
     public function configureOptions(OptionsResolver $resolver)
