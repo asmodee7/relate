@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Relate | School Infos
+{% endblock %}
+
+{% block body %}
+	<h1>My School Infos</h1>
+
+	<div class="content">
+        <h2>{{ school.SchoolName }}</h2>
+        <img src="http://placehold.it/450x150" alt="">
+        <span>{{ school.country }}</span>
+        <span>{{ school.language }}</span>
+        <h2>School Head</h2>
+        <span>{{ school.UserFirstname }} </span>
+        <span>{{ school.UserLastname }}</span>
+    </div>
+    
+    <a href="{{ path('edit_my_school_infos', {'id': school.id}) }}" class="btn btn-success my-3">Editer</a>
+
+{% endblock %}
