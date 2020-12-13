@@ -34,18 +34,47 @@
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
+						{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item">
+							<a class="nav-link" href="#">Schools</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('create_school') }}">New school</a>
+						</li>
+						{% endif %}
+						{% if is_granted('ROLE_SCHOOL') %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('new_teacher') }}">New teacher</a>
+						</li>
+						{% endif %}
+						{% if is_granted('ROLE_TEACHER') %}
 						<li class="nav-item">
 							<a class="nav-link" href="#">Profile</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Penpals</a>
+							<a class="nav-link" href="{{ path('teacher_classrooms') }}">Classrooms</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Discussions</a>
+							<a class="nav-link" href="{{ path('assoc_classroom') }}">New partnership</a>
+						</li>
+						{% endif %}
+						{% if is_granted('ROLE_STUDENT') %}
+						<li class="nav-item">
+							<a class="nav-link" href="#">Profile</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Help</a>
+							<a class="nav-link" href="#">School</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Teacher</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Classroom</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Team mate</a>
+						</li>
+						{% endif %}
 					</ul>
 				</div>
 				<div>
