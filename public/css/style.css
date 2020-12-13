@@ -26,7 +26,7 @@ body
 .log{
     position: absolute;
     z-index: 2;
-    top: 10px;
+    top: 25px;
     right: 10px;
 }
 
@@ -42,8 +42,8 @@ th a {
     color: black;
 }
 
-.table-height{
-    min-height: 35vh;
+.choice-h{
+    min-height: 40vh;
 }
 
 /* ------------------------------------------- Footer ------------------------------------------- */
