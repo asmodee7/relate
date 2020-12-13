@@ -8,15 +8,16 @@
 
 	<div class="content">
 		<img src="http://placehold.it/150x150" alt="">
-		<h2>Prenom nom</h2>
-		<span>Age</span>
+		<h2>{{ student.firstname}} {{ student.lastname}}</h2>
+		<span>{{ student.age}}</span>
 		<span>Duo</span>
 		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem quasi ipsum mollitia! Maiores vero quod enim culpa laborum quidem ut, dolorem tempora repudiandae accusantium fuga recusandae rem eveniet suscipit quas!</p>
-		<span>Sport</span>
-		<span>Music</span>
-		<p>otherhobbies</p>
+		<span>{{ student.sport}}</span>
+		<span>{{ student.music}}</span>
+		<p>{{ student.otherhobbies}}</p>
+		<p>{{ student.description}}</p>
 
-		<button type="submit" class="btn btn-success">Edit</button>
+		<a href="{{ path('editmystudentprofile', {'id': student.id}) }}" class="btn">Editer</a>
 	</div>
 
 {% endblock %}
