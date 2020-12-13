@@ -13,6 +13,7 @@ use App\Repository\ClassroomDuoRepository;
 use Doctrine\ORM\EntityManager;
 use App\Repository\TeacherRepository;
 use App\Repository\ClassroomRepository;
+use App\Repository\StudentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,7 +49,7 @@ class TeacherController extends AbstractController
         if ($studentForm->isSubmitted() && $studentForm->isValid()) {
             $hash = $encoder->encodePassword($student, $student->getPassword());
             $student->setPassword($hash);
-           
+
             $student->setRoles(["ROLE_STUDENT"]);
             $manager->persist($student);
             $manager->flush();
@@ -58,6 +59,22 @@ class TeacherController extends AbstractController
 
         return $this->render("teacher/create_student.html.twig", [
             'studentForm' => $studentForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("teacher/my_classrooms", name="teacher_classrooms")
+     */
+    public function showTeacherClassrooms(TeacherRepository $repo)
+    {
+        $user = $this->getUser()->getId();
+
+        $myClassrooms = $repo->find($user);
+
+        dump($myClassrooms);
+
+        return $this->render("teacher/teacher_classrooms.html.twig", [
+            'myClassrooms' => $myClassrooms
         ]);
     }
 
@@ -83,6 +100,7 @@ class TeacherController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute("teacher_classrooms");
+
         }
 
         return $this->render("teacher/create_classroom.html.twig", [
@@ -133,7 +151,7 @@ class TeacherController extends AbstractController
      * @Route("teacher/{id}/assoc_student", name="assoc_student")
      */
 
-    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo): Response
+    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo, Request $classRoomDuoRequest): Response
     {
 
         // on récupère l'id du classroomDuo
@@ -144,34 +162,20 @@ class TeacherController extends AbstractController
 
         // on verra après pour classroom_2 et les conditions
 
-        // $classroomduo = $duorepo->findByid();
+        $classroomduo = $classRoomDuoRequest->attributes->get('id');
+        dump($classroomduo);
 
-        $classroomduo = $duorepo->findAll();
+        $classroom1 = $newclassroomDuo->getClassroom1($classroomduo);
 
+        dump($classroom1); // id classe 1 en fonction de l'id
 
-        foreach ($classroomduo as $classroomduodata) {
-            $id = $classroomduodata->getId();
-        }
-        dump($id);
+        $classroom2 = $newclassroomDuo->getClassroom2($classroomduo);
 
-        foreach ($classroomduo as $classroomduodata) {
-            $classroom1 = $classroomduodata->getClassroom1();
-        }
-        dump($classroom1); // c'est "4" pour le duoclassroom 5
+        dump($classroom2); // id classe 2 en fonction de l'id
 
-        foreach ($classroomduo as $classroomduodata) {
-            $classroom2 = $classroomduodata->getClassroom2();
-        }
-        dump($classroom2);
+        $classroom = $classroomrepo->findById($classroom1); // il est allé chercher la classroom n
 
-        $classroom = $classroomrepo->findById($classroom1); // il est allé chercher la classroom 4
-
-        dump($classroom); // on a toutes les infos de la classroom_1 qui a l'id classroom 4
-
-
-        // $classroom->unwrap()->toArray();
-
-        // dump($classroom);
+        dump($classroom); // on a toutes les infos de la classroom_1 qui a l'id classroom n
 
 
         return $this->render("teacher/assoc_student.html.twig", [
@@ -181,26 +185,11 @@ class TeacherController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("teacher/my_classrooms", name="teacher_classrooms")
-     */
-    public function showTeacherClassrooms(TeacherRepository $repo)
-    {
-        $user = $this->getUser()->getId();
-
-        $myClassrooms = $repo->find($user);
-
-        dump($myClassrooms);
-
-        return $this->render("teacher/teacher_classrooms.html.twig", [
-            'myClassrooms' => $myClassrooms
-        ]);
-    }
 
     /**
      * @Route("teacher/{id}/my_classroomduos", name="teacher_showclassroom")
      */
-    public function showTeacherClassroomDuos(Request $request, ClassroomDuoRepository $duorepo, ClassroomRepository $classrepo)
+    public function showTeacherClassroomDuos(Request $request, ClassroomDuoRepository $duorepo, ClassroomRepository $classrepo, StudentRepository $studentrepo)
     {
 
         $id = $request->get('id');
@@ -223,10 +212,16 @@ class TeacherController extends AbstractController
 
         dump($myclassroom);
 
+        $mystudents = $studentrepo->findStudentsByClassroom($id);
 
-        return $this->render("teacher/teacher_showclassrooms.html.twig", [
+        dump($mystudents);
+
+        // on veut les classrooms où l'id de classroom dans étudiant = ID de la classroom
+
+        return $this->render("teacher/teacher_classroom_info.html.twig", [
             'classroomDuo' => $classroomDuo,
-            'myclassroom' => $myclassroom
+            'myclassroom' => $myclassroom,
+            'mystudents' => $mystudents
         ]);
     }
 }

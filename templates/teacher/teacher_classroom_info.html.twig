@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Teacher | ClassroomInfo
+{% endblock %}
+
+
+{% block body %}
+
+	<h1 class="text-center mt-2 pb-1">Teacher | ClassroomInfo</h1>
+	<hr>
+	<br>
+
+	<table class="table table-bordered text-center">
+
+		<thead>
+			<tr>
+				<th scope="col">ID DU DUO</th>
+				<th scope="col">CLASSROOM</th>
+				<th scope="col">CLASSROOM</th>
+				<th scope="col">See partnership</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for partner in classroomDuo %}
+				<tr>
+					{% for data in myclassroom %}
+						<td class="card-center">
+							{{ partner.id }}
+						</td>
+						<td class="card-center">
+							{% if partner.getClassroom1() == data.id %}
+								{{ partner.getClassroom1() }}
+								{{ data.grade }}
+								{{ data.classroomName }}
+
+							{% else %}
+								{{ partner.getClassroom1() }}
+							{% endif %}
+						</td>
+						<td class="card-center">
+							{% if partner.getClassroom2() == data.id %}
+								{{ partner.getClassroom2() }}
+								{{ data.grade }}
+								{{ data.classroomName }}
+							{% else %}
+								{{ partner.getClassroom2() }}
+							{% endif %}
+
+						</td>
+						<td class="card-center">
+							<button class="btn btn-peche">
+								<a class="text-white" href="{{ path("assoc_student", {'id': partner.id } )}}">Click</a>
+							</button>
+						</td>
+
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h1 class="text-center mt-2 pb-1">My Students</h1>
+	<hr>
+	<br>
+
+	<table class="table table-bordered text-center">
+
+		<thead>
+			<tr>
+				<th scope="col">firstname</th>
+				<th scope="col">lastname</th>
+				<th scope="col">age</th>
+				<th scope="col">description</th>
+				<th scope="col">sport</th>
+				<th scope="col">music</th>
+				<th scope="col">other hobbies</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for student in mystudents %}
+				<tr>
+					<td>{{ student.firstname }}</td>
+					<td>{{ student.lastname }}</td>
+					<td>{{ student.age }}</td>
+					<td>{{ student.description }}</td>
+					<td>{{ student.sport }}</td>
+					<td>{{ student.music }}</td>
+					<td>{{ student.otherHobbies }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
