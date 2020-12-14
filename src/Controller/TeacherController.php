@@ -15,6 +15,7 @@ use App\Repository\ClassroomDuoRepository;
 use Doctrine\ORM\EntityManager;
 use App\Repository\TeacherRepository;
 use App\Repository\ClassroomRepository;
+use App\Repository\StudentDuoRepository;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -171,37 +172,101 @@ class TeacherController extends AbstractController
      * @Route("teacher/{id}/assoc_student", name="assoc_student")
      */
 
-    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo, Request $classRoomDuoRequest, EntityManagerInterface $manager): Response
+    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo, Request $classRoomDuoRequest, EntityManagerInterface $manager, Request $request, StudentRepository $studentrepo, StudentDuoRepository $studentduorepo): Response
     {
 
         // on récupère l'id du classroomDuo
-
         // on montre le tableau qui correspond à l'id du classroomDuo avec classroom_1 et classroom_2
-
         // on affiche la classroom_id qui correspond au chiffre dans classroom_1
-
         // on verra après pour classroom_2 et les conditions
 
         $classroomduo = $classRoomDuoRequest->attributes->get('id');
-        dump($classroomduo);
+        // dump($classroomduo);
 
         $classroom1 = $newclassroomDuo->getClassroom1($classroomduo);
-
-        dump($classroom1); // id classe 1 en fonction de l'id
+        // dump($classroom1); // id classe 1 en fonction de l'id
 
         $classroom2 = $newclassroomDuo->getClassroom2($classroomduo);
-
-        dump($classroom2); // id classe 2 en fonction de l'id
+        // dump($classroom2); // id classe 2 en fonction de l'id
 
         $classroomOne = $classroomrepo->findById($classroom1); // il est allé chercher la classroom n dans classroom1
-
-        dump($classroomOne); // on a toutes les infos de la classroom_1 qui a l'id classroom n
+        // dump($classroomOne); // on a toutes les infos de la classroom_1 qui a l'id classroom n
 
         $classroomTwo = $classroomrepo->findById($classroom2);
+        // dump($classroomTwo);
 
-        dump($classroomTwo);
+        $id = $request->get('id');
+        // dump($id);
 
-        // dump($studentDuoRequest);
+        $studentsFromClassroom1 = $studentrepo->findStudentsByClassroom($classroom1);
+        // dump($studentsFromClassroom1);
+
+        $studentsFromClassroom2 = $studentrepo->findStudentsByClassroom($classroom2);
+        // dump($studentsFromClassroom2);
+
+        $studentsDuos = $studentduorepo->findAll();
+        // dump($studentsDuos);
+
+        // $student1 = $studentsDuos->getStudent1();
+        // dump($student1);
+
+        // ----------------------------------------------------------------------------------------------
+
+        // ClassroomDuo dans l'URL : $classroomduo
+        // Class from $classroomduo : $classFromDuo = $duorepo->find($classroomduo)
+
+        // dump($duorepo->find($classroomduo)->getClassroom1());
+        // dump($duorepo->find($classroomduo)->getClassroom2());
+
+        // Classroom 1 :$classroom1
+        // Classroom 2 : $classroom2
+        // Students classroom 1 : $studentsFromClassroom1
+        // Students classroom 2 : $studentsFromClassroom2
+        // StudentDuos : $studentsDuos
+
+        // dump($studentsFromClassroom1->getId());
+
+        $students1FromDuo = [];
+        $students2FromDuo = [];
+
+        foreach($studentsDuos as $oneStudentDuo)
+        {
+            // dump($oneStudentDuo->getStudent1());
+            // dump($oneStudentDuo->getStudent2());
+
+            // dump($studentsFromClassroom1);
+
+            foreach($studentsFromClassroom1 as $oneStudentFromClassroom1)
+            {
+                // dump($oneStudentFromClassroom1);
+                // dump($oneStudentDuo->getStudent1());
+
+                if($oneStudentDuo->getStudent1() == $oneStudentFromClassroom1->getId() || $oneStudentDuo->getStudent2() == $oneStudentFromClassroom1->getId())
+                {
+                    $students1FromDuo[] = $oneStudentFromClassroom1;
+                }
+            }
+
+            foreach($studentsFromClassroom2 as $oneStudentFromClassroom2)
+            {
+                // dump($oneStudentFromClassroom1);
+                // dump($oneStudentDuo->getStudent1());
+
+                if($oneStudentDuo->getStudent2() == $oneStudentFromClassroom2->getId() || $oneStudentDuo->getStudent1() == $oneStudentFromClassroom2->getId())
+                {
+                    $students2FromDuo[] = $oneStudentFromClassroom2;
+                }
+            }
+
+            // dump($test1);
+            // dump($test2);
+
+        }
+
+        dump($students1FromDuo);
+        dump($students2FromDuo);
+
+
 
         if ($classRoomDuoRequest->request->count() > 1) {
             $studentDuo = new StudentDuo();
@@ -215,7 +280,7 @@ class TeacherController extends AbstractController
             $manager->persist($studentDuo);
             $manager->flush();
 
-            // return $this->redirectToRoute('assoc_student', ['id' => $studentDuo->getId()]);
+            return $this->redirectToRoute('assoc_student', ['id' => $classroomduo]);
         }
 
         // RAJOUTER IF CLASSROOM ID CORRESPOND AU PROF CONNECTE
@@ -223,7 +288,12 @@ class TeacherController extends AbstractController
         return $this->render("teacher/assoc_student.html.twig", [
             'classroomOne' => $classroomOne,
             'classroomTwo' => $classroomTwo,
-            'newclassroomDuo' => $newclassroomDuo
+            'newclassroomDuo' => $newclassroomDuo,
+            'studentsDuos' => $studentsDuos,
+            'studentsFromClassroom1' => $studentsFromClassroom1,
+            'studentsFromClassroom2' => $studentsFromClassroom2,
+            'students1FromDuo' => $students1FromDuo,
+            'students2FromDuo' => $students2FromDuo
         ]);
     }
 

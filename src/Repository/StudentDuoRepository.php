@@ -19,6 +19,18 @@ class StudentDuoRepository extends ServiceEntityRepository
         parent::__construct($registry, StudentDuo::class);
     }
 
+    public function findDuoByStudent($id)
+    {
+
+        $query = $this->createQueryBuilder('d')
+            ->select('d')
+            ->where('d.student_1 = :id')
+            ->orwhere('d.student_2 = :id')
+            ->setParameter(":id", $id);
+
+        return $query->getQuery()->getResult();
+    }
+
     // /**
     //  * @return StudentDuo[] Returns an array of StudentDuo objects
     //  */

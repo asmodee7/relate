@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20201213101743 extends AbstractMigration
+final class Version20201214152452 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,6 +20,7 @@ final class Version20201213101743 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE TABLE admin (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, roles LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\', PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE classroom (id INT AUTO_INCREMENT NOT NULL, grade VARCHAR(255) NOT NULL, classroom_name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE classroom_teacher (classroom_id INT NOT NULL, teacher_id INT NOT NULL, INDEX IDX_3A0767FD6278D5A8 (classroom_id), INDEX IDX_3A0767FD41807E1D (teacher_id), PRIMARY KEY(classroom_id, teacher_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE classroom_duo (id INT AUTO_INCREMENT NOT NULL, classroom_1 VARCHAR(255) NOT NULL, classroom_2 VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -53,6 +54,7 @@ final class Version20201213101743 extends AbstractMigration
         $this->addSql('ALTER TABLE student_duo_student DROP FOREIGN KEY FK_6999C8DBCB944F1A');
         $this->addSql('ALTER TABLE student_duo_student DROP FOREIGN KEY FK_6999C8DB67E6A0A7');
         $this->addSql('ALTER TABLE classroom_teacher DROP FOREIGN KEY FK_3A0767FD41807E1D');
+        $this->addSql('DROP TABLE admin');
         $this->addSql('DROP TABLE classroom');
         $this->addSql('DROP TABLE classroom_teacher');
         $this->addSql('DROP TABLE classroom_duo');

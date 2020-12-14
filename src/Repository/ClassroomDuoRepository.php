@@ -33,7 +33,6 @@ class ClassroomDuoRepository extends ServiceEntityRepository
             // ->setParameter(":grade", $grade)
         ;
 
-
         return $query->getQuery()->getResult();
     }
 
