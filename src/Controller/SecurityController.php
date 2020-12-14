@@ -42,6 +42,10 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils, AuthorizationCheckerInterface $authChecker)
     {
+        if ($authChecker->isGranted('ROLE_ADMIN') || $authChecker->isGranted('ROLE_SCHOOL') || $authChecker->isGranted('ROLE_TEACHER') || $authChecker->isGranted('ROLE_STUDENT')) {
+            return $this->redirectToRoute("homepage");
+        }
+
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();

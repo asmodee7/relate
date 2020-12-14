@@ -13,7 +13,7 @@
 		{% for classroom in myClassrooms.classrooms %}
 
 			<div class="col-md-5">
-				<table class="table text-center table-hover table-bordered">
+				<table class="table text-center table-hover table-bordered choice-h">
 					<tr>
 						<th class="display-4">
 							<a href="{{ path('teacher_showclassroom', {'id': classroom.id }) }}">
@@ -27,7 +27,7 @@
 		{% endfor %}
 
 		<div class="col-md-5">
-			<table class="table text-center table-hover table-bordered">
+			<table class="table text-center table-hover table-bordered choice-h">
 				<tr>
 					<th class="display-4">
 						<a href="{#{{path('')}}#}">

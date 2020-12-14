@@ -43,14 +43,34 @@ class School implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez saisir un nom d'utilisateur !")
+     * @Assert\Length(
+     *      min="2",
+     *      minMessage="Votre nom d'utilisateur doit contenir minimum 2 caractères !"
+     * )
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="1", minMessage="Votre mot de passe doit faire minimum 1 caractères")
+     * @Assert\Length(                       
+     *        min="8",
+     *        minMessage="Votre mot de passe doit faire minimum 8 caractères !"
+     * )
+     * @Assert\EqualTo(
+     *      propertyPath="confirm_password",
+     *      message="Les mot de passe ne correspondent pas ! Vérifiez la saisie."
+     * )
      */
     private $password;
+
+    /**
+     * @Assert\EqualTo(
+     *      propertyPath="password",
+     *      message="Les mot de passe ne correspondent pas ! Vérifiez la saisie."
+     * )
+     */
+    public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
