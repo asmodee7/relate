@@ -4,11 +4,10 @@
 {% endblock %}
 
 {% block body %}
+<div class="col-12">
+	<h1 class="text-center my-5">New partnership:</h1>
 
-	<h4 class="text-center my-3">New partnership:
-	</h4>
-
-	<div class="container">
+	<div>
 		{{ form_start(schoolForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
 		{{ form_row(schoolForm.school_name, {'label': "Name of the school"} )}}
@@ -19,6 +18,7 @@
 		{{ form_row(schoolForm.user_position )}}
 		{{ form_row(schoolForm.username )}}
 		{{ form_row(schoolForm.password )}}
+		{{ form_row(schoolForm.confirm_password )}}
 
 		<div class="text-center my-3">
 			<button type="submit" class="btn btn-peche text-white text-center">Create the school account</button>
@@ -27,5 +27,5 @@
 		{{ form_end(schoolForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
 	</div>
-
+</div>
 {% endblock %}
