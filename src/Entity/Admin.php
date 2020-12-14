@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AdminRepository::class)
@@ -85,12 +86,10 @@ class Admin implements UserInterface
 
     public function eraseCredentials()
     {
-
     }
 
     public function getSalt()
     {
-
     }
 
     public function getRoles(): ?array

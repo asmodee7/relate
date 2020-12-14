@@ -15,6 +15,7 @@ use App\Repository\ClassroomDuoRepository;
 use Doctrine\ORM\EntityManager;
 use App\Repository\TeacherRepository;
 use App\Repository\ClassroomRepository;
+use App\Repository\StudentDuoRepository;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -171,43 +172,64 @@ class TeacherController extends AbstractController
      * @Route("teacher/{id}/assoc_student", name="assoc_student")
      */
 
-    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo, Request $classRoomDuoRequest, EntityManagerInterface $manager): Response
+    public function classduostudents(ClassroomDuo $newclassroomDuo, ClassroomDuoRepository $duorepo, ClassroomRepository $classroomrepo, Request $classRoomDuoRequest, EntityManagerInterface $manager, StudentDuoRepository $studentduorepo, StudentRepository $studentrepo): Response
     {
 
-        // on récupère l'id du classroomDuo
+        $students = $studentduorepo->findAll();
 
-        // on montre le tableau qui correspond à l'id du classroomDuo avec classroom_1 et classroom_2
+        dump($students);
+
+        // on récupère l'id du classroomDuo
+        $classroomduo = $classRoomDuoRequest->attributes->get('id');
+        // dump($classroomduo);
 
         // on affiche la classroom_id qui correspond au chiffre dans classroom_1
-
-        // on verra après pour classroom_2 et les conditions
-
-        $classroomduo = $classRoomDuoRequest->attributes->get('id');
-        dump($classroomduo);
-
         $classroom1 = $newclassroomDuo->getClassroom1($classroomduo);
 
-        dump($classroom1); // id classe 1 en fonction de l'id
+        // dump($classroom1); // id classe 1 en fonction de l'id
 
+        // on affiche la classroom_id qui correspond au chiffre dans classroom_2
         $classroom2 = $newclassroomDuo->getClassroom2($classroomduo);
 
-        dump($classroom2); // id classe 2 en fonction de l'id
+        // dump($classroom2); // id classe 2 en fonction de l'id
 
         $classroomOne = $classroomrepo->findById($classroom1); // il est allé chercher la classroom n dans classroom1
 
-        dump($classroomOne); // on a toutes les infos de la classroom_1 qui a l'id classroom n
+        // dump($classroomOne); // on a toutes les infos de la classroom_1 qui a l'id classroom n
 
         $classroomTwo = $classroomrepo->findById($classroom2);
 
-        dump($classroomTwo);
+        // dump($classroomTwo);
 
-        // dump($studentDuoRequest);
+
+        /********************************************************************* */
+
+        // SECURISATION URL
+        // dump($this->getUser());
+
+        // aller chercher les classes du prof
+        $tabId = [];
+        for ($i = 0; $i < count($this->getUser()->getClassrooms()); $i++) {
+            $tabId[] = $this->getUser()->getClassrooms()[$i]->getId();
+        }
+        dump($tabId);
+        // $tabId donne un array des id des classrooms du prof connecté
+
+        // dump($newclassroomDuo);
+        // là on regarde quelles classes sont dans le classroomduo
+
+        // $classroom1 et $classroom2 permettent de récupérer l'id des classrooms du duo
+
+        // Si les classes du classroomduo de l'url ne correspondent à aucune classe du prof, ça renvoie à l'affichage des classroms du prof connecté
+        if (!in_array($classroom1, $tabId) && !in_array($classroom2, $tabId)) {
+            return $this->redirectToRoute('teacher_classrooms');
+        }
 
         if ($classRoomDuoRequest->request->count() > 1) {
             $studentDuo = new StudentDuo();
 
             // si ce qu'il y a dans le select correspond à quelque chose dans la table student, alors retourne moi son ID
-            // envoie l'ID dans la table de DUO
+            // envoie l'ID dans la table de DUO students
 
             $studentDuo->setStudent1($classRoomDuoRequest->request->get('student_1'))
                 ->setStudent2($classRoomDuoRequest->request->get('student_2'));
@@ -218,12 +240,10 @@ class TeacherController extends AbstractController
             // return $this->redirectToRoute('assoc_student', ['id' => $studentDuo->getId()]);
         }
 
-        // RAJOUTER IF CLASSROOM ID CORRESPOND AU PROF CONNECTE
-
         return $this->render("teacher/assoc_student.html.twig", [
             'classroomOne' => $classroomOne,
             'classroomTwo' => $classroomTwo,
-            'newclassroomDuo' => $newclassroomDuo
+            'newclassroomDuo' => $newclassroomDuo,
         ]);
     }
 
@@ -234,11 +254,31 @@ class TeacherController extends AbstractController
     public function showTeacherClassroomDuos(Request $request, ClassroomDuoRepository $duorepo, ClassroomRepository $classrepo, StudentRepository $studentrepo)
     {
 
-        $id = $request->get('id');
+        // dump($this->getUser()->getClassrooms()[0]);
 
+        $id = $request->get('id');
         dump($id); // on récupère l'id de la classroom dans l'url, qui est le même que l'id de classroom_1
 
-        // on montre les partenaires selon l'id de classroom_1
+        // SECURISATION URL
+        $tabId = [];
+        for ($i = 0; $i < count($this->getUser()->getClassrooms()); $i++) {
+            $tabId[] = $this->getUser()->getClassrooms()[$i]->getId();
+        }
+        // on va chercher l'array de tous les id des classes du prof
+
+        $position = array_search($id, $tabId);
+        dump($tabId);
+        // on va chercher si l'id entré dans l'URL correspond aux id des classes du prof
+
+        if ($position === false) {
+            return $this->redirectToRoute('teacher_classrooms');
+        }
+        // si c'est faux, c'est que l'id entré ne correspond pas aux id des classes du prof, ça redirige sur teacher_classrooms
+
+
+
+
+        // MONTRER LES CLASSROOMS PARTENAIRES selon l'id de classroom_1 & 2
 
         // TROUVER TOUTES LES CLASSROOMS_1 ET CLASSROOM_2 AVEC ID URL
         // getClassroomDuoTeacher() dans ClassroomDuoRepository permet d'aller chercher les classroomDuos où les classroom_1 et classroom_2 correspondent à l'id de la classroom sélectionnée

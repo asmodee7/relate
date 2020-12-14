@@ -5,92 +5,97 @@
 
 {% block body %}
 
-    <div class="row">
-    {% for classroomData in classroomOne %}
-        <h1 class="col-6 text-center my-4">{{ classroomData.classroomName}}, {{ classroomData.grade}}</h1>
-    {% endfor %}
-    {% for classroomData in classroomTwo %}
-        <h1 class="col-6 text-center my-4">{{ classroomData.classroomName}}, {{ classroomData.grade}}</h1>
-    {% endfor %}
-    </div>
-<div class="row">
-    <div class="col-6">
-        <table class="table table-hover table-bordered">
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Sport</th>
-            <th>Musique</th>
-            <th>Autres intérêts</th>
-        </tr>
-            {% for students in classroomOne %}
-                {% for item in students.students %}
-                    <tr>
-                        <td>{{ item.lastname }}</td>
-                        <td>{{item.firstname}}</td>
-                        <td>{{item.sport}}</td>
-                        <td>{{item.music}}</td>
-                        <td>{{item.otherHobbies}}</td>
-                    </tr>
-                {% endfor %}
-            {% endfor %}
-        </table>
-    </div>
-    <div class="col-6">
-        <table class="table table-hover table-bordered">
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Sport</th>
-            <th>Musique</th>
-            <th>Autres intérêts</th>
-        </tr>
-            {% for students in classroomTwo %}
-                {% for item in students.students %}
-                    <tr>
-                        <td>{{ item.lastname }}</td>
-                        <td>{{item.firstname}}</td>
-                        <td>{{item.sport}}</td>
-                        <td>{{item.music}}</td>
-                        <td>{{item.otherHobbies}}</td>
-                        {# {{dump(item.studentDuos)}} #}
-                    </tr>
-                    {% endfor %}
-                {% endfor %}
-        </table>
-    </div>
-</div>
-    <form action="" method="post">
-        <div class="row justify-content-center">
+	<div class="row">
+		{% for classroomData in classroomOne %}
+			<h1 class="col-6 text-center my-4">{{ classroomData.classroomName}},
+				{{ classroomData.grade}}</h1>
+		{% endfor %}
+		{% for classroomData in classroomTwo %}
+			<h1 class="col-6 text-center my-4">{{ classroomData.classroomName}},
+				{{ classroomData.grade}}</h1>
+		{% endfor %}
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<table class="table table-hover table-bordered">
+				<tr>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Sport</th>
+					<th>Musique</th>
+					<th>Autres intérêts</th>
+				</tr>
+				{% for students in classroomOne %}
+					{% for item in students.students %}
+						<tr>
+							<td>{{ item.lastname }}</td>
+							<td>{{item.firstname}}</td>
+							<td>{{item.sport}}</td>
+							<td>{{item.music}}</td>
+							<td>{{item.otherHobbies}}</td>
+						</tr>
+					{% endfor %}
+				{% endfor %}
+			</table>
+		</div>
+		<div class="col-6">
+			<table class="table table-hover table-bordered">
+				<tr>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Sport</th>
+					<th>Musique</th>
+					<th>Autres intérêts</th>
+				</tr>
+				{% for students in classroomTwo %}
+					{% for item in students.students %}
+						<tr>
+							<td>{{ item.lastname }}</td>
+							<td>{{item.firstname}}</td>
+							<td>{{item.sport}}</td>
+							<td>{{item.music}}</td>
+							<td>{{item.otherHobbies}}</td>
+							{# {{dump(item.studentDuos)}} #}
+						</tr>
+					{% endfor %}
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<form action="" method="post">
+		<div class="row justify-content-center">
 
-            <div class="form-group col-6">
-                <label for="student_1">Sélection de mon student</label>
-                <select class="form-control" name="student_1" id="student_1">
-                    {% for students in classroomOne %}
-                        {% for item in students.students %}
-                            <option value="{{item.id}}">{{ item.firstname }} {{ item.lastname }}</option>
-                        {% endfor %}
-                    {% endfor %}
-                </select>
-            </div>
+			<div class="form-group col-6">
+				<label for="student_1">Sélection de mon student</label>
+				<select class="form-control" name="student_1" id="student_1">
+					{% for students in classroomOne %}
+						{% for item in students.students %}
+							<option value="{{item.id}}">{{ item.firstname }}
+								{{ item.lastname }}</option>
+						{% endfor %}
+					{% endfor %}
+				</select>
+			</div>
 
-            <div class="form-group col-6">
-                <label for="student_2">Sélection de l'autre student</label>
-                <select class="form-control" name="student_2" id="student_2">
-                    {% for students in classroomTwo %}
-                        {% for item in students.students %}
-                            <option value="{{item.id}}">{{ item.firstname }} {{ item.lastname }}</option>
-                        {% endfor %}
-                    {% endfor %}
-                </select>
-            </div>
+			<div class="form-group col-6">
+				<label for="student_2">Sélection de l'autre student</label>
+				<select class="form-control" name="student_2" id="student_2">
+					{% for students in classroomTwo %}
+						{% for item in students.students %}
+							<option value="{{item.id}}">{{ item.firstname }}
+								{{ item.lastname }}</option>
+						{% endfor %}
+					{% endfor %}
+				</select>
+			</div>
 
-            <div class="col-12 d-flex justify-content-center">
-                <button type="submit" class="btn btn-peche text-white my-3">Create a student duo</button>
-            </div>
+			<div class="col-12 d-flex justify-content-center">
+				<button type="submit" class="btn btn-peche text-white my-3">Create a student duo</button>
+			</div>
 
-        </div>
+		</div>
 
-    </form>
+	</form>
+
 
 {% endblock %}

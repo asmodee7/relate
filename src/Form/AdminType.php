@@ -15,8 +15,7 @@ class AdminType extends AbstractType
         $builder
             ->add('username')
             ->add('password', PasswordType::class)
-            ->add('confirm_password', PasswordType::class)
-        ;
+            ->add('confirm_password', PasswordType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
