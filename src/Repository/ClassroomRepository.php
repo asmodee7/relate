@@ -38,6 +38,17 @@ class ClassroomRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function getClassroomsUser($user)
+    {
+
+        $query = $this->createQueryBuilder('c')
+            ->select('c')
+            ->leftJoin('c.teachers', 't')
+            ->where('t.id = :user')
+            ->setParameter(":user", $user);
+        return $query->getQuery()->getResult();
+    }
+
     /**
      * @return Classroom[] Returns an array of Classroom objects
      */

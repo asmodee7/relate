@@ -38,9 +38,13 @@ class TeacherController extends AbstractController
     /**
      * @Route("teacher/new-student", name="create-student")
      */
-    public function newStudent(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
+    public function newStudent(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TeacherRepository $teacherrepo, ClassroomRepository $classroomrepo): Response
     {
+        $user = $this->getUser()->getId(); // id du teacher connecté
+        dump($this->getUser()->getClassrooms());
+
         $student = new Student;
+        dump($student);
 
         $studentForm = $this->createForm(StudentType::class, $student);
 
@@ -48,11 +52,25 @@ class TeacherController extends AbstractController
 
         dump($request);
 
+        $myclassrooms = $classroomrepo->getClassroomsUser($user); // on va chercher les infos de classroomrepo en fonction de l'id du prof
+        // dump($myclassrooms);
+
         if ($studentForm->isSubmitted() && $studentForm->isValid()) {
+
+            dump($request->request->get('classrooms'));
+
+            $id = $request->request->get('classrooms');
+
+            $classroomTest = $classroomrepo->find($id);
+            dump($classroomTest);
+
+            $student->addClassroom($classroomTest);
+
             $hash = $encoder->encodePassword($student, $student->getPassword());
             $student->setPassword($hash);
 
             $student->setRoles(["ROLE_STUDENT"]);
+
             $manager->persist($student);
             $manager->flush();
 
@@ -60,7 +78,8 @@ class TeacherController extends AbstractController
         }
 
         return $this->render("teacher/create_student.html.twig", [
-            'studentForm' => $studentForm->createView()
+            'studentForm' => $studentForm->createView(),
+            'myclassrooms' => $myclassrooms
         ]);
     }
 
@@ -255,12 +274,14 @@ class TeacherController extends AbstractController
     {
         /* $repo =$this->getDoctrine()-> getRepository(Teacher::class); */
 
-        $teacher =$repo->find($id);
+        $teacher = $repo->find($id);
 
-        return $this->render('teacher/profile.html.twig', 
-        [
-            'teacher' => $teacher
-        ]);
+        return $this->render(
+            'teacher/profile.html.twig',
+            [
+                'teacher' => $teacher
+            ]
+        );
     }
 
     /**
@@ -273,17 +294,18 @@ class TeacherController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($teacher);
             $manager->flush();
 
             return $this->redirectToRoute('my_teacher_profile', ['id' => $teacher->getId()]);
         }
 
-        return $this->render('teacher/editprofile.html.twig',
-        [
-            'formEditTeacher' => $form->createView()
-        ]);
+        return $this->render(
+            'teacher/editprofile.html.twig',
+            [
+                'formEditTeacher' => $form->createView()
+            ]
+        );
     }
 }

@@ -55,6 +55,8 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                csrf_parameter: _csrf_security_token
+                csrf_token_id: a_private_string
 
                 default_target_path: homepage
 
