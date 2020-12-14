@@ -252,13 +252,11 @@ class Teacher implements UserInterface
     // Cette méthode est uniquement destinée à nettoyer les mots de passe en texte brute éventuellement stockés
     public function eraseCredentials()
     {
-        
     }
 
     // Renvoie la chaine de caractère non encodée que l'utilisateur a saisi, qui est utilisé à l'origine pour encoder le mot de passe
     public function getSalt()
     {
-        
     }
 
     public function getRoles(): ?array
@@ -272,6 +270,4 @@ class Teacher implements UserInterface
 
         return $this;
     }
-
- 
 }
