@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage | Schools
+{% endblock %}
+
+{% block body %}
+
+	<h1 class=" text-center mt-2 pb-1">Schools</h1>
+	<br>
+
+	<div class="row justify-content-center">
+
+		{% for school in schools %}
+
+			<div class="col-md-5">
+				<table class="table text-center table-hover table-bordered choice-h">
+					<tr>
+						<th class="display-4">
+                            <p>Id of the school{{ school.id }}</p>
+							<a href="{{ path('school_infos', {'id': school.id }) }}">
+								{{ school.schoolName }}<br><i class="fas fa-users"></i>
+							</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+
+		{% endfor %}
+
+		<div class="col-md-5">			
+			<a href="{{path('create_school')}}">Create new School</a>
+		</div>
+
+	</div>
+
+
+{% endblock %}
