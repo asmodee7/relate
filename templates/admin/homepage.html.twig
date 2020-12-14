@@ -20,10 +20,10 @@
 
 		{#--------------------------------------ADMIN------------------------------------------------------#}
 
-		<div class="row justify-content-center">
+        <div class="row justify-content-center">
 			<div class="col-md-5 display-4 d-flex justify-content-center align-items-center border border-dark choice-h">
-                <a href="{#{{ path('') }}#}" class="text-center d-flex flex-column justify-content-center align-items-center">
-                    My school
+                <a href="{{ path('schools') }}" class="text-center d-flex flex-column justify-content-center align-items-center">
+                    Schools
                     <i class="fas fa-school"></i>
                 </a>
             </div>
@@ -45,7 +45,7 @@
 
 		<div class="row justify-content-center ">
 			<div class="col-md-5 display-4 d-flex justify-content-center align-items-center border border-dark choice-h">
-                <a href="{#{{ path('') }}#}" class="text-center d-flex flex-column justify-content-center align-items-center">
+                <a href="{{ path('my_school_infos', {'id' : app.user.id}) }}" class="text-center d-flex flex-column justify-content-center align-items-center">
                     Profile
                     <i class="fas fa-school"></i>
                 </a>

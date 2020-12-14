@@ -341,8 +341,7 @@ class TeacherController extends AbstractController
             return $this->redirectToRoute('my_teacher_profile', ['id' => $teacher->getId()]);
         }
 
-        return $this->render(
-            'teacher/editprofile.html.twig',
+        return $this->render('teacher/editprofile.html.twig',
             [
                 'formEditTeacher' => $form->createView()
             ]
