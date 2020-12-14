@@ -21,8 +21,7 @@ class SchoolType extends AbstractType
             ->add('confirm_password', PasswordType::class)
             ->add('user_lastname')
             ->add('user_firstname')
-            ->add('user_position')
-        ;
+            ->add('user_position');
     }
 
     public function configureOptions(OptionsResolver $resolver)
