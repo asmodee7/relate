@@ -18,6 +18,7 @@ class SchoolType extends AbstractType
             ->add('language')
             ->add('username')
             ->add('password', PasswordType::class)
+            ->add('confirm_password', PasswordType::class)
             ->add('user_lastname')
             ->add('user_firstname')
             ->add('user_position')
