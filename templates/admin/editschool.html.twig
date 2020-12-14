@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Relate | School Infos
+{% endblock %}
+
+{% block body %}
+    <h1>Edit School</h1>
+
+    {#{{ form_start(formEditSchool)}}
+    
+    {{ form_row(formEditSchool.school_name, {'attr': {'placeholder': "School Name"}})}}
+    {{ form_row(formEditSchool.country, {'attr': {'placeholder': "Country"}})}}
+    {{ form_row(formEditSchool.language, {'attr': {'placeholder': "Language"}})}}
+    {{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': "Head First Name"}})}}
+    {{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': "Head Last Name"}})}}
+
+    <button type="submit" class="btn btn-success my-3">Save changes</button>
+
+    {{ form_end(formEditSchool)}}#}
+{% endblock %}
