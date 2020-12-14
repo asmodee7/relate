@@ -66,12 +66,10 @@ class Admin implements UserInterface
 
     public function eraseCredentials()
     {
-
     }
 
     public function getSalt()
     {
-
     }
 
     public function getRoles(): ?array
