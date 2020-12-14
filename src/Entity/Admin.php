@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=AdminRepository::class)
  */
@@ -32,7 +33,7 @@ class Admin implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(                       
-     *        min="8",
+     *        min="4",
      *        minMessage="Votre mot de passe doit faire minimum 8 caractères !"
      * )
      * @Assert\EqualTo(

@@ -5,40 +5,35 @@
 
 {% block body %}
 
-	<h1 class=" text-center mt-2 pb-1">My classrooms</h1>
-	<br>
+<div class="col-12">
+	<h1 class=" text-center my-5">My classrooms</h1>
 
 	<div class="row justify-content-center">
 
 		{% for classroom in myClassrooms.classrooms %}
 
-			<div class="col-md-5">
-				<table class="table text-center table-hover table-bordered choice-h">
-					<tr>
-						<th class="display-4">
-							<a href="{{ path('teacher_showclassroom', {'id': classroom.id }) }}">
-								{{ classroom.classroomName }}<br><i class="fas fa-users"></i>
-							</a>
-						</th>
-					</tr>
-				</table>
-			</div>
+			
+		    <a href="{{ path('teacher_showclassroom', {'id': classroom.id }) }}" class="col-4 text-center d-flex justify-content-center align-items-center c-green mx-3">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center border border-dark choice-h choice-w2 mb-4">
+                    {{ classroom.classroomName }}
+                    <i class="fas fa-users"></i>
+            	</div>
+			</a>
 
 		{% endfor %}
 
-		<div class="col-md-5">
-			<table class="table text-center table-hover table-bordered choice-h">
-				<tr>
-					<th class="display-4">
-						<a href="{#{{path('')}}#}">
-							Add a classroom<br><i class="fas fa-users"></i>
-						</a>
-					</th>
-				</tr>
-			</table>
-		</div>
+		
+		<a href="#" class="text-center d-flex justify-content-center align-items-center c-green mx-3">
+			<div class="display-4 d-flex flex-column justify-content-center align-items-center border border-dark choice-h choice-w">
+                Add a classroom
+                <i class="fas fa-users"></i>
+            </div>
+		</a>
 
 	</div>
+</div>
+
+	
 
 
 {% endblock %}

@@ -5,14 +5,15 @@
 
 {% block body %}
 
-	<h4 class="text-center my-3">New Student:
-	</h4>
+<div class="col-12">
+	<h1 class="text-center my-5">New Student:</h1>
 
 	<div class="container">
 		{{ form_start(studentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
 		{{ form_row(studentForm.username, {'label': "Username"} )}}
 		{{ form_row(studentForm.password, {'label': "Password"} )}}
+		{{ form_row(studentForm.confirm_password, {'label': "Confirm password"} )}}
 		{{ form_row(studentForm.lastname, {'label': "Lastname"} )}}
 		{{ form_row(studentForm.firstname, {'label': "Firstname"} )}}
 		{{ form_row(studentForm.age, {'label': "Age"} )}}
@@ -41,4 +42,7 @@
 		{{ form_end(studentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
 	</div>
+</div>
+
+	
 {% endblock %}

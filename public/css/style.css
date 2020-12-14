@@ -11,6 +11,10 @@ body
 
 .bg-green{background-color: #87D8A2;}
 
+.c-green{color: #87D8A2;}
+
+.c-green:hover{color: #6ab884;}
+
 .btn-peche
 {
     background-color: #FDB884;
@@ -46,6 +50,17 @@ th a {
     min-height: 40vh;
 }
 
+.choice-w2{
+    min-width: 30vw;
+}
+
+.w-input{
+    width:300px;
+}
+
+.peach-tab{
+    background-color: #FDB884!important;
+}
 /* ------------------------------------------- Footer ------------------------------------------- */
 
 .relate-footer{min-height: 15vh;}
