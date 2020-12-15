@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Hello School !
+{% endblock %}
+
+{% block body %}
+
+	<div class="relate-body">
+		{% for message in app.flashes('success') %}
+			<div class="col-md-5 mx-auto alert alert-success text-center">
+				{{ message }}
+			</div>
+        {% endfor %}
+			{{ form_start(formContact) }}
+			{{ form_row(formContact.firstname) }}
+			{{ form_row(formContact.lastname) }}
+			{{ form_row(formContact.phone) }}
+			{{ form_row(formContact.email) }}
+			{{ form_row(formContact.message) }}
+			<button type="submit">Send</button>
+			{{ form_end(formContact) }} 
+    </div>
+{% endblock %}

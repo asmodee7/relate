@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\School;
+use App\Entity\Contact;
 use App\Entity\Teacher;
+use App\Form\ContactType;
 use App\Form\TeacherType;
 use App\Form\EditSchoolType;
 use App\Repository\SchoolRepository;
 use App\Repository\TeacherRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Notification\ContactNotification;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -197,5 +200,21 @@ class SchoolController extends AbstractController
                 'formEditSchool' => $form->createView()
             ]
         );
+    }
+
+    /**
+     * @Route("/school/contact", name="school_contact")
+     */
+    public function contact(Request $request, EntityManagerInterface $manager, ContactNotification $notification)
+    {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $notification->notify($contact);
+            $this->addFlash('success', 'Votre Email a bien été envoyé');
+            $manager->persist($contact); // on prépare l'insertion $manager->flush(); // on execute l'insertion
+        }
+        return $this->render("school/contact.html.twig", ['formContact' => $form->createView()]);
     }
 }
