@@ -65,7 +65,7 @@ class SchoolController extends AbstractController
         $userid = $this->getUser()->getId();
 
         // foreach ($teacherliste as $teachers) {
- 
+
         //     $teacherliste = $repo->findById($userid);
         //     dump($teacherliste);
 
@@ -76,11 +76,36 @@ class SchoolController extends AbstractController
         dump($userid);
         dump($teachers);
 
-
-
         return $this->render("school/teachers.html.twig", [
             'teachers' => $teachers
         ]);
+    }
+
+    /**
+     * @Route("/school/teacher/infos/{id}", name="my_teacher_infos")
+     */
+    public function showTeacherInfos(TeacherRepository $repo, $id)
+    {
+        $teacher = $repo->find($id);
+        dump($teacher);
+
+        // $teacherid = $repo->find($id)->getId();
+        // dump($teacherid);
+
+        $userid = $this->getUser(); // id de la school connectée
+        dump($userid);
+
+        // if ($teacherid != $userid) {
+        //     return $this->redirectToRoute("homepage");
+        // }
+
+
+        return $this->render(
+            'school/teacherinfos.html.twig',
+            [
+                'teacher' => $teacher
+            ]
+        );
     }
 
     /**
@@ -89,6 +114,18 @@ class SchoolController extends AbstractController
     public function showInfos(SchoolRepository $repo, $id)
     {
         $school = $repo->find($id);
+
+
+        $schoolid = $repo->find($id)->getId();
+        dump($schoolid);
+
+        $userid = $this->getUser()->getId(); // id de la school connectée
+        dump($userid);
+
+        if ($schoolid != $userid) {
+            return $this->redirectToRoute("homepage");
+        }
+
 
         return $this->render(
             'school/infos.html.twig',
@@ -103,6 +140,17 @@ class SchoolController extends AbstractController
      */
     public function edit(School $school, Request $request, EntityManagerInterface $manager)
     {
+
+        $userid = $this->getUser()->getId();
+        dump($userid); // id de l'école connectée
+
+        $urlid = $request->attributes->get('id');
+        dump($urlid);
+
+        // SECURISATION URL
+        if ($userid != $urlid) {
+            return $this->redirectToRoute('homepage');
+        }
 
         $form = $this->createForm(EditSchoolType::class, $school);
 

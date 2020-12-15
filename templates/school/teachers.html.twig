@@ -16,8 +16,8 @@
 				<table class="table text-center table-hover table-bordered choice-h">
 					<tr>
 						<th class="display-4">
-                            <p>Id of the Teacher{{ teacher.id }}</p>
-							<a href="{{ path('teachers', {'id': teacher.id }) }}">
+							<p>Id of the Teacher{{ teacher.id }}</p>
+							<a href="{{ path('my_teacher_infos', {'id': teacher.id }) }}">
 								{{ teacher.firstname }}<br><i class="fas fa-users"></i>
 							</a>
 						</th>
@@ -27,7 +27,7 @@
 
 		{% endfor %}
 
-		<div class="col-md-5">			
+		<div class="col-md-5">
 			<a href="{{path('new_teacher')}}">Create new Teacher</a>
 		</div>
 
