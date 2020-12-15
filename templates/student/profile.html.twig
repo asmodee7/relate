@@ -4,21 +4,27 @@
 {% endblock %}
 
 {% block body %}
-	<h1>My Profile</h1>
 
-	<div class="content">
+<div class="container relate-body d-flex flex-column justify-content-center align-items-center">
+
+    <div class="card col-10 col-md-8 d-flex flex-column justify-content-center align-items-center style-rounded p-5">
+        <h1 class="card-title display-4 text-center">My profile</h1>
 		<img class="image_profile" src="{{ asset('uploads/photo/' ~ student.photo) }}" alt="">
+        <div class="card-body d-flex flex-column justify-content-center">
+            <h5 class="card-title display-5 bold-600">{{ student.username }}</h5>
+            <p>Firstname : <strong>{{ student.firstname }}</strong></p>
+            <p class="pb-3">Lastname : <strong>{{ student.lastname }}</strong></p>
+			<p>Description : <strong>{{ student.lastname }}</strong></p>
 
-		<h2>{{ student.firstname}} {{ student.lastname}}</h2>
-		<span>{{ student.age}}</span>
-		<span>Duo</span>
-		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem quasi ipsum mollitia! Maiores vero quod enim culpa laborum quidem ut, dolorem tempora repudiandae accusantium fuga recusandae rem eveniet suscipit quas!</p>
-		<span>{{ student.sport}}</span>
-		<span>{{ student.music}}</span>
-		<p>{{ student.otherhobbies}}</p>
-		<p>{{ student.description}}</p>
-	</div>
 
-	<a href="{{ path('edit_my_student_profile', {'id': student.id}) }}" class="btn btn-success my-3">Editer</a>
+            <p>Sport : <strong>{{ student.sport}}</strong></p>
+            <p>Music : <strong>{{ student.music}}</strong></p>
+            <p>Other hobbies : <strong>{{ student.otherhobbies}}</strong></p>
+
+            <a href="{{ path('edit_my_student_profile', {'id': student.id}) }}" class="mt-3 btn btn-peche text-white">Edit my profile</a>
+        </div>
+    </div>
+    
+</div>
 
 {% endblock %}
