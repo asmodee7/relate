@@ -31,14 +31,28 @@ class StudentController extends AbstractController
      */
     public function showProfile($id, Request $request, EntityManagerInterface $manager)
     {
-        $repo =$this->getDoctrine()-> getRepository(Student::class);
+        $repo = $this->getDoctrine()->getRepository(Student::class);
 
-        $student =$repo->find($id);
+        $student = $repo->find($id);
 
-        return $this->render('student/profile.html.twig', 
-        [
-            'student' => $student
-        ]);
+        $studentid = $repo->find($id)->getId();
+        dump($studentid);
+
+        $userid = $this->getUser()->getId();
+        dump($userid);
+
+        // SECURISATION URL
+        if ($userid != $studentid) {
+            return $this->redirectToRoute('homepage');
+        }
+
+
+        return $this->render(
+            'student/profile.html.twig',
+            [
+                'student' => $student
+            ]
+        );
     }
 
     /**
@@ -47,21 +61,29 @@ class StudentController extends AbstractController
     public function edit(Student $student, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager)
     {
 
+        $userid = $this->getUser()->getId();
+        dump($userid); // id du student connecté
+
+        $urlid = $request->attributes->get('id');
+        dump($urlid); // id dans l'url
+
+        // SECURISATION URL
+        if ($userid != $urlid) {
+            return $this->redirectToRoute('homepage');
+        }
 
         $form = $this->createForm(EditStudentType::class, $student);
 
         $form->handleRequest($request);
         dump($student);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $photoFile = $form->get('photo')->getData();
-            if ($photoFile) 
-            {
+            if ($photoFile) {
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newPhotoFile = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+                $newPhotoFile = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -86,9 +108,11 @@ class StudentController extends AbstractController
             return $this->redirectToRoute('my_student_profile', ['id' => $student->getId()]);
         }
 
-        return $this->render('student/edit.html.twig',
-        [
-            'formEditStudent' => $form->createView()
-        ]);
+        return $this->render(
+            'student/edit.html.twig',
+            [
+                'formEditStudent' => $form->createView()
+            ]
+        );
     }
 }

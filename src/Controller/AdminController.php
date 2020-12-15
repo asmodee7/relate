@@ -52,7 +52,7 @@ class AdminController extends AbstractController
         dump($request);
 
         if ($schoolForm->isSubmitted() && $schoolForm->isValid()) {
-            
+
 
             $hash = $encoder->encodePassword($school, $school->getPassword());
 
@@ -62,7 +62,7 @@ class AdminController extends AbstractController
             $manager->persist($school);
             $manager->flush();
 
-            $this->redirectToRoute("schools");
+            return $this->redirectToRoute("schools");
         }
 
         return $this->render("admin/create_school.html.twig", [

@@ -31,7 +31,7 @@ class SchoolController extends AbstractController
     /**
      * @Route("school/new-teacher", name="new_teacher")
      */
-    public function newSchoolTeacher(Request $request,SluggerInterface $slugger, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
+    public function newSchoolTeacher(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
         $teacher = new Teacher;
 
@@ -40,15 +40,15 @@ class SchoolController extends AbstractController
         $newTeacherForm->handleRequest($request);
 
         dump($request);
-        
 
-        if ($newTeacherForm->isSubmitted() && $newTeacherForm->isValid()){
+
+        if ($newTeacherForm->isSubmitted() && $newTeacherForm->isValid()) {
             $photoFile = $newTeacherForm->get('photo')->getData();
             if ($photoFile) {
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newPhotoFile = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+                $newPhotoFile = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -66,9 +66,6 @@ class SchoolController extends AbstractController
             }
 
 
-
-
-
             $hash = $encoder->encodePassword($teacher, $teacher->getPassword());
             $teacher->setPassword($hash);
 
@@ -78,7 +75,7 @@ class SchoolController extends AbstractController
             $manager->persist($teacher);
             $manager->flush();
 
-            $this->redirectToRoute("new_teacher");
+            return $this->redirectToRoute("teachers");
         }
 
         return $this->render("school/create_teacher.html.twig", [
