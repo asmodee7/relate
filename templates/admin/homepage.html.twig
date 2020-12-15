@@ -11,10 +11,12 @@
 
 	{% if is_granted('ROLE_ADMIN') %}
 
-		{#--------------------------------------ADMIN------------------------------------------------------#}
+	{#--------------------------------------ADMIN------------------------------------------------------#}
 
 		<div class="row justify-content-center">
-			<a href="{#{{ path('') }}#}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+
+			<a href="{{ path('schools') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     My school
                     <i class="fas fa-school"></i>
@@ -35,7 +37,7 @@
 		{#--------------------------------------SCHOOL------------------------------------------------------#}
 
 		<div class="row justify-content-center">
-			<a href="" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+			<a href="{{ path('my_school_infos', {'id': app.user.id}) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
 					Profile
 					<i class="fas fa-school"></i>
@@ -64,13 +66,14 @@
 			</a>
 		</div>
 		{#-------------------------------------FIN SCHOOL---------------------------------------------------#}
+    
+    
+		{% elseif is_granted('ROLE_TEACHER') %}
 
-	{% elseif is_granted('ROLE_TEACHER') %}
-
-		{#--------------------------------------TEACHER------------------------------------------------------#}
-
-		<div class="row justify-content-center">
-			<a href="{#{{ path('') }}#}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+			{#--------------------------------------TEACHER------------------------------------------------------#}
+      
+      	<div class="row justify-content-center">
+			<a href="{{ path('my_teacher_profile', {'id': app.user.id}) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Profile
                     <i class="fas fa-user-alt"></i>
@@ -119,21 +122,20 @@
 				</div>
 			</a>
 
-			<a href="{{ path('') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+			<a href="{#{{ path('') }}#}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
 					My teacher
 					<i class="fas fa-user-edit"></i>
 				</div>
 			</a>
 
-			<a href="{{ path('') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+			<a href="{#{{ path('') }}#}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
 					My team mate
 					<i class="fas fa-comment-dots"></i>
 				</div>
 			</a>
 		</div>
-
 
 	{#-------------------------------------FIN STUDENT---------------------------------------------------#}
 
@@ -144,5 +146,4 @@
 	{% endif %}
 
 </div>
-
 {% endblock %}
