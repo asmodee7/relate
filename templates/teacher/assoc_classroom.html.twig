@@ -7,14 +7,9 @@
 
 <div class="container relate-body">
 
-	<div class="col-12">
 		<div class="row">
-			<h1 class="col-6 text-center my-5">My classrooms</h1>
-			<h1 class="col-6 text-center my-5">Available classrooms</h1>
-		</div>
-
-		<div class="row">
-			<div class="col-6">
+			<div class="col-12 col-md-6">
+			<h1 class="text-center my-5">My classrooms</h1>
 				<table class="table table-hover table-bordered">
 					<tr>
 						{% for titre in titres %}
@@ -35,7 +30,8 @@
 				</table>
 			</div>
 
-			<div class="col-6">
+			<div class="col-12 col-md-6">
+			<h1 class="text-center my-5">Available classrooms</h1>
 
 				<table class="table table-hover table-bordered">
 
@@ -63,8 +59,8 @@
 		<form action="" method="post">
 			<div class="row">
 
-				<div class="form-group col-6">
-					<label for="classroom_1">Sélection de ma classe</label>
+				<div class="form-group col-12 col-md-6">
+					<label for="classroom_1">Select my classroom</label>
 					<select class="form-control" name="classroom_1" id="classroom_1">
 						{% for classroom in mesCLasses.classrooms %}
 							<option value="{{ classroom.id }}">{{ classroom.grade }}, {{ classroom.classroomName }}</option>
@@ -72,8 +68,8 @@
 					</select>
 				</div>
 
-				<div class="form-group col-6">
-					<label for="classroom_2">Sélection de l'autre classe</label>
+				<div class="form-group col-12 col-md-6">
+					<label for="classroom_2">Select a new partner</label>
 					<select class="form-control" name="classroom_2" id="classroom_2">
 						{% for classroom in classrooms %}
 							<option value="{{ classroom.id }}">{{ classroom.grade }}, {{ classroom.classroomName }}</option>
@@ -86,7 +82,6 @@
 			<button type="submit" class="btn btn-peche text-white mx-auto mt-5 d-flex col-4 justify-content-center">Submit</button>
 
 		</form>
-	</div>
 
 </div>
 

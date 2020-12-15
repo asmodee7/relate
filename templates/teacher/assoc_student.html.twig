@@ -12,25 +12,25 @@
 
 		<div class="row">
 			{% for classroomData in classroomOne %}
-				<h2 class="col-6 text-center mb-5">{{ classroomData.classroomName}}
+				<h2 class="col-12 col-lg-6 text-center mb-5">{{ classroomData.classroomName}}
 					/
 					{{ classroomData.grade}}</h2>
 			{% endfor %}
 			{% for classroomData in classroomTwo %}
-				<h2 class="col-6 text-center mb-5">{{ classroomData.classroomName}}
+				<h2 class="col-12 col-lg-6 text-center mb-5">{{ classroomData.classroomName}}
 					/
 					{{ classroomData.grade}}</h2>
 			{% endfor %}
 		</div>
 		<div class="row">
-			<div class="col-6">
+			<div class="col-12 col-lg-6">
 				<table class="table table-hover table-bordered">
 					<tr>
-						<th class="peach-tab text-light text-center">Nom</th>
-						<th class="peach-tab text-light text-center">Prénom</th>
+						<th class="peach-tab text-light text-center">Lastname</th>
+						<th class="peach-tab text-light text-center">Firstname</th>
 						<th class="peach-tab text-light text-center">Sport</th>
-						<th class="peach-tab text-light text-center">Musique</th>
-						<th class="peach-tab text-light text-center">Autres intérêts</th>
+						<th class="peach-tab text-light text-center">Music</th>
+						<th class="peach-tab text-light text-center">Other hobbies</th>
 					</tr>
 					{% for students in classroomOne %}
 						{% for item in students.students %}
@@ -45,14 +45,14 @@
 					{% endfor %}
 				</table>
 			</div>
-			<div class="col-6">
+			<div class="col-12 col-lg-6">
 				<table class="table table-hover table-bordered">
 					<tr>
-						<th class="peach-tab text-light text-center">Nom</th>
-						<th class="peach-tab text-light text-center">Prénom</th>
+						<th class="peach-tab text-light text-center">Lastname</th>
+						<th class="peach-tab text-light text-center">Firstname</th>
 						<th class="peach-tab text-light text-center">Sport</th>
-						<th class="peach-tab text-light text-center">Musique</th>
-						<th class="peach-tab text-light text-center">Autres intérêts</th>
+						<th class="peach-tab text-light text-center">Music</th>
+						<th class="peach-tab text-light text-center">Other hobbies</th>
 					</tr>
 					{% for students in classroomTwo %}
 						{% for item in students.students %}
@@ -71,8 +71,8 @@
 		</div>
 		<form action="" method="post">
 			<div class="row">
-				<div class="form-group col-6">
-					<label for="student_1">Choose my student</label>
+				<div class="form-group col-12 col-lg-6">
+					<label for="student_1">Choose a student</label>
 					<select class="form-control" name="student_1" id="student_1">
 						{% for students in classroomOne %}
 							{% for item in students.students %}
@@ -82,7 +82,7 @@
 						{% endfor %}
 					</select>
 				</div>
-				<div class="form-group col-6">
+				<div class="form-group col-12 col-lg-6">
 					<label for="student_2">Choose an other student</label>
 					<select class="form-control" name="student_2" id="student_2">
 						{% for students in classroomTwo %}
@@ -103,14 +103,14 @@
 
         {# {{dump(studentsFromClassroom1)}} #}
 
-        <h3 class="text-center my-2">Associations d'élèves</h3>
+        <h3 class="text-center my-2">Students partnerships</h3>
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <table class="table table-hover table-bordered">
                     <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
                     </tr>
                 
                 {% for student in students1FromDuo %}
@@ -121,11 +121,11 @@
                 {% endfor %}
                 </table>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <table class="table table-hover table-bordered">
                     <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
                     </tr>
                 
                 {% for student in students2FromDuo %}

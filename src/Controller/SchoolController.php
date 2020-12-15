@@ -169,7 +169,7 @@ class SchoolController extends AbstractController
     /**
      * @Route("/school/edit/{id}", name="edit_my_school_infos")
      */
-    public function edit(School $school, Request $request, EntityManagerInterface $manager)
+    public function edit(School $school, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
 
         $userid = $this->getUser()->getId();
@@ -188,6 +188,10 @@ class SchoolController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $hash = $encoder->encodePassword($school, $school->getPassword());
+            $school->setPassword($hash);
+
             $manager->persist($school);
             $manager->flush();
 

@@ -17,32 +17,9 @@ class EditSchoolType extends AbstractType
             ->add('country')
             ->add('school_name')
             ->add('language')
-            ->add('photo', FileType::class, [
-                'label' => 'Image (Jpeg,png,gif file)',
-
-                // unmapped means that this field is not associated to any entity property
-                'mapped' => false,
-
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
-                'required' => false,
-
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/png',
-                            'image/jpeg',
-                            'image/gif'
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid ImageFiles',
-                    ])
-                ],
-            ])
-            /* ->add('username')
-            ->add('password') */
+            ->add('username')
+            ->add('confirm_password')
+            ->add('password')
             ->add('user_lastname')
             ->add('user_firstname')
             /* ->add('user_position')
