@@ -50,7 +50,7 @@ class Teacher implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(                       
      *        min="8",
-     *        minMessage="Votre mot de passe doit faire minimum 8 caractères !"
+     *        minMessage="Votre mot de passe doit faire minimum 8 caractères !",
      * )
      * @Assert\EqualTo(
      *      propertyPath="confirm_password",
