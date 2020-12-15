@@ -5,37 +5,27 @@
 
 {% block body %}
 
-<div class="d-flex flex-column mx-auto">
-		<h1 class=" text-center my-5">Welcome
-		<span>
-			{{app.user.username}},
-		</span>
-		this is your back office
-		{{app.user.roles[0]|slice(5)|capitalize }}
+<div class="container">
 
-
-	</h1>
+		<h1 class="text-center my-5">Welcome <strong> {{app.user.username|capitalize}},</strong> this is your back office {{app.user.roles[0]|slice(5)|capitalize }}</h1>
 
 	{% if is_granted('ROLE_ADMIN') %}
 
 		{#--------------------------------------ADMIN------------------------------------------------------#}
 
 		<div class="row justify-content-center">
-			<a href="{#{{ path('') }}#}" class="text-center d-flex justify-content-center align-items-center c-green border border-dark col-6">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
+			<a href="{{ path('') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     My school
-
                     <i class="fas fa-school"></i>
                 </div>
 			</a>
-		</div>
-		<br>
-		<div class="row justify-content-center ">
-		    <a href="{{ path('create_school') }}" class="text-center d-flex justify-content-center align-items-center c-green border border-dark col-6">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
+
+			<a href="{{ path('create_school') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Add a school
                     <i class="fas fa-plus-circle"></i>
-            	</div>
+				</div>
 			</a>
 		</div>
 		{#-------------------------------------FIN ADMIN---------------------------------------------------#}
@@ -44,34 +34,33 @@
 
 		{#--------------------------------------SCHOOL------------------------------------------------------#}
 
-		<div class="d-flex flex-row justify-content-center">
-			<a href="{#{{ path('') }}#}" class="text-center d-flex justify-content-center align-items-center c-green mx-3">
-				<div class=" display-4 d-flex flex-column justify-content-center align-items-center border border-dark choice-h choice-w">
-
-                    Profile
-                    <i class="fas fa-school"></i>
-                </div>
+		<div class="row justify-content-center">
+			<a href="" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
+					Profile
+					<i class="fas fa-school"></i>
+				</div>
 			</a>
-			<a href="{#{{ path('') }}#}" class="text-center d-flex justify-content-center align-items-center c-green mx-3">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center border border-dark choice-h choice-w">
+			
+			<a href="" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Teachers
                     <i class="fas fa-users"></i>
                 </div>
 			</a>
-		</div>
-		<br>
-		<div class="d-flex flex-row justify-content-center">
-			<a href="{#{{ path('') }}#}" class="text-center d-flex justify-content-center align-items-center c-green mx-3">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center border border-dark choice-h choice-w">
+
+			<a href="" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Contact
                     <i class="fas fa-question-circle"></i>
-            	</div>
+				</div>
 			</a>
-			<a href="{{ path('new_teacher') }}" class="text-center d-flex justify-content-center align-items-center c-green mx-3">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center border border-dark choice-h choice-w">
+
+			<a href="{{ path('new_teacher') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Add a teacher
                     <i class="fas fa-plus-circle"></i>
-            	</div>
+				</div>
 			</a>
 		</div>
 		{#-------------------------------------FIN SCHOOL---------------------------------------------------#}
@@ -80,80 +69,77 @@
 
 		{#--------------------------------------TEACHER------------------------------------------------------#}
 
-		<div class="d-flex flex-row justify-content-center">
-		    <a href="{#{{ path('') }}#}" class="text-center d-flex justify-content-center align-items-center c-green mx-3 border border-dark col-6">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
+		<div class="row justify-content-center">
+			<a href="{#{{ path('') }}#}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Profile
                     <i class="fas fa-user-alt"></i>
-            	</div>
+				</div>
 			</a>
-			<a href="{{ path('create_classroom') }}" class="text-center d-flex justify-content-center align-items-center c-green mx-3 border border-dark col-6">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
+
+			<a href="{{ path('create_classroom') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Create classroom
                     <i class="fas fa-school"></i>
-            	</div>
+				</div>
 			</a>
-		</div>
-		<br>
-		<div class="d-flex flex-row justify-content-center">
-		    <a href="{{ path('teacher_classrooms') }}" class="text-center d-flex justify-content-center align-items-center c-green mx-3 border border-dark col-6">
-			<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
+
+			<a href="{{ path('teacher_classrooms') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     My classrooms
                     <i class="fas fa-users"></i>
-            	</div>
+				</div>
 			</a>
-			<a href="{{ path('create-student') }}" class="text-center d-flex justify-content-center align-items-center c-green mx-3 border border-dark col-6">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
+
+			<a href="{{ path('create-student') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Create student
                     <i class="fas fa-plus-circle"></i>
-            	</div>
+				</div>
 			</a>
-		</div>
-		<br>
-		<div class="d-flex flex-row justify-content-center">
-			<a href="{{ path('assoc_classroom') }}" class="text-center d-flex justify-content-center align-items-center c-green mx-3 border border-dark col-6">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
+
+			<a href="{{ path('assoc_classroom') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     New Partnership
                     <i class="fas fa-people-arrows"></i>
-            	</div>	
+				</div>	
 			</a>
 		</div>
-	</div>
 	{#-------------------------------------FIN TEACHER---------------------------------------------------#}
 
 	{% elseif is_granted('ROLE_STUDENT') %}
 
 	{#--------------------------------------STUDENT------------------------------------------------------#}
-	<div class="d-flex flex-row justify-content-center">
-		<a href="{#{{ path('') }}#}" class="text-center d-flex justify-content-center align-items-center c-green mx-3 border border-dark col-6">
-			<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
-                Profile
-                <i class="fas fa-user-alt"></i>
-        	</div>
-		</a>
-		<a href="{#{{ path('') }}#}" class="text-center d-flex justify-content-center align-items-center c-green mx-3 border border-dark col-6">
-			<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
-                My teacher
-                <i class="fas fa-user-edit"></i>
-        	</div>
-		</a>
-	</div>
-	<br>
-	<div class="d-flex flex-row justify-content-center">
-	    <a href="{#{{ path('') }}#}" class="text-center d-flex justify-content-center align-items-center c-green mx-3 border border-dark col-6">
-			<div class="display-4 d-flex flex-column justify-content-center align-items-center choice-h">
-                My team mate
-                <i class="fas fa-comment-dots"></i>
-        	</div>
-		</a>
-	</div>
+
+		<div class="row justify-content-center">
+			<a href="{{ path('') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
+					Profile
+					<i class="fas fa-user-alt"></i>
+				</div>
+			</a>
+
+			<a href="{{ path('') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
+					My teacher
+					<i class="fas fa-user-edit"></i>
+				</div>
+			</a>
+
+			<a href="{{ path('') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
+					My team mate
+					<i class="fas fa-comment-dots"></i>
+				</div>
+			</a>
+		</div>
 
 
 	{#-------------------------------------FIN STUDENT---------------------------------------------------#}
 
 	{% else %}
 
-	{{path('')}}
+	{# {{path('')}} #}
 
 	{% endif %}
 

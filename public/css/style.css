@@ -64,3 +64,64 @@ th a {
 /* ------------------------------------------- Footer ------------------------------------------- */
 
 .relate-footer{min-height: 15vh;}
+
+/* ------------------------------------------- Login ------------------------------------------- */
+
+.bold-600
+{
+    font-weight: 600;
+}
+
+.style-rounded
+{
+    border-radius: 30px;
+}
+
+.style-shadow
+{
+    box-shadow: 10px 10px 23px -2px rgba(0,0,0,0.21);
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+button:focus,
+button:active,
+/* button:hover, */
+.btn:active,
+.btn.active
+{
+    box-shadow: none !important;
+}
+
+.no-border
+{
+    border: none;
+}
+
+/* ------------------------------------------- Homepage ------------------------------------------- */
+
+.main-card
+{
+    min-height: 300px;
+}
+
+.main-card:hover
+{
+    background-color: rgb(236, 236, 236);
+}
+
