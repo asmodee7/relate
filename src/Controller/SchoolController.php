@@ -56,17 +56,19 @@ class SchoolController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/school/infos/{id}", name="my_school_infos")
      */
     public function showInfos(SchoolRepository $repo, $id)
     {
         $school = $repo->find($id);
 
-        return $this->render('school/infos.html.twig', 
-        [
-            'school' => $school
-        ]);
+        return $this->render(
+            'school/infos.html.twig',
+            [
+                'school' => $school
+            ]
+        );
     }
 
     /**
@@ -79,17 +81,18 @@ class SchoolController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($school);
             $manager->flush();
 
             return $this->redirectToRoute('my_school_infos', ['id' => $school->getId()]);
         }
 
-        return $this->render('school/edit.html.twig',
-        [
-            'formEditSchool' => $form->createView()
-        ]);
+        return $this->render(
+            'school/edit.html.twig',
+            [
+                'formEditSchool' => $form->createView()
+            ]
+        );
     }
 }
