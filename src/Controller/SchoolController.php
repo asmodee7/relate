@@ -115,6 +115,7 @@ class SchoolController extends AbstractController
     {
         $school = $repo->find($id);
 
+
         $schoolid = $repo->find($id)->getId();
         dump($schoolid);
 

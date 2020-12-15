@@ -3,6 +3,9 @@
 {% endblock %}
 
 {% block body %}
+
+<div class="container relate-body">
+
 	<h1>My Profile</h1>
 
 	<div class="content">
@@ -15,4 +18,6 @@
 	</div>
 
 	<a href="{{ path('edit_my_teacher_profile', {'id': teacher.id}) }}" class="btn btn-success my-3">Editer</a>
+
+</div>
 {% endblock %}

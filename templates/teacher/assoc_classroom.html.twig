@@ -5,88 +5,89 @@
 
 {% block body %}
 
-<div class="col-12">
-	<div class="row">
-		<h1 class="col-6 text-center my-5">My classrooms</h1>
-		<h1 class="col-6 text-center my-5">Available classrooms</h1>
-	</div>
+<div class="container relate-body">
 
-	<div class="row">
-		<div class="col-6">
-			<table class="table table-hover table-bordered">
-				<tr>
-					{% for titre in titres %}
-						{% if titre != 'id' %}
-							<th class="peach-tab text-center text-light">{{ titre }}</th>
-						{% endif %}
-					{% endfor %}
-				</tr>
-
-				{% for classroom in mesCLasses.classrooms %}
-
-					<tr>
-						<td class="card-center text-center">{{ classroom.grade }}</td>
-						<td class="card-center text-center">{{ classroom.classroomName }}</td>
-					</tr>
-
-				{% endfor %}
-			</table>
-		</div>
-
-		<div class="col-6">
-
-			<table class="table table-hover table-bordered">
-
-				<tr>
-					{% for titre in titres %}
-						{% if titre != 'id' %}
-							<th class="peach-tab text-center text-light">{{ titre }}</th>
-						{% endif %}
-					{% endfor %}
-				</tr>
-
-				{% for classroom in classrooms %}
-
-					<tr>
-						<td class="card-center text-center">{{ classroom.grade }}</td>
-						<td class="card-center text-center">{{ classroom.classroomName }}</td>
-					</tr>
-
-				{% endfor %}
-			</table>
-		</div>
-
-	</div>
-
-	<form action="" method="post">
+	<div class="col-12">
 		<div class="row">
+			<h1 class="col-6 text-center my-5">My classrooms</h1>
+			<h1 class="col-6 text-center my-5">Available classrooms</h1>
+		</div>
 
-			<div class="form-group col-6">
-				<label for="classroom_1">Sélection de ma classe</label>
-				<select class="form-control" name="classroom_1" id="classroom_1">
+		<div class="row">
+			<div class="col-6">
+				<table class="table table-hover table-bordered">
+					<tr>
+						{% for titre in titres %}
+							{% if titre != 'id' %}
+								<th class="peach-tab text-center text-light">{{ titre }}</th>
+							{% endif %}
+						{% endfor %}
+					</tr>
+
 					{% for classroom in mesCLasses.classrooms %}
-						<option value="{{ classroom.id }}">{{ classroom.grade }}, {{ classroom.classroomName }}</option>
+
+						<tr>
+							<td class="card-center text-center">{{ classroom.grade }}</td>
+							<td class="card-center text-center">{{ classroom.classroomName }}</td>
+						</tr>
+
 					{% endfor %}
-				</select>
+				</table>
 			</div>
 
-			<div class="form-group col-6">
-				<label for="classroom_2">Sélection de l'autre classe</label>
-				<select class="form-control" name="classroom_2" id="classroom_2">
+			<div class="col-6">
+
+				<table class="table table-hover table-bordered">
+
+					<tr>
+						{% for titre in titres %}
+							{% if titre != 'id' %}
+								<th class="peach-tab text-center text-light">{{ titre }}</th>
+							{% endif %}
+						{% endfor %}
+					</tr>
+
 					{% for classroom in classrooms %}
-						<option value="{{ classroom.id }}">{{ classroom.grade }}, {{ classroom.classroomName }}</option>
+
+						<tr>
+							<td class="card-center text-center">{{ classroom.grade }}</td>
+							<td class="card-center text-center">{{ classroom.classroomName }}</td>
+						</tr>
+
 					{% endfor %}
-				</select>
+				</table>
 			</div>
 
 		</div>
 
-		<button type="submit" class="btn btn-peche text-white mx-auto mt-5 d-flex col-4 justify-content-center">Submit</button>
+		<form action="" method="post">
+			<div class="row">
 
-	</form>
+				<div class="form-group col-6">
+					<label for="classroom_1">Sélection de ma classe</label>
+					<select class="form-control" name="classroom_1" id="classroom_1">
+						{% for classroom in mesCLasses.classrooms %}
+							<option value="{{ classroom.id }}">{{ classroom.grade }}, {{ classroom.classroomName }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<div class="form-group col-6">
+					<label for="classroom_2">Sélection de l'autre classe</label>
+					<select class="form-control" name="classroom_2" id="classroom_2">
+						{% for classroom in classrooms %}
+							<option value="{{ classroom.id }}">{{ classroom.grade }}, {{ classroom.classroomName }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+			</div>
+
+			<button type="submit" class="btn btn-peche text-white mx-auto mt-5 d-flex col-4 justify-content-center">Submit</button>
+
+		</form>
+	</div>
+
 </div>
-
-	
-
 
 {% endblock %}
