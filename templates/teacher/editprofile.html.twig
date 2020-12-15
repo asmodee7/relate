@@ -7,11 +7,13 @@
 
 {% block body %}
 
-<div class="container relate-body">
+<div class="container relate-body d-flex flex-column align-items-center justify-content-center">
 
-	<h1>Edit Teacher Profile</h1>
+	<h1 class="text-center p-5">Edit Teacher Profile</h1>
 
-	{{ form_start(formEditTeacher)}}
+	<div class="d-flex col-10 col-md-8 flex-column justify-content-center align-items-center">
+
+	{{ form_start(formEditTeacher, {'attr': {'class': "col-10 col-md-8 pb-3"}})}}
 	
 	{{ form_row(formEditTeacher.firstname, {'attr': {'placeholder': "First Name"}})}}
 	{{ form_row(formEditTeacher.lastname, {'attr': {'placeholder': "Last Name"}})}}
@@ -21,9 +23,11 @@
     {{ form_row(formEditTeacher.phone_number, {'attr': {'placeholder': "phone number"}})}}
     {{ form_row(formEditTeacher.email, {'attr': {'placeholder': "email"}})}}
 
-	<button type="submit" class="btn btn-success my-3">Save changes</button>
+	<button type="submit" class="text-center btn btn-peche my-3 text-white mx-auto">Save changes</button>
 
 	{{ form_end(formEditTeacher)}}
+
+	</div>
 
 </div>
 

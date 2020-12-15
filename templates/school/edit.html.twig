@@ -3,22 +3,32 @@
 {% block title %}Relate | Edit School
 {% endblock %}
 
-{% form_theme formEditSchool 'bootstrap_4_layout.html.twig' %}
-
 {% block body %}
-	<h1>Edit School</h1>
 
-	{{ form_start(formEditSchool)}}
-	
-	{{ form_row(formEditSchool.school_name, {'attr': {'placeholder': "School Name"}})}}
-	{{ form_row(formEditSchool.country, {'attr': {'placeholder': "Country"}})}}
-	{{ form_row(formEditSchool.language, {'attr': {'placeholder': "Language"}})}}
-	{{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': "Head First Name"}})}}
-    {{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': "Head Last Name"}})}}
-	
+	<div class="container relate-body d-flex flex-column align-items-center justify-content-center">
 
-	<button type="submit" class="btn btn-success my-3">Save changes</button>
+		<h1 class="text-center p-5">Edit School</h1>
 
-	{{ form_end(formEditSchool)}}
+		<div class="d-flex col-10 col-md-8 flex-column justify-content-center align-items-center">
+
+			{{ form_start(formEditSchool, {'attr': {'class': "col-10 col-md-8 pb-3"}})}}
+		
+				{{ form_row(formEditSchool.school_name, {'attr': {'placeholder': ""}})}}
+				{{ form_row(formEditSchool.country, {'attr': {'placeholder': ""}})}}
+				{{ form_row(formEditSchool.language, {'attr': {'placeholder': ""}})}}
+				{{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': ""}})}}
+				{{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': ""}})}}
+				{{ form_row(formEditSchool.username, {'attr': {'placeholder': ""}})}}
+				{{ form_row(formEditSchool.password, {'attr': {'placeholder': ""}})}}
+				{{ form_row(formEditSchool.confirm_password, {'attr': {'placeholder': ""}})}}
+			<button type="submit" class="text-center btn btn-peche my-3 text-white mx-auto">Save changes</button>
+			{{ form_end(formEditSchool)}}
+
+
+		
+		</div>
+	</div>
+
+
 
 {% endblock %}

@@ -8,16 +8,15 @@
 
 <div class="container relate-body">
 
-		<h1 class="text-center my-5">Teacher | ClassroomInfo</h1>
+		<h1 class="text-center my-5">My classroom partnership</h1>
 
 		<table class="table table-bordered text-center">
 
 			<thead>
 				<tr>
-					<th scope="col" class="peach-tab text-light">ID DU DUO</th>
 					<th scope="col" class="peach-tab text-light">CLASSROOM</th>
 					<th scope="col" class="peach-tab text-light">CLASSROOM</th>
-					<th scope="col" class="peach-tab text-light">See partnership</th>
+					<th scope="col" class="peach-tab text-light">Partnership</th>
 				</tr>
 			</thead>
 
@@ -25,9 +24,6 @@
 				{% for partner in classroomDuo %}
 					<tr>
 						{% for data in myclassroom %}
-							<td class="card-center">
-								{{ partner.id }}
-							</td>
 							<td class="card-center">
 								{% if partner.getClassroom1() == data.id %}
 									{{ partner.getClassroom1() }}
@@ -49,9 +45,9 @@
 
 							</td>
 							<td class="card-center">
-								<button class="btn btn-peche">
-									<a class="text-white" href="{{ path("assoc_student", {'id': partner.id } )}}">Click</a>
-								</button>
+								<a class="text-white" href="{{ path("assoc_student", {'id': partner.id } )}}">
+									<button class="btn btn-peche text-white">Show</button>
+								</a>
 							</td>
 
 						{% endfor %}
@@ -63,7 +59,7 @@
 		<h1 class="text-center my-5">My Students</h1>
 		
 
-		<table class="table table-bordered text-center">
+		<table class="table table-bordered text-center table-hover">
 
 			<thead>
 				<tr>
