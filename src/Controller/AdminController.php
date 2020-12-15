@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AdminController extends AbstractController
 {
 
-     /**
+    /**
      * @Route("/homepage", name="homepage")
      */
     public function homepage(): Response
@@ -61,7 +61,7 @@ class AdminController extends AbstractController
             $manager->persist($school);
             $manager->flush();
 
-            $this->redirectToRoute("create_school");
+            $this->redirectToRoute("schools");
         }
 
         return $this->render("admin/create_school.html.twig", [
@@ -69,7 +69,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("admin/schools", name="schools")
      */
     public function showSchools(SchoolRepository $repo)
@@ -82,39 +82,43 @@ class AdminController extends AbstractController
     }
 
     /**
-    * @Route("/admin/infos/school/{id}", name="school_infos")
-    */
+     * @Route("/admin/infos/school/{id}", name="school_infos")
+     */
     public function showInfos(SchoolRepository $repo, $id)
     {
         $school = $repo->find($id);
 
-        return $this->render('admin/schoolinfos.html.twig', 
-        [
-            'school' => $school
-        ]);
+        return $this->render(
+            'admin/schoolinfos.html.twig',
+            [
+                'school' => $school
+            ]
+        );
     }
 
     /**
      * @Route("/admin/edit/school/{id}", name="edit_school_infos")
      */
-    /* public function edit(School $school, Request $request, EntityManagerInterface $manager)
+    public function edit(SchoolRepository $repo, $id, School $school, Request $request, EntityManagerInterface $manager)
     {
+        $school = $repo->find($id);
 
         $form = $this->createForm(EditSchoolType::class, $school);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($school);
             $manager->flush();
 
             return $this->redirectToRoute('school_infos', ['id' => $school->getId()]);
         }
 
-        return $this->render('admin/editschool.html.twig',
-        [
-            'formEditSchool' => $form->createView()
-        ]);
-    } */
+        return $this->render(
+            'admin/editschool.html.twig',
+            [
+                'formEditSchool' => $form->createView()
+            ]
+        );
+    }
 }

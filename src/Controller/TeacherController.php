@@ -242,31 +242,26 @@ class TeacherController extends AbstractController
         $students1FromDuo = [];
         $students2FromDuo = [];
 
-        foreach($studentsDuos as $oneStudentDuo)
-        {
+        foreach ($studentsDuos as $oneStudentDuo) {
             // dump($oneStudentDuo->getStudent1());
             // dump($oneStudentDuo->getStudent2());
 
             // dump($studentsFromClassroom1);
 
-            foreach($studentsFromClassroom1 as $oneStudentFromClassroom1)
-            {
+            foreach ($studentsFromClassroom1 as $oneStudentFromClassroom1) {
                 // dump($oneStudentFromClassroom1);
                 // dump($oneStudentDuo->getStudent1());
 
-                if($oneStudentDuo->getStudent1() == $oneStudentFromClassroom1->getId() || $oneStudentDuo->getStudent2() == $oneStudentFromClassroom1->getId())
-                {
+                if ($oneStudentDuo->getStudent1() == $oneStudentFromClassroom1->getId() || $oneStudentDuo->getStudent2() == $oneStudentFromClassroom1->getId()) {
                     $students1FromDuo[] = $oneStudentFromClassroom1;
                 }
             }
 
-            foreach($studentsFromClassroom2 as $oneStudentFromClassroom2)
-            {
+            foreach ($studentsFromClassroom2 as $oneStudentFromClassroom2) {
                 // dump($oneStudentFromClassroom1);
                 // dump($oneStudentDuo->getStudent1());
 
-                if($oneStudentDuo->getStudent2() == $oneStudentFromClassroom2->getId() || $oneStudentDuo->getStudent1() == $oneStudentFromClassroom2->getId())
-                {
+                if ($oneStudentDuo->getStudent2() == $oneStudentFromClassroom2->getId() || $oneStudentDuo->getStudent1() == $oneStudentFromClassroom2->getId()) {
                     $students2FromDuo[] = $oneStudentFromClassroom2;
                 }
             }
@@ -401,7 +396,18 @@ class TeacherController extends AbstractController
     {
         /* $repo =$this->getDoctrine()-> getRepository(Teacher::class); */
 
+        $userid = $this->getUser()->getId();
+        // dump($userid);
+
         $teacher = $repo->find($id);
+
+        $teacherid = $teacher->getId(); // on récupère l'id de teacher dans l'URL
+        // dump($teacherid);
+
+        // SECURISATION URL
+        if ($userid != $teacherid) {
+            return $this->redirectToRoute('homepage');
+        }
 
         return $this->render(
             'teacher/profile.html.twig',
@@ -417,6 +423,16 @@ class TeacherController extends AbstractController
     public function edit(Teacher $teacher, Request $request, EntityManagerInterface $manager)
     {
 
+        $userid = $this->getUser()->getId();
+        dump($userid); // id du teacher connecté
+
+        $urlid = $request->attributes->get('id');
+
+        // SECURISATION URL
+        if ($userid != $urlid) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $form = $this->createForm(EditTeacherType::class, $teacher);
 
         $form->handleRequest($request);
@@ -428,7 +444,8 @@ class TeacherController extends AbstractController
             return $this->redirectToRoute('my_teacher_profile', ['id' => $teacher->getId()]);
         }
 
-        return $this->render('teacher/editprofile.html.twig',
+        return $this->render(
+            'teacher/editprofile.html.twig',
             [
                 'formEditTeacher' => $form->createView()
             ]
