@@ -20,6 +20,17 @@ class TeacherRepository extends ServiceEntityRepository
     }
 
 
+    public function findTeacherBySchool($id)
+    {
+        $query = $this->createQueryBuilder('t')
+        ->select('t')
+        ->leftJoin('t.id_school', 's')
+        ->where('s.id = :id')
+        ->setParameter(":id", $id);
+
+        return $query->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Teacher[] Returns an array of Teacher objects
     //  */
