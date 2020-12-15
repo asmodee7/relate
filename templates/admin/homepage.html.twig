@@ -44,7 +44,7 @@
 				</div>
 			</a>
 			
-			<a href="" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+			<a href="{{ path('teachers') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
                     Teachers
                     <i class="fas fa-users"></i>
@@ -115,21 +115,21 @@
 	{#--------------------------------------STUDENT------------------------------------------------------#}
 
 		<div class="row justify-content-center">
-			<a href="{#{{ path('') }}#}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+			<a href="{{ path('my_student_profile', {'id': app.user.id}) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
-					Profile
+					My profile
 					<i class="fas fa-user-alt"></i>
 				</div>
 			</a>
 
-			<a href="{#{{ path('') }}#}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+			{# <a href="" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
 					My teacher
 					<i class="fas fa-user-edit"></i>
 				</div>
-			</a>
+			</a> #}
 
-			<a href="{#{{ path('') }}#}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+			<a href="" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
 				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
 					My team mate
 					<i class="fas fa-comment-dots"></i>

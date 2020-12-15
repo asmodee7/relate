@@ -253,7 +253,14 @@ class TeacherController extends AbstractController
                 // dump($oneStudentDuo->getStudent1());
 
                 if ($oneStudentDuo->getStudent1() == $oneStudentFromClassroom1->getId() || $oneStudentDuo->getStudent2() == $oneStudentFromClassroom1->getId()) {
+
                     $students1FromDuo[] = $oneStudentFromClassroom1;
+
+                    foreach($oneStudentFromClassroom1->getClassrooms() as $oneClassroom)
+                    {
+                        dump($oneClassroom->getId());
+                    }
+
                 }
             }
 

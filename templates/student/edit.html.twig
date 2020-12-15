@@ -8,6 +8,8 @@
 {% block body %}
 	<h1>Edit Student Profile</h1>
 
+	{{ form_errors(formEditStudent) }}
+
 	{{ form_start(formEditStudent)}}
 	
 	{{ form_row(formEditStudent.firstname, {'attr': {'placeholder': "First Name"}})}}
