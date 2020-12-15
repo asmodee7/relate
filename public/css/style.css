@@ -125,3 +125,10 @@ button:active,
     background-color: rgb(236, 236, 236);
 }
 
+/*-------------------------------------------- Image profile ------------------------------- */
+
+.image_profile{
+    max-width: 50%;
+    max-height: auto;
+
+}

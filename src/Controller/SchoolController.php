@@ -12,7 +12,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SchoolController extends AbstractController
@@ -29,7 +31,7 @@ class SchoolController extends AbstractController
     /**
      * @Route("school/new-teacher", name="new_teacher")
      */
-    public function newSchoolTeacher(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
+    public function newSchoolTeacher(Request $request,SluggerInterface $slugger, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
         $teacher = new Teacher;
 
@@ -38,8 +40,35 @@ class SchoolController extends AbstractController
         $newTeacherForm->handleRequest($request);
 
         dump($request);
+        
 
-        if ($newTeacherForm->isSubmitted() && $newTeacherForm->isValid()) {
+        if ($newTeacherForm->isSubmitted() && $newTeacherForm->isValid()){
+            $photoFile = $newTeacherForm->get('photo')->getData();
+            if ($photoFile) {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newPhotoFile = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $photoFile->move(
+                        $this->getParameter('photo_directory'),
+                        $newPhotoFile
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $teacher->setPhoto($newPhotoFile);
+            }
+
+
+
+
+
             $hash = $encoder->encodePassword($teacher, $teacher->getPassword());
             $teacher->setPassword($hash);
 
@@ -86,18 +115,19 @@ class SchoolController extends AbstractController
      */
     public function showTeacherInfos(TeacherRepository $repo, $id)
     {
+
         $teacher = $repo->find($id);
-        dump($teacher);
 
-        // $teacherid = $repo->find($id)->getId();
-        // dump($teacherid);
+        // SECURISATION URL
+        $teacherid = $repo->find($id)->getIdSchool()->getId();
+        dump($teacherid); // on récupère l'id_school du teacher dans l'URL
 
-        $userid = $this->getUser(); // id de la school connectée
+        $userid = $this->getUser()->getId(); // id de la school connectée
         dump($userid);
 
-        // if ($teacherid != $userid) {
-        //     return $this->redirectToRoute("homepage");
-        // }
+        if ($teacherid != $userid) {
+            return $this->redirectToRoute("homepage");
+        }
 
 
         return $this->render(
@@ -115,12 +145,13 @@ class SchoolController extends AbstractController
     {
         $school = $repo->find($id);
 
-
         $schoolid = $repo->find($id)->getId();
         dump($schoolid);
 
         $userid = $this->getUser()->getId(); // id de la school connectée
         dump($userid);
+
+        // SECURISATION URL
 
         if ($schoolid != $userid) {
             return $this->redirectToRoute("homepage");
