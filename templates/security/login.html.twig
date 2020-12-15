@@ -4,8 +4,9 @@
 {% endblock %}
 
 {% block body %}
-<div class="d-flex flex-column align-items-center justify-content-center col-12">
-	<h1 class="text-center mb-4">Login</h1>
+<div class="d-flex flex-column align-items-center justify-content-center col-12 relate-body">
+	<h1 class="text-center mb-2 display-1 bold-600">Hello</h1>
+	<span class="text-center mb-4 bold-600">Welcome to relate !</span>
 
 	{% if error %}
 		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -13,11 +14,11 @@
 	<div class="row justify-content-center">
 		<form action="{{ path('login') }}" method="post" class="d-flex justify-content-center">
 			<div class="flex-column">
-				<input type="text" placeholder="Username" id="username" name="_username" value="{{ last_username }}" class="text-center w-input input-group-text bg-white"/>
+				<input type="text" placeholder="Username" id="username" name="_username" value="{{ last_username }}" class="text-center w-input input-group-text bg-white style-rounded style-shadow no-border"/>
 
-				<input type="password" placeholder="Password" id="password" name="_password" class="mt-4 text-center w-input input-group-text bg-white"/>			
+				<input type="password" placeholder="Password" id="password" name="_password" class="mt-4 text-center w-input input-group-text bg-white style-rounded style-shadow no-border"/>			
 				<div class="col-md-12 d-flex justify-content-center">
-					<button type="submit" class="btn btn-peche text-white col-md-6 mt-5">login</button>
+					<button type="submit" class="btn btn-peche text-white col-md-6 mt-5 style-rounded">login</button>
 				</div>
 			</div>
 			

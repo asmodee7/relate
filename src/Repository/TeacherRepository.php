@@ -19,6 +19,7 @@ class TeacherRepository extends ServiceEntityRepository
         parent::__construct($registry, Teacher::class);
     }
 
+
     public function findTeacherBySchool($id)
     {
         $query = $this->createQueryBuilder('t')
