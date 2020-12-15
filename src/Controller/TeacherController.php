@@ -5,23 +5,25 @@ namespace App\Controller;
 use App\Entity\Student;
 use App\Entity\Teacher;
 use App\Entity\Classroom;
-use App\Entity\ClassroomDuo;
-use App\Entity\StudentDuo;
-use App\Form\ClassroomDuoType;
 use App\Form\StudentType;
+use App\Entity\StudentDuo;
 use App\Form\ClassroomType;
+use App\Entity\ClassroomDuo;
 use App\Form\EditTeacherType;
-use App\Repository\ClassroomDuoRepository;
+use App\Form\ClassroomDuoType;
 use Doctrine\ORM\EntityManager;
+use App\Repository\StudentRepository;
 use App\Repository\TeacherRepository;
 use App\Repository\ClassroomRepository;
 use App\Repository\StudentDuoRepository;
-use App\Repository\StudentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ClassroomDuoRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class TeacherController extends AbstractController
@@ -39,7 +41,7 @@ class TeacherController extends AbstractController
     /**
      * @Route("teacher/new-student", name="create-student")
      */
-    public function newStudent(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TeacherRepository $teacherrepo, ClassroomRepository $classroomrepo): Response
+    public function newStudent(Request $request,SluggerInterface $slugger, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TeacherRepository $teacherrepo, ClassroomRepository $classroomrepo): Response
     {
         $user = $this->getUser()->getId(); // id du teacher connecté
         dump($this->getUser()->getClassrooms());
@@ -56,7 +58,29 @@ class TeacherController extends AbstractController
         $myclassrooms = $classroomrepo->getClassroomsUser($user); // on va chercher les infos de classroomrepo en fonction de l'id du prof
         // dump($myclassrooms);
 
-        if ($studentForm->isSubmitted() && $studentForm->isValid()) {
+        if ($studentForm->isSubmitted() && $studentForm->isValid()) 
+        {
+            $photoFile = $studentForm->get('photo')->getData();
+            if ($photoFile) {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newPhotoFile = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $photoFile->move(
+                        $this->getParameter('photo_directory'),
+                        $newPhotoFile
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $student->setPhoto($newPhotoFile);
+            }
 
             dump($request->request->get('classrooms'));
 
@@ -427,8 +451,10 @@ class TeacherController extends AbstractController
     /**
      * @Route("/teacher/edit/{id}", name="edit_my_teacher_profile")
      */
-    public function edit(Teacher $teacher, Request $request, EntityManagerInterface $manager)
+    public function edit(Teacher $teacher, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager)
     {
+
+        
 
         $userid = $this->getUser()->getId();
         dump($userid); // id du teacher connecté
@@ -445,6 +471,29 @@ class TeacherController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoFile = $form->get('photo')->getData();
+            if ($photoFile) 
+            {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newPhotoFile = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $photoFile->move(
+                        $this->getParameter('photo_directory'),
+                        $newPhotoFile
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $teacher->setPhoto($newPhotoFile);
+            }
+            
             $manager->persist($teacher);
             $manager->flush();
 

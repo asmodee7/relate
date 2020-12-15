@@ -52,6 +52,7 @@ class AdminController extends AbstractController
         dump($request);
 
         if ($schoolForm->isSubmitted() && $schoolForm->isValid()) {
+            
 
             $hash = $encoder->encodePassword($school, $school->getPassword());
 
