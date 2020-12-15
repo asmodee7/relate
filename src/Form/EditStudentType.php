@@ -43,18 +43,18 @@ class EditStudentType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid ImageFiles',
                     ])
                 ],
-            ])
-            ->add('sport')
-            ->add('music')
-            ->add('other_hobbies');
-/*             ->add('classrooms', EntityType::class, [
-                'label' => 'Classroom',
-                'class' => Classroom::class,
-                'choice_label' => 'classroom_name',
-                'expanded' => true,
-                'multiple' => true
-            /* ]) */
-            /* ->add('studentDuos'); */
+            ]);
+        // ->add('sport')
+        // ->add('music')
+        // ->add('other_hobbies');
+        //    ->add('classrooms', EntityType::class, [
+        //     'label' => 'Classroom',
+        //     'class' => Classroom::class,
+        //     'choice_label' => 'classroom_name',
+        //     'expanded' => true,
+        //     'multiple' => true
+        //  ]) 
+        // ->add('studentDuos'); 
     }
 
     public function configureOptions(OptionsResolver $resolver)

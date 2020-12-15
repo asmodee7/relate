@@ -5,47 +5,75 @@
 
 {% block body %}
 
-<div class="container relate-body">
+	<div class="container relate-body">
 
-	<div class="col-12">
-		<h1 class="text-center my-5">New Student:</h1>
+		<div class="col-12">
+			<h1 class="text-center my-5">New Student:</h1>
 
-		<div class="container">
-			{{ form_start(studentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+			<div class="container">
+				{{ form_start(studentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
-			{{ form_row(studentForm.username, {'label': "Username"} )}}
-			{{ form_row(studentForm.password, {'label': "Password"} )}}
-			{{ form_row(studentForm.confirm_password, {'label': "Confirm password"} )}}
-			{{ form_row(studentForm.lastname, {'label': "Lastname"} )}}
-			{{ form_row(studentForm.firstname, {'label': "Firstname"} )}}
-			{{ form_row(studentForm.age, {'label': "Age"} )}}
-			{{ form_row(studentForm.description, {'label': "Description"} )}}
-			{{ form_row(studentForm.photo, {'label': "Profile Picture"} )}}
-			{{ form_row(studentForm.sport, {'label': "Sport"} )}}
-			{{ form_row(studentForm.music, {'label': "Music"} )}}
-			{{ form_row(studentForm.OtherHobbies, {'label': "Others"} )}}
+				{{ form_row(studentForm.username, {'label': "Username"} )}}
+				{{ form_row(studentForm.password, {'label': "Password"} )}}
+				{{ form_row(studentForm.confirm_password, {'label': "Confirm password"} )}}
+				{{ form_row(studentForm.lastname, {'label': "Lastname"} )}}
+				{{ form_row(studentForm.firstname, {'label': "Firstname"} )}}
+				{{ form_row(studentForm.age, {'label': "Age"} )}}
+				{{ form_row(studentForm.description, {'label': "Description"} )}}
+				{{ form_row(studentForm.photo, {'label': "Profile Picture"} )}}
+				{# {{ form_row(studentForm.sport, {'label': "Sport"} )}} #}
+				{# {{ form_row(studentForm.music, {'label': "Music"} )}} #}
+				{# {{ form_row(studentForm.OtherHobbies, {'label': "Others"} )}} #}
 
-			{# {{ form_row(studentForm.classrooms )}} #}
+				{# {{ form_row(studentForm.classrooms )}} #}<label>Sport
+				</label>
+					<select name="sport" id="" class="form-control"> <option value="football">football</option>
+					<option value="tennis">tennis</option>
+					<option value="volleyball">volleyball</option>
+					<option value="basketball">basketball</option>
+					<option value="golf">golf</option>
+					<option value="aquabike">aquabike</option>
+				</select>
+
+				<label>Music</label>
+				<select name="music" id="" class="form-control">
+					<option value="rap">rap</option>
+					<option value="pop">pop</option>
+					<option value="jazz">jazz</option>
+					<option value="techno">techno</option>
+					<option value="soul">soul</option>
+					<option value="yodeling">yodeling</option>
+				</select>
+
+				<label>Other Hobbies</label>
+				<select name="OtherHobbies" id="" class="form-control">
+					<option value="video-games">video-games</option>
+					<option value="travel">travel</option>
+					<option value="shopping">shopping</option>
+					<option value="cinema">cinema</option>
+					<option value="photography">photography</option>
+					<option value="guitare-couture">guitare-couture</option>
+				</select>
 
 
-			<label>Classrooms</label>
-			<select name="classrooms" id="" class="form-control">
-				{% for myclassroom in myclassrooms %}
+				<label>Classrooms</label>
+				<select name="classrooms" id="" class="form-control">
+					{% for myclassroom in myclassrooms %}
 
-					<option value="{{ myclassroom.id }}">{{ myclassroom.classroomName }}</option>
+						<option value="{{ myclassroom.id }}">{{ myclassroom.classroomName }}</option>
 
-				{% endfor %}
-			</select>
+					{% endfor %}
+				</select>
 
-			<div class="text-center my-3">
-				<button type="submit" class="btn btn-peche text-white text-center">Create the student account</button>
+				<div class="text-center my-3">
+					<button type="submit" class="btn btn-peche text-white text-center">Create the student account</button>
+				</div>
+
+				{{ form_end(studentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
 			</div>
-
-			{{ form_end(studentForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
-
 		</div>
-	</div>
 
-</div>
+	</div>
 
 {% endblock %}
