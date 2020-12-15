@@ -49,9 +49,13 @@ class StudentController extends AbstractController
         $form = $this->createForm(EditStudentType::class, $student);
 
         $form->handleRequest($request);
+        dump($student);
 
         if($form->isSubmitted() && $form->isValid())
         {
+            dump('test');
+            $student->setRoles(['ROLE_STUDENT']);
+
             $manager->persist($student);
             $manager->flush();
 
