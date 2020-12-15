@@ -86,18 +86,19 @@ class SchoolController extends AbstractController
      */
     public function showTeacherInfos(TeacherRepository $repo, $id)
     {
+
         $teacher = $repo->find($id);
-        dump($teacher);
 
-        // $teacherid = $repo->find($id)->getId();
-        // dump($teacherid);
+        // SECURISATION URL
+        $teacherid = $repo->find($id)->getIdSchool()->getId();
+        dump($teacherid); // on récupère l'id_school du teacher dans l'URL
 
-        $userid = $this->getUser(); // id de la school connectée
+        $userid = $this->getUser()->getId(); // id de la school connectée
         dump($userid);
 
-        // if ($teacherid != $userid) {
-        //     return $this->redirectToRoute("homepage");
-        // }
+        if ($teacherid != $userid) {
+            return $this->redirectToRoute("homepage");
+        }
 
 
         return $this->render(
@@ -115,12 +116,13 @@ class SchoolController extends AbstractController
     {
         $school = $repo->find($id);
 
-
         $schoolid = $repo->find($id)->getId();
         dump($schoolid);
 
         $userid = $this->getUser()->getId(); // id de la school connectée
         dump($userid);
+
+        // SECURISATION URL
 
         if ($schoolid != $userid) {
             return $this->redirectToRoute("homepage");
