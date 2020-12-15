@@ -97,44 +97,44 @@
 				</div>
 
 			</div>
-		</form>
+     </form>
 
-		{# {{dump(studentsFromClassroom1)}} #}
+        {# {{dump(studentsFromClassroom1)}} #}
 
-		<h3 class="text-center my-2">Associations d'élèves</h3>
+        <h3 class="text-center my-2">Associations d'élèves</h3>
 
-		<div class="row">
-			<div class="col-6">
-				<table class="table table-hover table-bordered">
-					<tr>
-						<th>Prénom</th>
-						<th>Nom</th>
-					</tr>
-
-					{% for student in students1FromDuo %}
-						<tr>
-							<td>{{ student.firstname }}</td>
-							<td>{{ student.lastname }}</td>
-						</tr>
-					{% endfor %}
-				</table>
-			</div>
-			<div class="col-6">
-				<table class="table table-hover table-bordered">
-					<tr>
-						<th>Prénom</th>
-						<th>Nom</th>
-					</tr>
-
-					{% for student in students2FromDuo %}
-						<tr>
-							<td>{{ student.firstname }}</td>
-							<td>{{ student.lastname }}</td>
-						</tr>
-					{% endfor %}
-				</table>
-			</div>
-		</div>
-	</div>
+        <div class="row">
+            <div class="col-6">
+                <table class="table table-hover table-bordered">
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                    </tr>
+                
+                {% for student in students1FromDuo %}
+                    <tr>
+                        <td>{{ student.firstname }}</td>
+                        <td>{{ student.lastname }}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+            <div class="col-6">
+                <table class="table table-hover table-bordered">
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                    </tr>
+                
+                {% for student in students2FromDuo %}
+                    <tr>
+                        <td>{{ student.firstname }}</td>
+                        <td>{{ student.lastname }}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

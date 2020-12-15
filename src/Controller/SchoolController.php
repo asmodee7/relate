@@ -7,6 +7,7 @@ use App\Entity\Teacher;
 use App\Form\TeacherType;
 use App\Form\EditSchoolType;
 use App\Repository\SchoolRepository;
+use App\Repository\TeacherRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,6 +54,32 @@ class SchoolController extends AbstractController
 
         return $this->render("school/create_teacher.html.twig", [
             'newTeacherForm' => $newTeacherForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("school/teachers", name="teachers")
+     */
+    public function showTeachers(TeacherRepository $repo)
+    {
+        $userid = $this->getUser()->getId();
+
+        // foreach ($teacherliste as $teachers) {
+ 
+        //     $teacherliste = $repo->findById($userid);
+        //     dump($teacherliste);
+
+        // }
+
+        $teachers = $repo->findTeacherBySchool($userid);
+
+        dump($userid);
+        dump($teachers);
+
+
+
+        return $this->render("school/teachers.html.twig", [
+            'teachers' => $teachers
         ]);
     }
 
