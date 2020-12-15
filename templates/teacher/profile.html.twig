@@ -9,7 +9,8 @@
 	<h1>My Profile</h1>
 
 	<div class="content">
-		<img src="http://placehold.it/150x150" alt="">
+		<img class="image_profile" src="{{ asset('uploads/photo/' ~ teacher.photo) }}" alt="">
+		
 		<h2>{{ teacher.firstname}} {{ teacher.lastname}}</h2>
         <span>{{ teacher.email}}</span>
         <span>{{ teacher.phonenumber}}</span>
