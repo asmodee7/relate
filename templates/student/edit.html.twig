@@ -9,6 +9,7 @@
 
 <div class="container relate-body d-flex flex-column align-items-center justify-content-center">
 
+
 	<h1 class="text-center p-5">Edit student profile</h1>
 
 	<div class="d-flex col-10 col-md-8 flex-column justify-content-center align-items-center">
@@ -20,9 +21,41 @@
 	{{ form_row(formEditStudent.age, {'attr': {'placeholder': "Age"}})}}
 	{{ form_row(formEditStudent.photo, {'attr': {'placeholder': "Photo"}})}}
 	{{ form_row(formEditStudent.description, {'attr': {'placeholder': "Description"}})}}
-	{{ form_row(formEditStudent.sport, {'attr': {'placeholder': "Sport"}})}}
-	{{ form_row(formEditStudent.music, {'attr': {'placeholder': "Music"}})}}
-	{{ form_row(formEditStudent.other_hobbies, {'attr': {'placeholder': "Other Hobbies"}})}}
+	{# {{ form_row(formEditStudent.sport, {'attr': {'placeholder': "Sport"}})}}
+		{{ form_row(formEditStudent.music, {'attr': {'placeholder': "Music"}})}}
+		{{ form_row(formEditStudent.other_hobbies, {'attr': {'placeholder': "Other Hobbies"}})}} #}
+
+	<label>Sport
+	</label>
+	<select name="sport" id="" class="form-control">
+		<option value="football">football</option>
+		<option value="tennis">tennis</option>
+		<option value="volleyball">volleyball</option>
+		<option value="basketball">basketball</option>
+		<option value="golf">golf</option>
+		<option value="aquabike">aquabike</option>
+	</select>
+
+	<label>Music</label>
+	<select name="music" id="" class="form-control">
+		<option value="rap">rap</option>
+		<option value="pop">pop</option>
+		<option value="jazz">jazz</option>
+		<option value="techno">techno</option>
+		<option value="soul">soul</option>
+		<option value="yodeling">yodeling</option>
+	</select>
+
+	<label>Other Hobbies</label>
+	<select name="OtherHobbies" id="" class="form-control">
+		<option value="video-games">video-games</option>
+		<option value="travel">travel</option>
+		<option value="shopping">shopping</option>
+		<option value="cinema">cinema</option>
+		<option value="photography">photography</option>
+		<option value="guitare-couture">guitare-couture</option>
+	</select>
+
 
 	<button type="submit" class="text-center btn btn-peche my-3 text-white mx-auto">Save changes</button>
 

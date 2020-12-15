@@ -81,7 +81,6 @@ class TeacherController extends AbstractController
                 $student->setPhoto($newPhotoFile);
             }
 
-            dump($request->request->get('classrooms'));
 
             $id = $request->request->get('classrooms');
 
@@ -89,6 +88,15 @@ class TeacherController extends AbstractController
             dump($classroomTest);
 
             $student->addClassroom($classroomTest);
+
+            $sport = $request->request->get('sport');
+            $student->setSport($sport);
+
+            $music = $request->request->get('music');
+            $student->setMusic($music);
+
+            $setOtherHobbies = $request->request->get('OtherHobbies');
+            $student->setOtherHobbies($setOtherHobbies);
 
             $hash = $encoder->encodePassword($student, $student->getPassword());
             $student->setPassword($hash);

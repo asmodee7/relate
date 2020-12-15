@@ -91,6 +91,7 @@ class Student implements UserInterface
      */
     private $photo;
 
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -300,12 +301,10 @@ class Student implements UserInterface
 
     public function eraseCredentials()
     {
-
     }
 
     public function getSalt()
     {
-
     }
 
 

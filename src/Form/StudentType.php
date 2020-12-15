@@ -49,9 +49,9 @@ class StudentType extends AbstractType
                     ])
                 ],
             ])
-            ->add('sport')
-            ->add('music')
-            ->add('OtherHobbies')
+            // ->add('sport')
+            // ->add('music')
+            // ->add('OtherHobbies')
             // ->add('classrooms', EntityType::class, [
             //     'label' => 'Classroom',
             //     'class' => Classroom::class,

@@ -100,6 +100,16 @@ class StudentController extends AbstractController
                 $student->setPhoto($newPhotoFile);
             }
             dump('test');
+
+            $sport = $request->request->get('sport');
+            $student->setSport($sport);
+
+            $music = $request->request->get('music');
+            $student->setMusic($music);
+
+            $setOtherHobbies = $request->request->get('OtherHobbies');
+            $student->setOtherHobbies($setOtherHobbies);
+
             $student->setRoles(['ROLE_STUDENT']);
 
             $manager->persist($student);
