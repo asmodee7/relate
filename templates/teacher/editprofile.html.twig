@@ -6,6 +6,9 @@
 {% form_theme formEditTeacher 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+
+<div class="container relate-body">
+
 	<h1>Edit Teacher Profile</h1>
 
 	{{ form_start(formEditTeacher)}}
@@ -21,5 +24,7 @@
 	<button type="submit" class="btn btn-success my-3">Save changes</button>
 
 	{{ form_end(formEditTeacher)}}
+
+</div>
 
 {% endblock %}
