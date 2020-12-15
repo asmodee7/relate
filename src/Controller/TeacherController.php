@@ -41,7 +41,7 @@ class TeacherController extends AbstractController
     /**
      * @Route("teacher/new-student", name="create-student")
      */
-    public function newStudent(Request $request,SluggerInterface $slugger, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TeacherRepository $teacherrepo, ClassroomRepository $classroomrepo): Response
+    public function newStudent(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder, TeacherRepository $teacherrepo, ClassroomRepository $classroomrepo): Response
     {
         $user = $this->getUser()->getId(); // id du teacher connecté
         dump($this->getUser()->getClassrooms());
@@ -58,14 +58,13 @@ class TeacherController extends AbstractController
         $myclassrooms = $classroomrepo->getClassroomsUser($user); // on va chercher les infos de classroomrepo en fonction de l'id du prof
         // dump($myclassrooms);
 
-        if ($studentForm->isSubmitted() && $studentForm->isValid()) 
-        {
+        if ($studentForm->isSubmitted() && $studentForm->isValid()) {
             $photoFile = $studentForm->get('photo')->getData();
             if ($photoFile) {
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newPhotoFile = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+                $newPhotoFile = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -99,7 +98,7 @@ class TeacherController extends AbstractController
             $manager->persist($student);
             $manager->flush();
 
-            $this->redirectToRoute("create-student");
+            return $this->redirectToRoute("create-student");
         }
 
         return $this->render("teacher/create_student.html.twig", [
@@ -145,7 +144,7 @@ class TeacherController extends AbstractController
             $manager->persist($classroom);
             $manager->flush();
 
-            return $this->redirectToRoute("teacher_classrooms");
+            return $this->redirectToRoute("create_classroom");
         }
 
         return $this->render("teacher/create_classroom.html.twig", [
@@ -280,11 +279,9 @@ class TeacherController extends AbstractController
 
                     $students1FromDuo[] = $oneStudentFromClassroom1;
 
-                    foreach($oneStudentFromClassroom1->getClassrooms() as $oneClassroom)
-                    {
+                    foreach ($oneStudentFromClassroom1->getClassrooms() as $oneClassroom) {
                         dump($oneClassroom->getId());
                     }
-
                 }
             }
 
@@ -454,8 +451,6 @@ class TeacherController extends AbstractController
     public function edit(Teacher $teacher, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager)
     {
 
-        
-
         $userid = $this->getUser()->getId();
         dump($userid); // id du teacher connecté
 
@@ -472,12 +467,11 @@ class TeacherController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $photoFile = $form->get('photo')->getData();
-            if ($photoFile) 
-            {
+            if ($photoFile) {
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newPhotoFile = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+                $newPhotoFile = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -493,7 +487,7 @@ class TeacherController extends AbstractController
                 // instead of its contents
                 $teacher->setPhoto($newPhotoFile);
             }
-            
+
             $manager->persist($teacher);
             $manager->flush();
 
