@@ -130,15 +130,21 @@ class StudentController extends AbstractController
     /**
      * @Route("/student/my_partners", name="student_partners")
      */
-    public function showPartners(StudentDuoRepository $studentDuoRepo)
+    public function showPartners(StudentDuoRepository $studentDuoRepo, StudentRepository $studentRepo)
     {
         $userid = $this->getUser()->getId();
         dump($userid);
 
         $myDuos = $studentDuoRepo->findDuoByStudent($userid);
         dump($myDuos);
+
+        $students = $studentRepo->findAll();
+        dump($students);
+
         return $this->render('student/student_partners.html.twig', [
-            'myDuos' => $myDuos
+            'myDuos' => $myDuos,
+            'students' => $students,
+            'userid' => $userid
         ]);
     }
 

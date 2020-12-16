@@ -13,15 +13,18 @@
 
 			{{ form_start(formEditSchool, {'attr': {'class': "col-10 col-md-8 pb-3"}})}}
 		
-				{{ form_row(formEditSchool.school_name, {'attr': {'placeholder': ""}})}}
-				{{ form_row(formEditSchool.country, {'attr': {'placeholder': ""}})}}
-				{{ form_row(formEditSchool.language, {'attr': {'placeholder': ""}})}}
-				{{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': ""}})}}
-				{{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': ""}})}}
-				{{ form_row(formEditSchool.username, {'attr': {'placeholder': ""}})}}
-				{{ form_row(formEditSchool.password, {'attr': {'placeholder': ""}})}}
-				{{ form_row(formEditSchool.confirm_password, {'attr': {'placeholder': ""}})}}
-			<button type="submit" class="text-center btn btn-peche my-3 text-white mx-auto">Save changes</button>
+				{{ form_row(formEditSchool.school_name, {'attr': {'placeholder': "School name"}})}}
+				{{ form_row(formEditSchool.country, {'attr': {'placeholder': "Country"}})}}
+				{{ form_row(formEditSchool.language, {'attr': {'placeholder': "Language"}})}}
+				{{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': "Firstname"}})}}
+				{{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': "Lastname"}})}}
+				{{ form_row(formEditSchool.username, {'attr': {'placeholder': "Username"}})}}
+				{{ form_row(formEditSchool.user_position, {'attr': {'placeholder': "User position"}})}}
+
+			<div class="col-12 d-flex justify-content-center">
+				<button type="submit" class="text-center btn btn-peche my-3 text-white mx-auto">Save changes</button>
+			</div>
+			
 			{{ form_end(formEditSchool)}}
 
 

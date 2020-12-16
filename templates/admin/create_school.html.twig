@@ -5,20 +5,20 @@
 
 {% block body %}
 	<div class="col-12">
-		<h1 class="text-center my-5">New partnership:</h1>
+		<h1 class="text-center my-5">Add a new school</h1>
 
 		<div>
 			{{ form_start(schoolForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
-			{{ form_row(schoolForm.school_name, {'label': "Name of the school"} )}}
-			{{ form_row(schoolForm.country )}}
-			{{ form_row(schoolForm.language )}}
-			{{ form_row(schoolForm.user_lastname )}}
-			{{ form_row(schoolForm.user_firstname )}}
-			{{ form_row(schoolForm.user_position )}}
-			{{ form_row(schoolForm.username )}}
-			{{ form_row(schoolForm.password )}}
-			{{ form_row(schoolForm.confirm_password )}}
+			{{ form_row(schoolForm.school_name, {'attr': {'placeholder': "School Name"}} )}}
+			{{ form_row(schoolForm.country, {'attr': {'placeholder': "Country"}} )}}
+			{{ form_row(schoolForm.language, {'attr': {'placeholder': "Language"}} )}}
+			{{ form_row(schoolForm.user_lastname, {'attr': {'placeholder': "Lastname"}} )}}
+			{{ form_row(schoolForm.user_firstname, {'attr': {'placeholder': "Firstname"}} )}}
+			{{ form_row(schoolForm.user_position, {'attr': {'placeholder': "User position"}} )}}
+			{{ form_row(schoolForm.username, {'attr': {'placeholder': "Username"}} )}}
+			{{ form_row(schoolForm.password, {'attr': {'placeholder': "Password"}} )}}
+			{{ form_row(schoolForm.confirm_password, {'attr': {'placeholder': "Password"}} )}}
 
 			<div class="text-center my-3">
 				<button type="submit" class="btn btn-peche text-white text-center">Create the school account</button>

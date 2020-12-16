@@ -18,12 +18,12 @@ class EditSchoolType extends AbstractType
             ->add('school_name')
             ->add('language')
             ->add('username')
-            ->add('confirm_password')
-            ->add('password')
+            // ->add('confirm_password')
+            // ->add('password')
             ->add('user_lastname')
             ->add('user_firstname')
-            /* ->add('user_position')
-            ->add('roles') */
+            ->add('user_position')
+            // ->add('roles')
         ;
     }
 

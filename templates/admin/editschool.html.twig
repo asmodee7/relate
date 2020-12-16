@@ -17,11 +17,14 @@
 			{{ form_row(formEditSchool.school_name, {'attr': {'placeholder': "School Name"}})}}
 			{{ form_row(formEditSchool.country, {'attr': {'placeholder': "Country"}})}}
 			{{ form_row(formEditSchool.language, {'attr': {'placeholder': "Language"}})}}
-			{{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': "Head First Name"}})}}
-			{{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': "Head Last Name"}})}}
+			{{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': "Firstname"}})}}
+			{{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': "Lastname"}})}}
+			{{ form_row(formEditSchool.username, {'attr': {'placeholder': "Username"}})}}
+			{{ form_row(formEditSchool.user_position, {'attr': {'placeholder': "Position"}})}}
 
-			<button type="submit" class="text-center btn btn-peche my-3 text-white mx-auto">Save changes</button>
-
+			<div class="col-12 d-flex justify-content-center">
+				<button type="submit" class="text-center btn btn-peche my-3 text-white mx-auto">Save changes</button>
+			</div>
 			{{ form_end(formEditSchool)}}
 
 		</div>
