@@ -216,7 +216,7 @@ class SchoolController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $notification->notify($contact);
-            $this->addFlash('success', 'Votre Email a bien été envoyé');
+            $this->addFlash('success', 'Your email has been sent');
             $manager->persist($contact); // on prépare l'insertion $manager->flush(); // on execute l'insertion
         }
         return $this->render("school/contact.html.twig", ['formContact' => $form->createView()]);
