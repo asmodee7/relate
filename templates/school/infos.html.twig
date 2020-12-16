@@ -5,24 +5,39 @@
 
 {% block body %}
 
-<div class="container relate-body d-flex flex-column justify-content-center align-items-center">
+	<div class="container relate-body d-flex flex-column justify-content-center align-items-center">
 
-    <div class="card d-flex flex-column justify-content-center align-items-center style-rounded p-5">
-        <h1 class="card-title display-4 text-center">My School Informations</h1>
-        <div class="card-body d-flex flex-column justify-content-center">
-            <h5 class="card-title display-5 bold-600">{{ school.SchoolName }}</h5>
-            <p class="pt-3">Location : <strong>{{ school.country }}</strong></p>
-            <p class="pb-3">Language : <strong>{{ school.language }}</strong></p>
-            <p>Represented by <strong>{{ school.UserFirstname|capitalize }} {{ school.UserLastname|capitalize }}</strong></p>
-            <p>Contact position : <strong>{{ school.userPosition }}</strong></p>
-            <p>Username : <strong>{{ school.username }}</strong></p>
-            <p class="pb-3">Language : <strong>{{ school.language }}</strong></p>
+		<div class="card d-flex flex-column justify-content-center align-items-center style-rounded p-5">
+			<h1 class="card-title display-4 text-center">My School Infos</h1>
+			<div class="card-body d-flex flex-column justify-content-center">
+				<h5 class="card-title">Name of the school :
+					<strong>{{ school.SchoolName }}</strong>
+				</h5>
+				<p class="pt-3">Location :
+					<strong>{{ school.country }}</strong>
+				</p>
+				<p class="pb-3">Language :
+					<strong>{{ school.language }}</strong>
+				</p>
+				<p>Represented by :
+					<strong>{{ school.UserFirstname|capitalize }}
+						{{ school.UserLastname|capitalize }}</strong>
+				</p>
+				<p>Contact position :
+					<strong>{{ school.userPosition }}</strong>
+				</p>
+				<p>Username :
+					<strong>{{ school.username }}</strong>
+				</p>
+				<p class="pb-3">Language :
+					<strong>{{ school.language }}</strong>
+				</p>
 
-            <a href="{{ path('edit_my_school_infos', {'id': school.id}) }}" class="mt-3 btn btn-peche text-white">Edit my profile</a>
-        </div>
-    </div>
-    
-</div>
+				<a href="{{ path('edit_my_school_infos', {'id': school.id}) }}" class="mt-3 btn btn-peche text-white">Edit my profile</a>
+			</div>
+		</div>
+
+	</div>
 
 
 {% endblock %}

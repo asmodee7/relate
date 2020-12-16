@@ -1,20 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Relate | School Infos
+{% block title %}Admin | Edit School
 {% endblock %}
 
 {% block body %}
-	<h1>Edit School</h1>
 
-	{{ form_start(formEditSchool)}}
+	<div class="container relate-body d-flex flex-column align-items-center justify-content-center">
 
-	{{ form_row(formEditSchool.school_name, {'attr': {'placeholder': "School Name"}})}}
-	{{ form_row(formEditSchool.country, {'attr': {'placeholder': "Country"}})}}
-	{{ form_row(formEditSchool.language, {'attr': {'placeholder': "Language"}})}}
-	{{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': "Head First Name"}})}}
-	{{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': "Head Last Name"}})}}
+		<h1 class="text-center p-5">Edit School</h1>
 
-	<button type="submit" class="btn btn-success my-3">Save changes</button>
+		<div class="d-flex col-10 col-md-8 flex-column justify-content-center align-items-center">
 
-	{{ form_end(formEditSchool)}}
+
+			{{ form_start(formEditSchool, {'attr': {'class': "col-10 col-md-8 pb-3"}})}}
+
+			{{ form_row(formEditSchool.school_name, {'attr': {'placeholder': "School Name"}})}}
+			{{ form_row(formEditSchool.country, {'attr': {'placeholder': "Country"}})}}
+			{{ form_row(formEditSchool.language, {'attr': {'placeholder': "Language"}})}}
+			{{ form_row(formEditSchool.user_firstname, {'attr': {'placeholder': "Head First Name"}})}}
+			{{ form_row(formEditSchool.user_lastname, {'attr': {'placeholder': "Head Last Name"}})}}
+
+			<button type="submit" class="text-center btn btn-peche my-3 text-white mx-auto">Save changes</button>
+
+			{{ form_end(formEditSchool)}}
+
+		</div>
+
+	</div>
+
+
 {% endblock %}

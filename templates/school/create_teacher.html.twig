@@ -1,36 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Admin !
+{% block title %}Relate | Add Teacher
 {% endblock %}
 
 {% block body %}
-<div class="container">
-	<h1 class="text-center my-5">Add a new teacher</h1>
-
 	<div class="container">
-		{{ form_start(newTeacherForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+		<h1 class="text-center my-5">Add a new teacher</h1>
 
-		{{ form_row(newTeacherForm.lastname )}}
-		{{ form_row(newTeacherForm.firstname )}}
-		{{ form_row(newTeacherForm.username )}}
-		{{ form_row(newTeacherForm.password )}}
-		{{ form_row(newTeacherForm.confirm_password )}}
-        {{ form_row(newTeacherForm.language )}}
-        {{ form_row(newTeacherForm.email )}}
-        {{ form_row(newTeacherForm.phone_number )}}
-        {{ form_row(newTeacherForm.photo )}}
-        {{ form_row(newTeacherForm.description )}}
-        {# {{ form_row(newTeacherForm.id_school )}} 
-        {{ form_row(newTeacherForm.classrooms )}} #}
+		<div class="container">
+			{{ form_start(newTeacherForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
 
-		<div class="text-center my-3">
-			<button type="submit" class="btn btn-peche text-white text-center">Create the Teacher account</button>
+			{{ form_row(newTeacherForm.lastname )}}
+			{{ form_row(newTeacherForm.firstname )}}
+			{{ form_row(newTeacherForm.username )}}
+			{{ form_row(newTeacherForm.password )}}
+			{{ form_row(newTeacherForm.confirm_password )}}
+			{{ form_row(newTeacherForm.language )}}
+			{{ form_row(newTeacherForm.email )}}
+			{{ form_row(newTeacherForm.phone_number )}}
+			{{ form_row(newTeacherForm.photo )}}
+			{{ form_row(newTeacherForm.description )}}
+			{# {{ form_row(newTeacherForm.id_school )}} 
+			        {{ form_row(newTeacherForm.classrooms )}} #}
+
+			<div class="text-center my-3">
+				<button type="submit" class="btn btn-peche text-white text-center">Create the Teacher account</button>
+			</div>
+
+			{{ form_end(newTeacherForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+
 		</div>
-
-		{{ form_end(newTeacherForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
-
 	</div>
-</div>
-	
+
 
 {% endblock %}

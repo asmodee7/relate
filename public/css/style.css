@@ -4,6 +4,7 @@ rouge #C35256
 bleu #00C6CF
 "taupe" (neutre) #BAA89B */
 
+
 body
 {font-family: 'Montserrat', sans-serif;}
 
@@ -20,6 +21,32 @@ body
     background-color: #FDB884;
     text-align: center;
 }
+
+@media(max-width:767px){
+    .responsiveblock {
+        font-size: 2rem;
+      }
+
+}
+@media(min-width:768px){
+    .responsiveblock {
+        font-size: 2rem;
+      }
+
+}
+@media(min-width:992px){
+    .responsiveblock {
+        font-size: 2.5rem;
+      }
+
+}
+@media(min-width:1200px){
+    .responsiveblock {
+        font-size: 3rem;
+      }
+
+}
+
 
 
 
@@ -53,6 +80,8 @@ th a {
     text-decoration: none;
     color: black;
 }
+
+
 
 .choice-h{
     min-height: 40vh;
@@ -131,6 +160,7 @@ button:active,
 .main-card:hover
 {
     background-color: rgb(236, 236, 236);
+    text-decoration: none;
 }
 
 /*-------------------------------------------- Image profile ------------------------------- */

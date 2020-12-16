@@ -1,22 +1,46 @@
 {% extends 'base.html.twig' %}
-{% block title %}Relate | Teacher Profile
+{% block title %}Relate | Teacher Infos
 {% endblock %}
 
 {% block body %}
-	<h1>Teacher infos</h1>
 
-	<div class="content">
-		<h2>{{ teacher.id }}</h2>
-		<img src="http://placehold.it/450x150" alt="">
-		<span>{{ teacher.username }}</span>
-		<span>{{ teacher.lastname }}</span>
-		<span>{{ teacher.firstname }}</span>
-		<span>{{ teacher.language }}</span>
-		<span>{{ teacher.email }}</span>
-		<span>{{ teacher.phoneNumber }}</span>
-		<span>{{ teacher.description }}</span>
-		<span>{{ teacher.email }}</span>
+	<div class="container relate-body d-flex flex-column justify-content-center align-items-center">
 
+		<div class="card d-flex flex-column justify-content-center align-items-center style-rounded p-5 mt-5">
+			<h1 class="card-title display-4 text-center">Teacher infos</h1>
+			<div class="card-body d-flex flex-column justify-content-center">
+				<h5 class="card-title">Teacher n°{{ teacher.id }}
+					:
+					<strong>{{ teacher.username }}</strong>
+				</h5>
+				<p>Picture :
+					<strong>{{ teacher.photo }}</strong>
+				</p>
+
+				{# 
+													<img src="http://placehold.it/450x150" alt=""> #}
+				<p class="pt-3">Lastname :
+					<strong>{{ teacher.firstname }}</strong>
+				</p>
+				<p>Firstname :
+					<strong>{{ teacher.firstname }}</strong>
+				</p>
+				<p>Language taught :
+					<strong>{{ teacher.language }}</strong>
+				</p>
+				<p>Email :
+					<strong>{{ teacher.email }}</strong>
+				</p>
+				<p>Phone Number :
+					<strong>{{ teacher.phoneNumber }}</strong>
+				</p>
+				<p class="pb-3">Description :
+					<strong>{{ teacher.description }}</strong>
+				</p>
+
+
+			</div>
+		</div>
 	</div>
 
 	{#<a href="{{ path('edit_school_infos', {'id': school.id}) }}" class="btn btn-success my-3">Editer</a>#}

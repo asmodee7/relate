@@ -1,39 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Homepage
+{% block title %}Relate | Classrooms
 {% endblock %}
 
 {% block body %}
 
-<div class="container relate-body">
+	<div class="container relate-body">
 
-	<div class="col-12">
-		<h1 class=" text-center my-5">My classrooms</h1>
+		<div class="col-12">
+			<h1 class=" text-center my-5">My classrooms</h1>
 
-		<div class="row justify-content-center">
+			<div class="row justify-content-center">
 
-			{% for classroom in myClassrooms.classrooms %}
+				{% for classroom in myClassrooms.classrooms %}
 
-				<a href="{{ path('teacher_showclassroom', {'id': classroom.id }) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
-					<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
-						{{ classroom.classroomName }}
-						<i class="fas fa-users"></i>
+					<a href="{{ path('teacher_showclassroom', {'id': classroom.id }) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+						<div class="responsiveblock display-4 d-flex flex-column justify-content-center align-items-center text-center">
+							{{ classroom.classroomName }}
+							<i class="fas fa-users"></i>
+						</div>
+					</a>
+
+				{% endfor %}
+
+				<a href="{{ path('create_classroom') }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+					<div class="display-4 responsiveblock d-flex flex-column justify-content-center align-items-center text-center">
+						Add a classroom
+						<i class="fas fa-plus-circle"></i>
 					</div>
 				</a>
 
-			{% endfor %}
-
-			<a href="#" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
-				<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
-					Add a classroom
-					<i class="fas fa-users"></i>
-				</div>
-			</a>
-
+			</div>
 		</div>
-	</div>
 
-</div>
+	</div>
 
 
 {% endblock %}
