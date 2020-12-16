@@ -151,8 +151,44 @@ class StudentController extends AbstractController
     /**
      * @Route("/student/my_exchanges/{id}", name="student_exchanges")
      */
-    public function showExchanges()
+    public function showExchanges(Request $request, StudentDuoRepository $studentDuoRepo)
     {
+
+        $userid = $this->getUser()->getId();
+        dump($userid); // id de l'utilisateur
+
+        $totalDuos = $studentDuoRepo->findAll();
+        dump($totalDuos); // on trouve le duo de l'url
+
+        $urlid = $request->attributes->get('id');
+        dump($urlid); // id dans l'url, càd id du student duo
+
+
+        // Si l'id entré dans l'URL est supérieur aux nombre possible de duos, ça redirige
+        if ($urlid > count($totalDuos)) {
+            return $this->redirectToRoute('student_partners');
+        }
+
+        $urlDuo = $studentDuoRepo->findById($urlid);
+        dump($urlDuo); // on trouve le duo de l'url
+
+        foreach ($urlDuo as $student1duo) {
+            $student1 = $student1duo->getStudent1();
+        }
+        dump($student1); // on le student 1 du duo
+
+        foreach ($urlDuo as $student2duo) {
+            $student2 = $student2duo->getStudent2();
+        }
+        dump($student2); // on le student 2 du duo
+
+
+        // Si l'id de l'utilisateur ne correspond pas à 1 des étudiants du duo de l'URL 
+        if ($userid != $student1 && $userid != $student2) {
+            // return $this->redirectToRoute('student_partners');
+            echo ("prout");
+        }
+
         return $this->render('student/student_exchanges.html.twig');
     }
 }
