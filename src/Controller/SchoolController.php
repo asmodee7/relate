@@ -23,15 +23,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SchoolController extends AbstractController
 {
     /**
-     * @Route("/school", name="school")
-     */
-    public function index(): Response
-    {
-        return $this->render('school/index.html.twig', [
-            'controller_name' => 'SchoolController',
-        ]);
-    }
-    /**
      * @Route("school/new-teacher", name="new_teacher")
      */
     public function newSchoolTeacher(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response

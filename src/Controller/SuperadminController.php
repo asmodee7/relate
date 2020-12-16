@@ -14,18 +14,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SuperadminController extends AbstractController
 {
     /**
-     * @Route("/superadmin", name="superadmin")
-     */
-    public function index(): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_SUPERADMIN', null, 'Unable to access this page!');
-
-        return $this->render('superadmin/index.html.twig', [
-            'controller_name' => 'SuperadminController',
-        ]);
-    }
-
-    /**
      * @Route("superadmin/new_admin", name="create_admin")
      */
     public function newSchool(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
