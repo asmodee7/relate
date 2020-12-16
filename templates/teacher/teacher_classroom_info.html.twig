@@ -16,7 +16,7 @@
 				<tr>
 					<th scope="col" class="peach-tab text-light">CLASSROOM</th>
 					<th scope="col" class="peach-tab text-light">CLASSROOM</th>
-					<th scope="col" class="peach-tab text-light">Partnership</th>
+					<th scope="col" class="peach-tab text-light">PARTNERSHIPS</th>
 				</tr>
 			</thead>
 
@@ -26,7 +26,7 @@
 						{% for data in myclassroom %}
 							<td class="card-center">
 								{% if partner.getClassroom1() == data.id %}
-									{{ partner.getClassroom1() }}
+									{# {{ partner.getClassroom1() }} #}
 									{{ data.grade }}
 									{{ data.classroomName }}
 
@@ -36,7 +36,7 @@
 							</td>
 							<td class="card-center">
 								{% if partner.getClassroom2() == data.id %}
-									{{ partner.getClassroom2() }}
+									{# {{ partner.getClassroom2() }} #}
 									{{ data.grade }}
 									{{ data.classroomName }}
 								{% else %}
@@ -58,7 +58,7 @@
 
 		<h1 class="text-center my-5">My Students</h1>
 
-
+		<div class="overflow-auto">
 		<table class="table table-bordered text-center table-hover">
 
 			<thead>
@@ -86,6 +86,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		</div>
 
 	</div>
 {% endblock %}
