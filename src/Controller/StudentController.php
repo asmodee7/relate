@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Student;
 use App\Form\EditStudentType;
 use App\Form\LoginStudentType;
+use App\Repository\StudentDuoRepository;
 use App\Repository\StudentRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -124,5 +125,28 @@ class StudentController extends AbstractController
                 'formEditStudent' => $form->createView()
             ]
         );
+    }
+
+    /**
+     * @Route("/student/my_partners", name="student_partners")
+     */
+    public function showPartners(StudentDuoRepository $studentDuoRepo)
+    {
+        $userid = $this->getUser()->getId();
+        dump($userid);
+
+        $myDuos = $studentDuoRepo->findDuoByStudent($userid);
+        dump($myDuos);
+        return $this->render('student/student_partners.html.twig', [
+            'myDuos' => $myDuos
+        ]);
+    }
+
+    /**
+     * @Route("/student/my_exchanges/{id}", name="student_exchanges")
+     */
+    public function showExchanges()
+    {
+        return $this->render('student/student_exchanges.html.twig');
     }
 }
