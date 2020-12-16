@@ -170,3 +170,23 @@ button:active,
     max-height: auto;
 
 }
+
+/*-------------------------------------------- messages ------------------------------------------- */
+
+.bg-grey
+{
+    background-color: rgb(236, 236, 236);
+}
+
+.rounded-message
+{
+    border-radius: 15px;
+}
+
+.small-message
+{
+    font-style: italic;
+    text-transform: capitalize;
+    color: grey;
+    font-size: 10px;
+}

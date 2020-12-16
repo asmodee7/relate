@@ -7,7 +7,68 @@
 
 <div class="container relate-body">
 
-		<h1 class=" text-center my-5">My exchanges</h1>
+		<h1 class="text-center my-5">My exchanges</h1>
+
+		<div class="d-flex border rounded p-3 flex-column">
+
+			<div class="d-flex flex-column-reverse overflow-auto">
+
+				{% for message in messages %}
+
+				{% if message.author == username %}
+				<div class="d-flex flex-row-reverse">
+					<small class="small-message text-right bold-600">Sent by {{ message.author }} the {{ message.createdAt | date('d/m/Y') }} at {{ message.createdAt | date('H:i:s') }}</small>
+				</div>
+
+				<div class="d-flex flex-row-reverse">
+					<span class="text-right bg-primary text-white rounded-message p-2 my-1">{{message.content}}</span>
+				</div>
+
+				{% else %}
+				<div class="d-flex flex-row">
+					<small class="small-message text-left bold-600">Sent by {{ message.author }} the {{ message.createdAt | date('d/m/Y') }} at {{ message.createdAt | date('H:i:s') }}</small>
+				</div>
+
+				<div class="d-flex flex-row">
+					<span class="d-flex flex-row text-left border rounded-message p-2 my-1">{{message.content}}</span>
+				</div>
+					
+				{% endif %}
+
+				
+					
+				{% endfor %}
+
+			</div>
+
+			
+		</div>
+
+				{{form_start(messageForm)}}
+
+				<div class="row my-2 align-items-center justify-content-between">
+
+					<div class="col-11">
+					
+					{{ form_row(messageForm.content, {'attr': {'placeholder':"Type your message...", 'class': "bg-grey"}}) }}
+
+					</div>
+
+					<div class="col-1 d-flex align-items-center justify-content-end">
+
+						<button id="send" type="submit" class="text-center btn btn-peche text-white">Send</button>
+					
+					</div>
+
+
+
+				</div>
+
+				{{form_end(messageForm)}}
+
+		
+
+		
 
 </div>
 
