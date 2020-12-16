@@ -8,7 +8,7 @@
 		<h1 class="text-center my-5">Add a new teacher</h1>
 
 		<div class="container">
-			{{ form_start(newTeacherForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+			{{ form_start(newTeacherForm, {'attr': {'class': 'col-md-5 mx-auto', 'novalidate': 'novalidate'}) }}
 
 			{{ form_row(newTeacherForm.lastname )}}
 			{{ form_row(newTeacherForm.firstname )}}

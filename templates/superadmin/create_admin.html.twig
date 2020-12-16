@@ -7,7 +7,7 @@
 	<h4 class="text-center my-3">New Admin:</h4>
 
 	<div class="container">
-		{{ form_start(adminForm, {'attr': {'class': 'col-md-5 mx-auto'}}) }}
+		{{ form_start(adminForm, {'attr': {'class': 'col-md-5 mx-auto', 'novalidate': 'novalidate'}) }}
 
 		{{ form_row(adminForm.username, {'label': "Username"} )}}
 		{{ form_row(adminForm.password, {'label': "Password"} )}}

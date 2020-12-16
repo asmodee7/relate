@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=SchoolRepository::class)
  * @UniqueEntity(
  * fields = {"username"},
- * message = "Username deja utilisé"
+ * message = "This username already exists"
  * )
  */
 class School implements UserInterface
@@ -28,47 +28,55 @@ class School implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a country")
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a school name")
      */
     private $school_name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a language")
      */
     private $language;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez saisir un nom d'utilisateur !")
+     * @Assert\NotBlank(message="Please enter a username !")
      * @Assert\Length(
-     *      min="2",
-     *      minMessage="Votre nom d'utilisateur doit contenir minimum 2 caractères !"
+     *      min="4",
+     *      minMessage="At least 4 characters"
      * )
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Assert\NotBlank(message="Please enter a password")
+     * 
      * @Assert\Length(                       
      *        min="8",
-     *        minMessage="Votre mot de passe doit faire minimum 8 caractères !"
+     *        minMessage="At least 8 characters"
      * )
      * @Assert\EqualTo(
      *      propertyPath="confirm_password",
-     *      message="Les mot de passe ne correspondent pas ! Vérifiez la saisie.",
+     *      message="Passwords don't match",
      *      groups={"create_school"}
      * )
      */
     private $password;
 
     /**
+     * @Assert\NotBlank(message="Please confirm the password")
+     * 
      * @Assert\EqualTo(
      *      propertyPath="password",
-     *      message="Les mot de passe ne correspondent pas ! Vérifiez la saisie.",
+     *      message="Passwords don't match",
      *      groups={"create_school"}
      * )
      */
@@ -76,16 +84,19 @@ class School implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a lastname")
      */
     private $user_lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a firstname")
      */
     private $user_firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a position")
      */
     private $user_position;
 
