@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Entity\Student;
 use App\Form\EditStudentType;
 use App\Form\LoginStudentType;
-use App\Repository\StudentDuoRepository;
+use App\Form\MessageType;
+use App\Repository\MessageRepository;
 use App\Repository\StudentRepository;
 use Doctrine\Persistence\ObjectManager;
+use App\Repository\StudentDuoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -143,7 +146,7 @@ class StudentController extends AbstractController
     /**
      * @Route("/student/my_exchanges/{id}", name="student_exchanges")
      */
-    public function showExchanges(Request $request, StudentDuoRepository $studentDuoRepo)
+    public function showExchanges(Request $request, StudentDuoRepository $studentDuoRepo, MessageRepository $messagerepo, EntityManagerInterface $manager)
     {
 
         $userid = $this->getUser()->getId();
@@ -177,10 +180,38 @@ class StudentController extends AbstractController
 
         // Si l'id de l'utilisateur ne correspond pas à 1 des étudiants du duo de l'URL 
         if ($userid != $student1 && $userid != $student2) {
-            // return $this->redirectToRoute('student_partners');
-            echo ("prout");
+            return $this->redirectToRoute('student_partners');
         }
 
-        return $this->render('student/student_exchanges.html.twig');
+        $username = $this->getUser()->getUsername();
+        dump($username);
+        
+        $messages = $messagerepo->findMessagesByIdDuo($urlid);
+        dump($messages);
+
+        $newMessage = new Message;
+        
+        $messageForm = $this->createForm(MessageType::class, $newMessage);
+        dump($messageForm);
+
+        $messageForm->handleRequest($request);
+        
+        if($messageForm->isSubmitted() && $messageForm->isValid())
+        {
+            $newMessage->setAuthor($username)
+                        ->setCreatedAt(new \DateTime())
+                        ->setIdDuo($urlid);
+
+            $manager->persist($newMessage);
+            $manager->flush();
+
+            return $this->redirectToRoute('student_exchanges', ['id' => $urlid]);
+        }
+
+        return $this->render('student/student_exchanges.html.twig', [
+            'messageForm' => $messageForm->createView(),
+            'messages' => $messages,
+            'username' => $username
+        ]);
     }
 }
