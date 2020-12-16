@@ -19,6 +19,7 @@ class Message
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $author;
 
