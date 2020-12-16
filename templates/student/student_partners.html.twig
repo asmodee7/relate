@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Relate | Student partners
+{% endblock %}
+
+{% block body %}
+
+<div class="container relate-body">
+
+		<h1 class=" text-center my-5">My partners</h1>
+
+		<div class="row justify-content-center">
+
+			{% for duo in myDuos %}
+
+				<a href="{{ path('student_exchanges', {'id': duo.id }) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+					<div class="display-4 d-flex flex-column justify-content-center align-items-center text-center">
+						id du duo : {{ duo.id }}
+						<i class="fas fa-users"></i>
+					</div>
+				</a>
+
+			{% endfor %}
+
+		</div>
+
+</div>
+
+{% endblock %}
