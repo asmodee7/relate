@@ -1,23 +1,30 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Hello School !
+{% block title %}Relate | Contact Us
 {% endblock %}
 
 {% block body %}
+	<div class="container">
+		<h1 class="text-center my-5">Contact us</h1>
 
-	<div class="relate-body">
-		{% for message in app.flashes('success') %}
-			<div class="col-md-5 mx-auto alert alert-success text-center">
-				{{ message }}
-			</div>
-        {% endfor %}
-			{{ form_start(formContact) }}
+		<div class="relate-body">
+			{% for message in app.flashes('success') %}
+				<div class="col-md-5 mx-auto alert alert-success text-center">
+					{{ message }}
+				</div>
+			{% endfor %}
+			{{ form_start(formContact, {'attr': {'class': 'col-md-6 mx-auto'}}) }}
 			{{ form_row(formContact.firstname) }}
 			{{ form_row(formContact.lastname) }}
 			{{ form_row(formContact.phone) }}
 			{{ form_row(formContact.email) }}
 			{{ form_row(formContact.message) }}
-			<button type="submit">Send</button>
-			{{ form_end(formContact) }} 
-    </div>
+
+			<div class="text-center my-3">
+				<button type="submit" class="btn btn-peche text-white text-center">Send</button>
+			</div>
+			{{ form_end(formContact) }}
+		</div>
+
+	</div>
 {% endblock %}

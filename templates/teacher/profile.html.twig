@@ -1,45 +1,59 @@
 {% extends 'base.html.twig' %}
-{% block title %}Relate | Teacher Profile
+{% block title %}Relate | My Profile
 {% endblock %}
 
 {% block body %}
 
-<div class="container relate-body d-flex flex-column justify-content-center align-items-center">
+	<div class="container relate-body d-flex flex-column justify-content-center align-items-center">
 
-    <div class="card col-10 col-md-8 d-flex flex-column justify-content-center align-items-center style-rounded p-5">
-        <h1 class="card-title display-4 text-center">My profile</h1>
-		<img class="image_profile" src="{{ asset('uploads/photo/' ~ teacher.photo) }}" alt="">
-        <div class="card-body d-flex flex-column justify-content-center">
-            <h5 class="card-title display-5 bold-600">{{ teacher.username }}</h5>
-            <p>Firstname : <strong>{{ teacher.firstname }}</strong></p>
-            <p class="pb-3">Lastname : <strong>{{ teacher.lastname }}</strong></p>
+		<div class="card col-10 col-md-8 d-flex flex-column justify-content-center align-items-center style-rounded p-5 mt-2">
+			<h1 class="card-title display-4 text-center">My profile</h1>
+
+			<img class="image_profile" src="{{ asset('uploads/photo/' ~ teacher.photo) }}" alt="">
+
+			<div class="card-body d-flex flex-column justify-content-center">
+				<h5 class="card-title">Username :
+					<strong>{{ teacher.username }}</strong>
+				</h5>
+				<p>Firstname :
+					<strong>{{ teacher.firstname }}</strong>
+				</p>
+				<p class="pb-3">Lastname :
+					<strong>{{ teacher.lastname }}</strong>
+				</p>
 
 
-            <p>E-mail : <strong>{{ teacher.email}}</strong></p>
-            <p>Phone : <strong>{{ teacher.phonenumber}}</strong></p>
-            <p class="pb-3">Language : <strong>{{ teacher.language }}</strong></p>
+				<p>E-mail :
+					<strong>{{ teacher.email}}</strong>
+				</p>
+				<p>Phone :
+					<strong>{{ teacher.phonenumber}}</strong>
+				</p>
+				<p class="pb-3">Language :
+					<strong>{{ teacher.language }}</strong>
+				</p>
 
-            <a href="{{ path('edit_my_teacher_profile', {'id': teacher.id}) }}" class="mt-3 btn btn-peche text-white">Edit my profile</a>
-        </div>
-    </div>
-    
-</div>
+				<a href="{{ path('edit_my_teacher_profile', {'id': teacher.id}) }}" class="mt-3 btn btn-peche text-white">Edit my profile</a>
+			</div>
+		</div>
 
-{# <div class="container relate-body">
-
-	<h1>My Profile</h1>
-
-	<div class="content">
-		<img class="image_profile" src="{{ asset('uploads/photo/' ~ teacher.photo) }}" alt="">
-		
-		<h2>{{ }} {{ teacher.lastname}}</h2>
-        <span></span>
-        <span></span>
-        <span>{{ teacher.language}}</span>
-		<p>{{ teacher.description}}</p>
 	</div>
 
-	<a href="{{ path('edit_my_teacher_profile', {'id': teacher.id}) }}" class="btn btn-success my-3">Editer</a>
-
-</div> #}
+	{# <div class="container relate-body">
+					
+						<h1>My Profile</h1>
+					
+						<div class="content">
+							<img class="image_profile" src="{{ asset('uploads/photo/' ~ teacher.photo) }}" alt="">
+							
+							<h2>{{ }} {{ teacher.lastname}}</h2>
+					        <span></span>
+					        <span></span>
+					        <span>{{ teacher.language}}</span>
+							<p>{{ teacher.description}}</p>
+						</div>
+					
+						<a href="{{ path('edit_my_teacher_profile', {'id': teacher.id}) }}" class="btn btn-success my-3">Editer</a>
+					
+					</div> #}
 {% endblock %}

@@ -1,36 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Homepage | Teachers
+{% block title %}Relate | Teachers
 {% endblock %}
 
 {% block body %}
 
-<div class="container relate-body">
+	<div class="container relate-body">
 
-	<h1 class=" text-center my-5">My teachers</h1>
+		<h1 class=" text-center my-5">My teachers</h1>
 
-	<div class="row justify-content-center">
+		<div class="row justify-content-center">
 
-		{% for teacher in teachers %}
+			{% for teacher in teachers %}
 
-			<a href="{{ path('my_teacher_infos', {'id': teacher.id }) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
-				<div class="display-5 d-flex flex-column justify-content-center align-items-center text-center">
-					{{ teacher.firstname }} {{ teacher.lastname }}
-					<i class="fas fa-users"></i>
-				</div>
-			</a>
+				<a href="{{ path('my_teacher_infos', {'id': teacher.id }) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+					<div class="display-4 responsiveblock d-flex flex-column justify-content-center align-items-center text-center">
+						{{ teacher.firstname }}
+						{{ teacher.lastname }}
+						<i class="fas fa-users"></i>
+					</div>
+				</a>
 
-		{% endfor %}
+			{% endfor %}
 
-		<a href="{{path('new_teacher')}}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
-				<div class="display-5 d-flex flex-column justify-content-center align-items-center text-center">
+			<a href="{{path('new_teacher')}}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 responsiveblock d-flex flex-column justify-content-center align-items-center text-center">
 					Add a teacher
 					<i class="fas fa-plus-circle"></i>
 				</div>
 			</a>
 
-	</div>
+		</div>
 
-</div>
+	</div>
 
 {% endblock %}

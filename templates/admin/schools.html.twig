@@ -1,40 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Homepage | Schools
+{% block title %}Admin | Schools
 {% endblock %}
 
 {% block body %}
 
-	<h1 class=" text-center mt-2 pb-1">Schools</h1>
-	<br>
+	<div class="container relate-body">
 
-	<div class="row justify-content-center">
+		<h1 class=" text-center my-5">My schools</h1>
 
-		{% for school in schools %}
 
-			<div class="col-md-5">
-				<table class="table text-center table-hover table-bordered choice-h">
-					<tr>
-						<th class="display-4">
-							<p>School Id :
-								<strong>{{ school.id }}</strong>
-							</p>
-							<a href="{{ path('school_infos', {'id': school.id }) }}">
-								Name :
-								<strong>{{ school.schoolName }}</strong><br><i class="fas fa-users"></i>
-							</a>
-						</th>
-					</tr>
-				</table>
-			</div>
+		<div class="row justify-content-center">
 
-		{% endfor %}
+			{% for school in schools %}
 
-		<div class="col-md-5">
-			<a href="{{path('create_school')}}">Create new School</a>
+
+				<a href="{{ path('school_infos', {'id': school.id }) }}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+					<div class="display-4 responsiveblock d-flex flex-column justify-content-center align-items-center text-center">
+						<p>School n°
+							<strong>{{ school.id }}</strong>
+						</p>
+						<p>School Name :
+							<strong>{{ school.schoolName }}</strong>
+						</p>
+						<i class="pt-2 fas fa-school"></i>
+					</div>
+				</a>
+
+			{% endfor %}
+
+			<a href="{{path('create_school')}}" class="main-card col-10 col-md-5 mx-3 my-3 c-green d-flex align-items-center justify-content-center style-shadow style-rounded">
+				<div class="display-4 responsiveblock d-flex flex-column justify-content-center align-items-center text-center">
+					Create new school
+					<i class="fas fa-plus-circle"></i>
+				</div>
+			</a>
+
 		</div>
-
 	</div>
-
 
 {% endblock %}

@@ -1,21 +1,39 @@
 {% extends 'base.html.twig' %}
-{% block title %}Relate | School Profile
+{% block title %}Admin | School Profile
 {% endblock %}
 
 {% block body %}
-	<h1>School infos</h1>
 
-	<div class="content">
-		<h2>{{ school.SchoolName }}</h2>
-		<img src="http://placehold.it/450x150" alt="">
-		<span>{{ school.country }}</span>
-		<span>{{ school.language }}</span>
-		<h2>School Head</h2>
-		<span>{{ school.UserFirstname }}
-		</span>
-		<span>{{ school.UserLastname }}</span>
+	<div class="container relate-body d-flex flex-column justify-content-center align-items-center">
+
+		<div class="card col-10 col-md-8 d-flex flex-column justify-content-center align-items-center style-rounded p-5 mt-2">
+			<h1 class="card-title display-4 text-center">School infos</h1>
+
+			<div class="card-body d-flex flex-column justify-content-center">
+				<h5 class="card-title display-5">School name :
+					<strong>{{ school.SchoolName }}</strong>
+				</h5>
+				<p>Country :
+					<strong>{{ school.country }}</strong>
+				</p>
+				<p class="pb-3">Language :
+					<strong>{{ school.language }}</strong>
+				</p>
+				<p>School Head :
+					<strong>{{ school.UserFirstname }}</strong>
+				</p>
+				<p>Phone :
+					<strong>{{ school.UserLastname }}</strong>
+				</p>
+				<p class="pb-3">User Position :
+					<strong>{{ school.userPosition }}</strong>
+				</p>
+
+				<a href="{{ path('edit_school_infos', {'id': school.id}) }}" class="mt-3 btn btn-peche text-white">Edit the school</a>
+			</div>
+		</div>
+
 	</div>
 
-	<a href="{{ path('edit_school_infos', {'id': school.id}) }}" class="btn btn-success my-3">Editer</a>
 
 {% endblock %}
