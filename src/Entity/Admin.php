@@ -22,7 +22,11 @@ class Admin implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez saisir un nom d'utilisateur !")
+     * @Assert\NotBlank(message="Please select a username")
+     * @Assert\Length(
+     *      min="4",
+     *      minMessage="At least 4 characters"
+     * )
      */
     private $username;
 
@@ -30,12 +34,12 @@ class Admin implements UserInterface
      * @ORM\Column(type="string", length=255)
 
      * @Assert\Length(                       
-     *        min="4",
-     *        minMessage="Votre mot de passe doit faire minimum 8 caractères !"
+     *        min="8",
+     *        minMessage="At least 4 characters"
      * )
      * @Assert\EqualTo(
      *      propertyPath="confirm_password",
-     *      message="Les mot de passe ne correspondent pas ! Vérifiez la saisie."
+     *      message="Passwords don't match"
      * )
      */
     private $password;

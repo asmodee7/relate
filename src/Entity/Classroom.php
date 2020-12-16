@@ -21,16 +21,19 @@ class Classroom
 
     /**
      * @ORM\ManyToMany(targetEntity=Teacher::class, inversedBy="classrooms")
+     * 
      */
     private $teachers;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a grade")
      */
     private $grade;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a classroom name")
      */
     private $classroomName;
 
