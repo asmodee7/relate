@@ -13,7 +13,7 @@
 					{{ message }}
 				</div>
 			{% endfor %}
-			{{ form_start(formContact, {'attr': {'class': 'col-md-6 mx-auto'}}) }}
+			{{ form_start(formContact, {'attr': {'class': 'col-md-6 mx-auto','novalidate': 'novalidate'}}) }}
 			{{ form_row(formContact.firstname) }}
 			{{ form_row(formContact.lastname) }}
 			{{ form_row(formContact.phone) }}
