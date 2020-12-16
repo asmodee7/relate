@@ -8,14 +8,14 @@
 
 		<div class="card d-flex flex-column justify-content-center align-items-center style-rounded p-5 mt-5">
 			<h1 class="card-title display-4 text-center">Teacher infos</h1>
-			<div class="card-body d-flex flex-column justify-content-center">
+			<div class="card-body d-flex flex-column justify-content-center align-items-center">
 				<h5 class="card-title">Teacher n°{{ teacher.id }}
 					:
 					<strong>{{ teacher.username }}</strong>
 				</h5>
-				<p>Picture :
-					<strong>{{ teacher.photo }}</strong>
-				</p>
+				
+					<img class="image_profile" src="{{ asset('uploads/photo/' ~ teacher.photo) }}">
+
 
 				{# 
 													<img src="http://placehold.it/450x150" alt=""> #}
