@@ -20,14 +20,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class StudentController extends AbstractController
 {
     /**
-     * @Route("/student/", name="studenthomepage")
-     */
-    public function index()
-    {
-        return $this->render('student/index.html.twig');
-    }
-
-    /**
      * @Route("/student/profile/{id}", name="my_student_profile")
      */
     public function showProfile($id, Request $request, EntityManagerInterface $manager)

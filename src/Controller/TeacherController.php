@@ -28,15 +28,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class TeacherController extends AbstractController
 {
-    /**
-     * @Route("/teacher", name="teacher")
-     */
-    public function index(): Response
-    {
-        return $this->render('teacher/index.html.twig', [
-            'controller_name' => 'TeacherController',
-        ]);
-    }
 
     /**
      * @Route("teacher/new-student", name="create-student")

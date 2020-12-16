@@ -25,18 +25,6 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin", name="admin")
-     */
-    public function index(): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
-
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
-    /**
      * @Route("admin/new-school", name="create_school")
      */
     public function newSchool(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
