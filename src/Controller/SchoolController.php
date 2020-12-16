@@ -218,6 +218,8 @@ class SchoolController extends AbstractController
             $notification->notify($contact);
             $this->addFlash('success', 'Your email has been sent');
             $manager->persist($contact); // on prépare l'insertion $manager->flush(); // on execute l'insertion
+
+            return $this->redirectToRoute('school_contact');
         }
         return $this->render("school/contact.html.twig", ['formContact' => $form->createView()]);
     }
