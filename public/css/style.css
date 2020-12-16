@@ -27,6 +27,14 @@ body
 
 .relate-nav{min-height: 15vh;}
 
+.relate-nav li > a:hover{
+    color: #FDB884 !important;
+}
+
+.relate-nav li.active a:hover{
+    color: #FDB884 !important;
+}
+
 .log{
     position: absolute;
     z-index: 2;
