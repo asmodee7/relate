@@ -35,10 +35,10 @@ class Student implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez saisir un nom d'utilisateur !")
+     * @Assert\NotBlank(message="Please enter a username !")
      * @Assert\Length(
      *      min="2",
-     *      minMessage="Votre nom d'utilisateur doit contenir minimum 2 caractères !"
+     *      minMessage="At least 4 characters"
      * )
      */
     private $username;
@@ -47,20 +47,21 @@ class Student implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(                       
      *        min="8",
-     *        minMessage="Votre mot de passe doit faire minimum 8 caractères !"
+     *        minMessage="At least 8 characters"
      * )
      * @Assert\EqualTo(
      *      propertyPath="confirm_password",
-     *      message="Les mot de passe ne correspondent pas ! Vérifiez la saisie.",
+     *      message="Passwords don't match",
      *      groups={"create_student"}
      * )
      */
     private $password;
 
     /**
+     * @Assert\NotBlank(message="Please confirm the password")
      * @Assert\EqualTo(
      *      propertyPath="password",
-     *      message="Les mot de passe ne correspondent pas ! Vérifiez la saisie.",
+     *      message="Passwords don't match",
      *      groups={"create_student"}
      * )
      */
@@ -68,16 +69,19 @@ class Student implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a lastname")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Please enter a firstname")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(message="Please enter an age")
      */
     private $age;
 
@@ -88,6 +92,7 @@ class Student implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $photo;
 
