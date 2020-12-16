@@ -34,7 +34,7 @@ class Contact
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Please enter a phone number")
      *  @Assert\Length(min = 8, max = 20, minMessage = "min_lenght", maxMessage = "max_lenght")
-     *  @Assert\Regex(pattern="/^\(0\)[0-9]*$", message="number_only") 
+     *  @Assert\Regex(pattern="/^\(0\)[0-9]*$/", message="number_only") 
      */
     private $phone;
 
