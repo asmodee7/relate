@@ -60,8 +60,7 @@ class EditStudentType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Student::class,
-            'validation_goups' => ['create_student']
+            'data_class' => Student::class
         ]);
     }
 }

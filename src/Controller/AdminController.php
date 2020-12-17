@@ -32,8 +32,11 @@ class AdminController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
 
         $school = new School;
+        dump($school);
 
-        $schoolForm = $this->createForm(SchoolType::class, $school);
+        $schoolForm = $this->createForm(SchoolType::class, $school,[
+            'validation_groups'=> ["create_school"]
+        ]);
 
         $schoolForm->handleRequest($request);
 

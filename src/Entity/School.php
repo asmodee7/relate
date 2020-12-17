@@ -55,13 +55,11 @@ class School implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * 
-     * @Assert\NotBlank(message="Please enter a password")
-     * 
+     * @ORM\Column(type="string", length=255) 
      * @Assert\Length(                       
-     *        min="8",
-     *        minMessage="At least 8 characters"
+     *          min="8",
+     *          minMessage="At least 8 characters",
+     *          groups={"create_school"}
      * )
      * @Assert\EqualTo(
      *      propertyPath="confirm_password",
@@ -71,9 +69,7 @@ class School implements UserInterface
      */
     private $password;
 
-    /**
-     * @Assert\NotBlank(message="Please confirm the password")
-     * 
+    /** 
      * @Assert\EqualTo(
      *      propertyPath="password",
      *      message="Passwords don't match",
@@ -84,19 +80,16 @@ class School implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please enter a lastname")
      */
     private $user_lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please enter a firstname")
      */
     private $user_firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please enter a position")
      */
     private $user_position;
 

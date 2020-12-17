@@ -40,7 +40,9 @@ class TeacherController extends AbstractController
         $student = new Student;
         dump($student);
 
-        $studentForm = $this->createForm(StudentType::class, $student);
+        $studentForm = $this->createForm(StudentType::class, $student,[
+            'validation_groups'=> ["registration"]
+        ]);
 
         $studentForm->handleRequest($request);
 

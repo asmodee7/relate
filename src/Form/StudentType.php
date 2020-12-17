@@ -72,6 +72,7 @@ class StudentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Student::class,
+            'validation_groups'=> ["registration"]
 
         ]);
     }

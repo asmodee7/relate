@@ -180,9 +180,6 @@ class SchoolController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $hash = $encoder->encodePassword($school, $school->getPassword());
-            $school->setPassword($hash);
-
             $manager->persist($school);
             $manager->flush();
 

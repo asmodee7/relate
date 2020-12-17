@@ -29,7 +29,6 @@ class EditSchoolType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => School::class,
-            'validation_goups' => ['create_school']
         ]);
     }
 }

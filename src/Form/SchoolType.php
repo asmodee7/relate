@@ -28,6 +28,7 @@ class SchoolType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => School::class,
+            'validation_groups'=>['create_school']
         ]);
     }
 }

@@ -16,21 +16,22 @@
 					<strong>{{ teacher.username }}</strong>
 				</h5>
 				<p>Firstname :
-					<strong>{{ teacher.firstname }}</strong>
+					<strong>{{ teacher.firstname}}</strong>
 				</p>
 				<p class="pb-3">Lastname :
-					<strong>{{ teacher.lastname }}</strong>
+					<strong>{{ teacher.lastname}}</strong>
 				</p>
-
-
+				<p>Language :
+					<strong>{{ teacher.language}}</strong>
+				</p>
 				<p>E-mail :
 					<strong>{{ teacher.email}}</strong>
 				</p>
 				<p>Phone :
 					<strong>{{ teacher.phonenumber}}</strong>
 				</p>
-				<p class="pb-3">Language :
-					<strong>{{ teacher.language }}</strong>
+				<p class="py-3">Description :
+					<strong>{{ teacher.description}}</strong>
 				</p>
 
 				<a href="{{ path('edit_my_teacher_profile', {'id': teacher.id}) }}" class="mt-3 btn btn-peche text-white">Edit my profile</a>

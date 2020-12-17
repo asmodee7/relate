@@ -37,8 +37,9 @@ class Student implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Please enter a username !")
      * @Assert\Length(
-     *      min="2",
-     *      minMessage="At least 4 characters"
+     *      min="4",
+     *      minMessage="At least 4 characters",
+     *      groups={"registration"}
      * )
      */
     private $username;
@@ -47,22 +48,27 @@ class Student implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(                       
      *        min="8",
-     *        minMessage="At least 8 characters"
+     *        minMessage="At least 8 characters",
+     *        groups={"registration"}
      * )
      * @Assert\EqualTo(
      *      propertyPath="confirm_password",
      *      message="Passwords don't match",
-     *      groups={"create_student"}
+     *      groups={"registration"}
      * )
      */
     private $password;
 
     /**
-     * @Assert\NotBlank(message="Please confirm the password")
+     * @Assert\NotBlank(
+     *      message="Please confirm the password",
+     *      groups={"registration"}
+     * )
      * @Assert\EqualTo(
      *      propertyPath="password",
      *      message="Passwords don't match",
-     *      groups={"create_student"}
+     *      groups={"registration"}
+     *      
      * )
      */
     public $confirm_password;

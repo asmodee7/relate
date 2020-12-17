@@ -51,6 +51,7 @@ class Teacher implements UserInterface
      * @Assert\Length(                       
      *        min="8",
      *        minMessage="At least 8 characters",
+     *        groups={"create_teacher"} 
      * )
      * @Assert\EqualTo(
      *      propertyPath="confirm_password",
